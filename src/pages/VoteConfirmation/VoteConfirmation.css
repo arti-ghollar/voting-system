@@ -1,0 +1,668 @@
+/* =========================================================
+   VOTE CONFIRMATION
+   Professional Responsive Design
+   ========================================================= */
+
+.vote-confirmation-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 24px 60px;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+.vote-confirmation-page *,
+.vote-confirmation-page *::before,
+.vote-confirmation-page *::after {
+  box-sizing: border-box;
+}
+
+.vote-confirmation-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.vote-confirmation-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.vote-confirmation-eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+}
+
+.vote-confirmation-header h1 {
+  margin: 0;
+  color: #111827;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+
+.vote-confirmation-header p {
+  margin: 9px 0 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.vote-confirmation-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid #dce4ee;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.vote-confirmation-back-button:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.vote-confirmation-back-button:focus-visible,
+.vote-confirmation-primary-button:focus-visible,
+.vote-confirmation-secondary-button:focus-visible,
+.vote-confirmation-copy-button:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.17);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   SUCCESS CARD
+   ========================================================= */
+
+.vote-confirmation-success-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 18px;
+  padding: 34px 30px;
+  border: 1px solid #bbf7d0;
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    #f0fdf4 0%,
+    #ffffff 100%
+  );
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
+}
+
+.vote-confirmation-success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 65px;
+  margin-bottom: 15px;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 900;
+  box-shadow: 0 10px 25px rgba(22, 163, 74, 0.2);
+}
+
+.vote-confirmation-success-label {
+  color: #15803d;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+}
+
+.vote-confirmation-success-card h2 {
+  margin: 8px 0 0;
+  color: #166534;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.vote-confirmation-success-card p {
+  max-width: 620px;
+  margin: 9px auto 0;
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.vote-confirmation-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  padding: 7px 11px;
+  border: 1px solid #bbf7d0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #15803d;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.vote-confirmation-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+/* =========================================================
+   COMMON CARD
+   ========================================================= */
+
+.vote-confirmation-card,
+.vote-confirmation-blockchain-card {
+  margin-bottom: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.035);
+}
+
+.vote-confirmation-card {
+  padding: 21px;
+}
+
+.vote-confirmation-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.vote-confirmation-card-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+}
+
+.vote-confirmation-card-header h2 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.vote-confirmation-election-id {
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   ELECTION DETAILS
+   ========================================================= */
+
+.vote-confirmation-details-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding-top: 18px;
+}
+
+.vote-confirmation-detail {
+  min-width: 0;
+}
+
+.vote-confirmation-detail span,
+.vote-confirmation-chain-grid span {
+  display: block;
+  margin-bottom: 5px;
+  color: #94a3b8;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.vote-confirmation-detail strong {
+  display: block;
+  overflow: hidden;
+  color: #475569;
+  font-size: 10px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   BLOCKCHAIN CARD
+   ========================================================= */
+
+.vote-confirmation-blockchain-card {
+  padding: 22px;
+}
+
+.vote-confirmation-blockchain-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.vote-confirmation-blockchain-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  border-radius: 11px;
+  background: #f5f3ff;
+  color: #7c3aed;
+  font-size: 18px;
+}
+
+.vote-confirmation-blockchain-header h2 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.vote-confirmation-blockchain-header p {
+  margin: 6px 0 0;
+  color: #94a3b8;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   TRANSACTION
+   ========================================================= */
+
+.vote-confirmation-transaction {
+  padding: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  background: #f8fafc;
+}
+
+.vote-confirmation-transaction-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+
+.vote-confirmation-transaction-heading > span:first-child {
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.vote-confirmation-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.vote-confirmation-transaction-value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vote-confirmation-transaction-value code {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  color: #334155;
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vote-confirmation-copy-button {
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid #dbeafe;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #2563eb;
+  font-family: inherit;
+  font-size: 8px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.vote-confirmation-copy-button:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+/* =========================================================
+   CHAIN GRID
+   ========================================================= */
+
+.vote-confirmation-chain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.vote-confirmation-chain-grid > div {
+  padding: 13px;
+  border: 1px solid #eef2f7;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.vote-confirmation-chain-grid strong {
+  color: #475569;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.vote-confirmation-chain-status {
+  color: #15803d !important;
+}
+
+/* =========================================================
+   PRIVACY
+   ========================================================= */
+
+.vote-confirmation-privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 17px 19px;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: #eff6ff;
+}
+
+.vote-confirmation-privacy-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 9px;
+  background: #ffffff;
+  font-size: 15px;
+}
+
+.vote-confirmation-privacy h3 {
+  margin: 0;
+  color: #1e40af;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.vote-confirmation-privacy p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 9px;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.vote-confirmation-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 18px;
+}
+
+.vote-confirmation-primary-button,
+.vote-confirmation-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 15px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.vote-confirmation-primary-button {
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.vote-confirmation-primary-button:hover {
+  border-color: #1d4ed8;
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.vote-confirmation-secondary-button {
+  border: 1px solid #dbe2ea;
+  background: #ffffff;
+  color: #475569;
+}
+
+.vote-confirmation-secondary-button:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   NOTICE
+   ========================================================= */
+
+.vote-confirmation-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.vote-confirmation-notice-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 9px;
+  background: #e2e8f0;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.vote-confirmation-notice h3 {
+  margin: 0;
+  color: #475569;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.vote-confirmation-notice p {
+  margin: 4px 0 0;
+  color: #94a3b8;
+  font-size: 9px;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+  .vote-confirmation-details-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vote-confirmation-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .vote-confirmation-back-button {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .vote-confirmation-page {
+    padding: 25px 14px 45px;
+  }
+
+  .vote-confirmation-success-card {
+    padding: 27px 19px;
+  }
+
+  .vote-confirmation-success-card h2 {
+    font-size: 21px;
+  }
+
+  .vote-confirmation-card,
+  .vote-confirmation-blockchain-card {
+    padding: 17px;
+  }
+
+  .vote-confirmation-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .vote-confirmation-details-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .vote-confirmation-chain-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vote-confirmation-transaction-value {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .vote-confirmation-transaction-value code {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: #ffffff;
+  }
+
+  .vote-confirmation-copy-button {
+    width: 100%;
+  }
+
+  .vote-confirmation-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .vote-confirmation-primary-button,
+  .vote-confirmation-secondary-button {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+  .vote-confirmation-page {
+    padding: 20px 10px 35px;
+  }
+
+  .vote-confirmation-header h1 {
+    font-size: 29px;
+  }
+
+  .vote-confirmation-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vote-confirmation-success-icon {
+    width: 58px;
+    height: 58px;
+    font-size: 24px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .vote-confirmation-page *,
+  .vote-confirmation-page *::before,
+  .vote-confirmation-page *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

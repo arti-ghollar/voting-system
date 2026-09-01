@@ -1,0 +1,132 @@
+.transaction-card {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #eaecf0;
+  border-radius: 11px;
+  background: #ffffff;
+}
+
+.transaction-card__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 40px;
+  border-radius: 10px;
+  color: #175cd3;
+  background: #eef4ff;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.transaction-card__content {
+  min-width: 0;
+  flex: 1;
+}
+
+.transaction-card__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.transaction-card__title > strong {
+  overflow: hidden;
+  color: #344054;
+  font-size: 11px;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transaction-card__status {
+  padding: 4px 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.transaction-card__status > span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.transaction-card__status--confirmed {
+  color: #027a48;
+  background: #ecfdf3;
+}
+
+.transaction-card__status--pending {
+  color: #b54708;
+  background: #fffaeb;
+}
+
+.transaction-card__status--failed {
+  color: #b42318;
+  background: #fef3f2;
+}
+
+.transaction-card__hash {
+  overflow: hidden;
+  margin-top: 5px;
+  color: #175cd3;
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transaction-card__meta {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #98a2b3;
+  font-size: 9px;
+}
+
+.transaction-card__copy {
+  min-height: 32px;
+  padding: 0 9px;
+  border: 1px solid #d0d5dd;
+  border-radius: 7px;
+  color: #475467;
+  background: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.transaction-card__copy:hover {
+  color: #175cd3;
+  border-color: #98b7f2;
+  background: #f5f8ff;
+}
+
+@media (max-width: 520px) {
+  .transaction-card {
+    align-items: flex-start;
+  }
+
+  .transaction-card__copy {
+    display: none;
+  }
+
+  .transaction-card__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+}

@@ -1,0 +1,132 @@
+.vote-card {
+  width: 100%;
+  min-height: 78px;
+  padding: 13px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  color: inherit;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.vote-card:hover:not(:disabled) {
+  border-color: #98b7f2;
+  background: #f8faff;
+}
+
+.vote-card--selected {
+  border-color: #175cd3;
+  background: #f5f8ff;
+  box-shadow: 0 0 0 3px rgba(23, 92, 211, 0.07);
+}
+
+.vote-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.vote-card__candidate,
+.vote-card__right {
+  display: flex;
+  align-items: center;
+}
+
+.vote-card__candidate {
+  min-width: 0;
+  gap: 12px;
+}
+
+.vote-card__avatar {
+  width: 46px;
+  height: 46px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 46px;
+  border-radius: 50%;
+  color: #175cd3;
+  background: #eef4ff;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.vote-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vote-card__info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vote-card__info strong {
+  overflow: hidden;
+  color: #101828;
+  font-size: 13px;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vote-card__info span {
+  overflow: hidden;
+  color: #667085;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vote-card__right {
+  flex: 0 0 auto;
+  gap: 13px;
+}
+
+.vote-card__symbol {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #175cd3;
+  background: #eef4ff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.vote-card__radio {
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #d0d5dd;
+  border-radius: 50%;
+}
+
+.vote-card--selected .vote-card__radio {
+  border-color: #175cd3;
+}
+
+.vote-card__radio > span {
+  width: 10px;
+  height: 10px;
+  display: block;
+  border-radius: 50%;
+  background: #175cd3;
+}

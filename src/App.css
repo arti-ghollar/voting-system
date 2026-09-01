@@ -1,0 +1,75 @@
+/* =========================================================
+   APP ROOT
+   ========================================================= */
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.app {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================================
+   PAGE CONTAINER
+   ========================================================= */
+
+.app-main > * {
+  width: 100%;
+}
+
+/* =========================================================
+   GLOBAL PAGE TRANSITION
+   ========================================================= */
+
+.app-main {
+  animation: appFadeIn 0.25s ease-in-out;
+}
+
+@keyframes appFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .app-main {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .app-main {
+    width: 100%;
+  }
+}

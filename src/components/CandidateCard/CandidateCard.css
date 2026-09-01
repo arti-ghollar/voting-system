@@ -1,0 +1,129 @@
+.candidate-card {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #eaecf0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 3px 10px rgba(16, 24, 40, 0.04);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.candidate-card:hover {
+  transform: translateY(-2px);
+  border-color: #c8d7f7;
+  box-shadow: 0 10px 25px rgba(16, 24, 40, 0.08);
+}
+
+.candidate-card--selected {
+  border-color: #175cd3;
+  background: #f8faff;
+  box-shadow: 0 0 0 3px rgba(23, 92, 211, 0.08);
+}
+
+.candidate-card--disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.candidate-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.candidate-card__avatar {
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  color: #175cd3;
+  background: #eef4ff;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.candidate-card__avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.candidate-card__symbol {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dbe5ff;
+  border-radius: 10px;
+  color: #175cd3;
+  background: #f5f8ff;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.candidate-card__content {
+  margin-top: 17px;
+}
+
+.candidate-card__content h3 {
+  margin: 0;
+  color: #101828;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.candidate-card__party {
+  margin: 5px 0 0;
+  color: #175cd3;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.candidate-card__description {
+  min-height: 38px;
+  margin: 11px 0 0;
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.candidate-card__button {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 17px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  color: #344054;
+  background: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.candidate-card__button:hover:not(:disabled) {
+  color: #175cd3;
+  border-color: #98b7f2;
+  background: #f5f8ff;
+}
+
+.candidate-card--selected .candidate-card__button {
+  color: #ffffff;
+  border-color: #175cd3;
+  background: #175cd3;
+}
+
+.candidate-card__button:disabled {
+  cursor: not-allowed;
+}

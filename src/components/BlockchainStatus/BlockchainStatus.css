@@ -1,0 +1,116 @@
+.blockchain-status {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #dbe5ff;
+  border-radius: 14px;
+  background: #f8faff;
+}
+
+.blockchain-status__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.blockchain-status__icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  border-radius: 11px;
+  color: #175cd3;
+  background: #eef4ff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.blockchain-status__header > div:nth-child(2) {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.blockchain-status__header span:first-child {
+  color: #667085;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.blockchain-status__header h3 {
+  margin: 0;
+  color: #101828;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.blockchain-status__indicator {
+  padding: 6px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.blockchain-status__indicator span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.blockchain-status__indicator.is-connected {
+  color: #027a48;
+  background: #ecfdf3;
+}
+
+.blockchain-status__indicator.is-disconnected {
+  color: #b42318;
+  background: #fef3f2;
+}
+
+.blockchain-status__details {
+  margin-top: 20px;
+  padding-top: 17px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  border-top: 1px solid #dbe5ff;
+}
+
+.blockchain-status__details div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.blockchain-status__details span {
+  color: #98a2b3;
+  font-size: 9px;
+}
+
+.blockchain-status__details strong {
+  overflow: hidden;
+  color: #344054;
+  font-size: 10px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 650px) {
+  .blockchain-status__details {
+    grid-template-columns: 1fr;
+  }
+
+  .blockchain-status__indicator {
+    display: none;
+  }
+}

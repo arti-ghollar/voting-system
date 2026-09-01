@@ -1,0 +1,772 @@
+/* =========================================================
+   VOTING STATUS
+   Professional Responsive Design
+   ========================================================= */
+
+.voting-status-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 24px 60px;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+.voting-status-page *,
+.voting-status-page *::before,
+.voting-status-page *::after {
+  box-sizing: border-box;
+}
+
+.voting-status-container {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.voting-status-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.voting-status-eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+}
+
+.voting-status-header h1 {
+  margin: 0;
+  color: #111827;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+
+.voting-status-header p {
+  max-width: 620px;
+  margin: 9px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.voting-status-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid #dce4ee;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 10px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.voting-status-back-button:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   ELECTION CARD
+   ========================================================= */
+
+.voting-election-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 18px;
+  padding: 24px;
+  border: 1px solid #bfdbfe;
+  border-radius: 17px;
+  background: linear-gradient(
+    135deg,
+    #eff6ff 0%,
+    #ffffff 100%
+  );
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.05);
+}
+
+.voting-election-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+}
+
+.voting-election-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 53px;
+  height: 53px;
+  flex: 0 0 53px;
+  border-radius: 13px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.18);
+}
+
+.voting-card-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #94a3b8;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1.1px;
+}
+
+.voting-election-card h2 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.voting-election-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 7px;
+  color: #15803d;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.voting-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.voting-election-date {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.voting-election-date span {
+  color: #94a3b8;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.voting-election-date strong {
+  color: #475569;
+  font-size: 9px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.voting-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.voting-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding: 19px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.035);
+}
+
+.voting-summary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  border-radius: 11px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.voting-summary-icon.blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.voting-summary-icon.green {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.voting-summary-icon.purple {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.voting-summary-card > div:last-child {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.voting-summary-card span {
+  color: #94a3b8;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.voting-summary-card strong {
+  margin-top: 3px;
+  overflow: hidden;
+  color: #334155;
+  font-size: 15px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.voting-summary-card small {
+  margin-top: 3px;
+  overflow: hidden;
+  color: #94a3b8;
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PROGRESS CARD
+   ========================================================= */
+
+.voting-progress-card {
+  margin-bottom: 18px;
+  padding: 22px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.035);
+}
+
+.voting-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.voting-section-heading h2 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.voting-completed-badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 8px;
+  font-weight: 900;
+}
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.voting-timeline {
+  padding-top: 21px;
+}
+
+.voting-timeline-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  min-height: 75px;
+}
+
+.voting-timeline-marker {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border: 2px solid #2563eb;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.voting-timeline-item.completed
+  .voting-timeline-marker {
+  border-color: #16a34a;
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.voting-timeline-item.current
+  .voting-timeline-marker {
+  border-color: #7c3aed;
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.voting-timeline-content {
+  min-width: 0;
+  flex: 1;
+  padding-bottom: 20px;
+}
+
+.voting-timeline-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.voting-timeline-title-row h3 {
+  margin: 0;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.voting-timeline-content p {
+  max-width: 720px;
+  margin: 5px 0 0;
+  color: #94a3b8;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.voting-step-status {
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 7px;
+  font-weight: 900;
+}
+
+.voting-step-status.current {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+.voting-timeline-line {
+  position: absolute;
+  top: 34px;
+  left: 16px;
+  width: 2px;
+  height: calc(100% - 34px);
+  background: #bbf7d0;
+}
+
+/* =========================================================
+   VERIFICATION CARD
+   ========================================================= */
+
+.voting-verification-card {
+  margin-bottom: 18px;
+  padding: 22px;
+  border: 1px solid #ddd6fe;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    #faf5ff 0%,
+    #ffffff 100%
+  );
+  box-shadow: 0 5px 20px rgba(124, 58, 237, 0.035);
+}
+
+.voting-verification-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.voting-verification-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 47px;
+  height: 47px;
+  flex: 0 0 47px;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #7c3aed;
+  font-size: 18px;
+}
+
+.voting-verification-content h2 {
+  margin: 0;
+  color: #5b21b6;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.voting-verification-content p {
+  max-width: 760px;
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   TRANSACTION
+   ========================================================= */
+
+.voting-transaction-box {
+  padding: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  background: #ffffff;
+}
+
+.voting-transaction-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+
+.voting-transaction-heading > span:first-child {
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.voting-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.voting-transaction-value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.voting-transaction-value code {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  padding: 9px 10px;
+  border: 1px solid #eef2f7;
+  border-radius: 7px;
+  background: #f8fafc;
+  color: #475569;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.voting-copy-button {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #4f46e5;
+  font-family: inherit;
+  font-size: 8px;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.voting-copy-button:hover {
+  border-color: #a5b4fc;
+  background: #eef2ff;
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.voting-verification-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 17px;
+}
+
+.voting-primary-button,
+.voting-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 39px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.voting-primary-button {
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.voting-primary-button:hover {
+  border-color: #1d4ed8;
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.voting-secondary-button {
+  border: 1px solid #dbe2ea;
+  background: #ffffff;
+  color: #475569;
+}
+
+.voting-secondary-button:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   INFO NOTICE
+   ========================================================= */
+
+.voting-info-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 17px 19px;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: #eff6ff;
+}
+
+.voting-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  flex: 0 0 35px;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.voting-info-notice h3 {
+  margin: 0;
+  color: #1e40af;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.voting-info-notice p {
+  max-width: 800px;
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 9px;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.voting-status-page a:focus-visible,
+.voting-status-page button:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.18);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .voting-status-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .voting-status-back-button {
+    width: 100%;
+  }
+
+  .voting-election-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .voting-election-date {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+  .voting-status-page {
+    padding: 25px 14px 45px;
+  }
+
+  .voting-status-header h1 {
+    font-size: 30px;
+  }
+
+  .voting-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .voting-election-card,
+  .voting-progress-card,
+  .voting-verification-card {
+    padding: 18px;
+  }
+
+  .voting-election-main {
+    align-items: flex-start;
+  }
+
+  .voting-election-card h2 {
+    font-size: 17px;
+  }
+
+  .voting-election-date strong {
+    white-space: normal;
+  }
+
+  .voting-transaction-value {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .voting-transaction-value code {
+    width: 100%;
+  }
+
+  .voting-copy-button {
+    width: 100%;
+  }
+
+  .voting-verification-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .voting-primary-button,
+  .voting-secondary-button {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+  .voting-status-page {
+    padding: 20px 10px 35px;
+  }
+
+  .voting-status-header h1 {
+    font-size: 27px;
+  }
+
+  .voting-election-main {
+    gap: 11px;
+  }
+
+  .voting-election-icon {
+    width: 45px;
+    height: 45px;
+    flex-basis: 45px;
+  }
+
+  .voting-timeline-item {
+    gap: 10px;
+  }
+
+  .voting-timeline-title-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .voting-status-page *,
+  .voting-status-page *::before,
+  .voting-status-page *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
