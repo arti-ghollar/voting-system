@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./About.css";
 
 // Images for Three Ways to Vote
@@ -8,23 +9,22 @@ import centerVotingImg from "../../assets/voting_center_assistance_1789640280892
 import homeVisitImg from "../../assets/home_visit_voting_1789640353460.jpg";
 
 const About = () => {
+  const { t } = useLanguage();
   return (
     <main className="about-page">
       {/* Hero Section */}
       <section className="about-hero">
         <div className="about-container">
           <div className="about-hero-content">
-            <span className="about-badge">ABOUT OUR PLATFORM</span>
+            <span className="about-badge">{t('aboutOurPlatform')}</span>
 
             <h1>
-              Building a More
-              <span> Transparent Future</span>
+              {t('buildingMore')}
+              <span> {t('transparentFuture')}</span>
             </h1>
 
             <p>
-              Our blockchain-based voting platform is designed to make
-              elections secure, transparent, accessible, and trustworthy for
-              everyone.
+              {t('aboutHeroDesc')}
             </p>
           </div>
         </div>
@@ -35,47 +35,43 @@ const About = () => {
         <div className="about-container">
           <div className="about-grid">
             <div className="about-content">
-              <span className="section-label">WHO WE ARE</span>
+              <span className="section-label">{t('whoWeAre')}</span>
 
               <h2>
-                Modern Voting for a
-                <span> Digital World</span>
+                {t('modernVoting')}
+                <span> {t('digitalWorld')}</span>
               </h2>
 
               <p>
-                We are developing a modern digital voting solution that
-                combines secure authentication, blockchain technology, and a
-                simple user experience.
+                {t('aboutIntro1')}
               </p>
 
               <p>
-                Our goal is to reduce the limitations of traditional voting
-                systems while providing voters with a reliable and transparent
-                way to participate in elections.
+                {t('aboutIntro2')}
               </p>
 
               <div className="about-features">
                 <div className="about-feature">
                   <div className="feature-icon">🔐</div>
                   <div>
-                    <h3>Secure</h3>
-                    <p>Designed with security at every stage.</p>
+                    <h3>{t('secureFeature')}</h3>
+                    <p>{t('secureFeatureDesc')}</p>
                   </div>
                 </div>
 
                 <div className="about-feature">
                   <div className="feature-icon">⛓️</div>
                   <div>
-                    <h3>Blockchain Powered</h3>
-                    <p>Votes can be recorded with greater transparency.</p>
+                    <h3>{t('blockchainFeature')}</h3>
+                    <p>{t('blockchainFeatureDesc')}</p>
                   </div>
                 </div>
 
                 <div className="about-feature">
                   <div className="feature-icon">✓</div>
                   <div>
-                    <h3>Easy to Use</h3>
-                    <p>A simple experience for every voter.</p>
+                    <h3>{t('easyFeature')}</h3>
+                    <p>{t('easyFeatureDesc')}</p>
                   </div>
                 </div>
               </div>
@@ -85,27 +81,26 @@ const About = () => {
               <div className="visual-card">
                 <div className="visual-icon">🗳️</div>
 
-                <h3>Trusted Digital Voting</h3>
+                <h3>{t('trustedDigital')}</h3>
 
                 <p>
-                  Secure participation with a transparent and user-friendly
-                  election experience.
+                  {t('trustedDigitalDesc')}
                 </p>
 
                 <div className="visual-stats">
                   <div>
                     <strong>100%</strong>
-                    <span>Digital Process</span>
+                    <span>{t('digitalProcess')}</span>
                   </div>
 
                   <div>
                     <strong>24/7</strong>
-                    <span>Accessible</span>
+                    <span>{t('accessible')}</span>
                   </div>
 
                   <div>
-                    <strong>Secure</strong>
-                    <span>Architecture</span>
+                    <strong>{t('secureBadge')}</strong>
+                    <span>{t('secureArchitecture')}</span>
                   </div>
                 </div>
               </div>
@@ -118,13 +113,13 @@ const About = () => {
       <section className="about-voting-ways">
         <div className="about-container">
           <div className="voting-ways-header">
-            <span className="section-label">HOW IT WORKS</span>
+            <span className="section-label">{t('howItWorks')}</span>
             <h2>
-              Three Ways to
-              <span> Vote</span>
+              {t('threeWaysToVote')}
+              <span> {t('voteSpan')}</span>
             </h2>
             <p>
-              Making voting more accessible, convenient, and inclusive for everyone. Choose the voting method that best suits your situation.
+              {t('threeWaysDesc')}
             </p>
           </div>
 
@@ -136,20 +131,20 @@ const About = () => {
                 <div className="way-icon">📱</div>
               </div>
               <div className="way-card-content">
-                <h3>Online / Home Voting</h3>
+                <h3>{t('onlineVoting')}</h3>
                 <p>
-                  Voters who have a smartphone and are comfortable using digital technology can cast their vote securely from home using the online voting system.
+                  {t('onlineVotingDesc')}
                 </p>
                 <ul className="way-features">
-                  <li>Vote from your smartphone</li>
-                  <li>Easy and convenient process</li>
-                  <li>Secure voter verification</li>
-                  <li>Candidate information before voting</li>
-                  <li>Vote confirmation after submission</li>
-                  <li>Designed for users who are comfortable with digital technology</li>
+                  <li>{t('onlineFeat1')}</li>
+                  <li>{t('onlineFeat2')}</li>
+                  <li>{t('onlineFeat3')}</li>
+                  <li>{t('onlineFeat4')}</li>
+                  <li>{t('onlineFeat5')}</li>
+                  <li>{t('onlineFeat6')}</li>
                 </ul>
                 <Link to="/voting-method" className="way-action-btn">
-                  Vote Online
+                  {t('voteOnlineBtn')}
                 </Link>
               </div>
             </article>
@@ -161,20 +156,20 @@ const About = () => {
                 <div className="way-icon">🏢</div>
               </div>
               <div className="way-card-content">
-                <h3>Assisted Voting Center</h3>
+                <h3>{t('assistedCenter')}</h3>
                 <p>
-                  Voters who are not comfortable using smartphones or online technology can visit an authorized voting center and receive assistance through a simple and accessible voting process.
+                  {t('assistedCenterDesc')}
                 </p>
                 <ul className="way-features">
-                  <li>Visit an authorized voting center</li>
-                  <li>Voter identity verification</li>
-                  <li>Assistance from an authorized operator</li>
-                  <li>Simple and accessible interface</li>
-                  <li>Candidate choice remains private</li>
-                  <li>Vote is recorded only after voter confirmation</li>
+                  <li>{t('centerFeat1')}</li>
+                  <li>{t('centerFeat2')}</li>
+                  <li>{t('centerFeat3')}</li>
+                  <li>{t('centerFeat4')}</li>
+                  <li>{t('centerFeat5')}</li>
+                  <li>{t('centerFeat6')}</li>
                 </ul>
                 <Link to="/voting-method" className="way-action-btn">
-                  Find Voting Center
+                  {t('findCenterBtn')}
                 </Link>
               </div>
             </article>
@@ -186,20 +181,20 @@ const About = () => {
                 <div className="way-icon">🏠</div>
               </div>
               <div className="way-card-content">
-                <h3>Authorized Home Visit Voting</h3>
+                <h3>{t('homeVisit')}</h3>
                 <p>
-                  Voters who are unable to travel to a voting center, such as eligible elderly or mobility-limited voters, may request an authorized home voting visit, subject to applicable election rules and approval.
+                  {t('homeVisitDesc')}
                 </p>
                 <ul className="way-features">
-                  <li>Request home voting assistance</li>
-                  <li>Request verification and approval</li>
-                  <li>Authorized officer assigned</li>
-                  <li>Voting appointment scheduled</li>
-                  <li>Private assisted voting process</li>
-                  <li>Vote completion confirmation</li>
+                  <li>{t('homeFeat1')}</li>
+                  <li>{t('homeFeat2')}</li>
+                  <li>{t('homeFeat3')}</li>
+                  <li>{t('homeFeat4')}</li>
+                  <li>{t('homeFeat5')}</li>
+                  <li>{t('homeFeat6')}</li>
                 </ul>
                 <Link to="/home-voting-request" className="way-action-btn">
-                  Request Home Visit
+                  {t('requestHomeVisitBtn')}
                 </Link>
               </div>
             </article>
@@ -211,53 +206,48 @@ const About = () => {
       <section className="about-mission">
         <div className="about-container">
           <div className="mission-header">
-            <span className="section-label">OUR MISSION</span>
+            <span className="section-label">{t('ourMission')}</span>
 
             <h2>
-              Making Elections
-              <span> Safer & Smarter</span>
+              {t('makingElections')}
+              <span> {t('saferSmarter')}</span>
             </h2>
 
             <p>
-              We believe technology can help create a voting process that is
-              more transparent, efficient, and accessible.
+              {t('missionDesc')}
             </p>
           </div>
 
           <div className="mission-cards">
             <article className="mission-card">
               <div className="mission-number">01</div>
-              <h3>Transparency</h3>
+              <h3>{t('transparencyLabel')}</h3>
               <p>
-                Provide a voting environment where election information and
-                results can be handled with greater transparency.
+                {t('transparencyDesc')}
               </p>
             </article>
 
             <article className="mission-card">
               <div className="mission-number">02</div>
-              <h3>Security</h3>
+              <h3>{t('securityLabel')}</h3>
               <p>
-                Use modern security practices to protect voter information and
-                voting operations.
+                {t('securityDesc')}
               </p>
             </article>
 
             <article className="mission-card">
               <div className="mission-number">03</div>
-              <h3>Accessibility</h3>
+              <h3>{t('accessibilityLabel')}</h3>
               <p>
-                Make the voting experience straightforward and accessible
-                across modern devices.
+                {t('accessibilityDesc')}
               </p>
             </article>
 
             <article className="mission-card">
               <div className="mission-number">04</div>
-              <h3>Trust</h3>
+              <h3>{t('trustLabel')}</h3>
               <p>
-                Build confidence through reliable technology and a clear
-                election experience.
+                {t('trustDesc')}
               </p>
             </article>
           </div>
@@ -269,39 +259,37 @@ const About = () => {
         <div className="about-container">
           <div className="technology-box">
             <div>
-              <span className="section-label">OUR TECHNOLOGY</span>
+              <span className="section-label">{t('ourTechnology')}</span>
 
               <h2>
-                Powered by Modern
-                <span> Technology</span>
+                {t('poweredBy')}
+                <span> {t('technologySpan')}</span>
               </h2>
 
               <p>
-                The platform is structured around modern web technologies and
-                blockchain concepts to create a secure and scalable digital
-                voting experience.
+                {t('techDesc')}
               </p>
             </div>
 
             <div className="technology-list">
               <div className="technology-item">
                 <span>01</span>
-                <strong>Modern Web Application</strong>
+                <strong>{t('webAppTech')}</strong>
               </div>
 
               <div className="technology-item">
                 <span>02</span>
-                <strong>Secure Authentication</strong>
+                <strong>{t('secureAuthTech')}</strong>
               </div>
 
               <div className="technology-item">
                 <span>03</span>
-                <strong>Blockchain Integration</strong>
+                <strong>{t('blockchainTech')}</strong>
               </div>
 
               <div className="technology-item">
                 <span>04</span>
-                <strong>Transparent Results</strong>
+                <strong>{t('transparentTech')}</strong>
               </div>
             </div>
           </div>
@@ -312,16 +300,15 @@ const About = () => {
       <section className="about-cta">
         <div className="about-container">
           <div className="cta-content">
-            <span className="about-badge">THE FUTURE OF VOTING</span>
+            <span className="about-badge">{t('futureOfVoting')}</span>
 
             <h2>
-              Your Vote.
-              <span> Your Voice.</span>
+              {t('yourVoteHero')}
+              <span> {t('yourVoiceHero')}</span>
             </h2>
 
             <p>
-              Experience a modern approach to secure and transparent digital
-              elections.
+              {t('futureDesc')}
             </p>
           </div>
         </div>

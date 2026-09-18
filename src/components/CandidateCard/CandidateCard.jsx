@@ -1,3 +1,4 @@
+import { useLanguage } from "../../context/LanguageContext";
 import "./CandidateCard.css";
 
 const CandidateCard = ({
@@ -13,6 +14,7 @@ const CandidateCard = ({
     image = "",
     description = "Candidate information is available here.",
   } = candidate || {};
+  const { t } = useLanguage();
 
   const handleSelect = () => {
     if (!disabled && onSelect) {
@@ -56,10 +58,10 @@ const CandidateCard = ({
         {selected ? (
           <>
             <span>✓</span>
-            Selected
+            {t('cardSelected')}
           </>
         ) : (
-          "Select Candidate"
+          t('cardSelectCandidate')
         )}
       </button>
     </article>

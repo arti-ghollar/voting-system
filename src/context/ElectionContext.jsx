@@ -4,76 +4,93 @@ import React, {
   useMemo,
   useState,
   useCallback,
+  useEffect,
 } from "react";
+import { api } from "../services/api";
+import { useAuth } from "./AuthContext";
 
 const ElectionContext = createContext(null);
 
-const initialElections = [
-  {
-    id: "ELX-001",
-    title: "General Election 2026",
-    type: "General",
-    status: "Active",
-    startDate: "2026-09-10",
-    endDate: "2026-09-12",
-  },
-  {
-    id: "ELX-002",
-    title: "Municipal Election 2026",
-    type: "Municipal",
-    status: "Scheduled",
-    startDate: "2026-10-05",
-    endDate: "2026-10-06",
-  },
-];
-
 export const ElectionProvider = ({ children }) => {
-  const [elections, setElections] = useState(initialElections);
-  const [selectedElection, setSelectedElection] = useState(
-    initialElections[0]
-  );
+  const { isAuthenticated, isAdmin } = useAuth();
+  const [elections, setElections] = useState([]);
+  const [selectedElection, setSelectedElection] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const addElection = useCallback((election) => {
-    const newElection = {
-      id: `ELX-${String(elections.length + 1).padStart(3, "0")}`,
-      ...election,
-    };
-
-    setElections((previous) => [...previous, newElection]);
-
-    return newElection;
-  }, [elections.length]);
-
-  const updateElection = useCallback((id, updates) => {
-    setElections((previous) =>
-      previous.map((election) =>
-        election.id === id
-          ? { ...election, ...updates }
-          : election
-      )
-    );
-  }, []);
-
-  const removeElection = useCallback((id) => {
-    setElections((previous) =>
-      previous.filter((election) => election.id !== id)
-    );
-
-    if (selectedElection?.id === id) {
-      setSelectedElection(null);
+  const fetchElections = useCallback(async () => {
+    if (!isAuthenticated) return;
+    setLoading(true);
+    try {
+      // If admin, fetch all elections. If voter, fetch active elections
+      const res = isAdmin ? await api.admin.getElections() : await api.getElections(); // assuming a GET /api/admin/elections is identical to GET /api/elections for simplicity or if they differ
+      if (res.success) {
+        setElections(res.elections);
+        if (res.elections.length > 0 && !selectedElection) {
+          setSelectedElection(res.elections[0]);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching elections:", error);
+    } finally {
+      setLoading(false);
     }
-  }, [selectedElection]);
+  }, [isAuthenticated, isAdmin]);
+
+  useEffect(() => {
+    fetchElections();
+  }, [fetchElections]);
+
+  const addElection = useCallback(async (electionData) => {
+    try {
+      const res = await api.admin.createElection(electionData);
+      if (res.success) {
+        await fetchElections();
+        return { ...electionData, id: res.id };
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }, [fetchElections]);
+
+  const updateElection = useCallback(async (id, updates) => {
+    try {
+      const res = await api.admin.updateElection(id, updates);
+      if (res.success) {
+        await fetchElections();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [fetchElections]);
+
+  const removeElection = useCallback(async (id) => {
+    try {
+      const res = await api.admin.deleteElection(id);
+      if (res.success) {
+        await fetchElections();
+        if (selectedElection?.id === id) {
+          setSelectedElection(null);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [fetchElections, selectedElection]);
 
   const value = useMemo(
     () => ({
       elections,
+      loading,
       selectedElection,
       setSelectedElection,
       addElection,
       updateElection,
       removeElection,
+      refreshElections: fetchElections
     }),
-    [elections, selectedElection, addElection, updateElection, removeElection]
+    [elections, loading, selectedElection, addElection, updateElection, removeElection, fetchElections]
   );
 
   return (

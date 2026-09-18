@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Profile.css";
 
 const Profile = () => {
+  const { t } = useLanguage();
   const [isEditing, setIsEditing] = useState(false);
 
   const [profile, setProfile] = useState({
@@ -47,17 +49,16 @@ const Profile = () => {
         {/* Page Header */}
         <header className="profile-header">
           <div>
-            <span className="profile-eyebrow">ACCOUNT SETTINGS</span>
-            <h1>My Profile</h1>
+            <span className="profile-eyebrow">{t('accountSettingsEyebrow')}</span>
+            <h1>{t('myProfileTitle')}</h1>
             <p>
-              Manage your personal information and view your voter account
-              details.
+              {t('myProfileDesc')}
             </p>
           </div>
 
           <Link to="/voter-dashboard" className="profile-back-button">
             <span aria-hidden="true">←</span>
-            Back to Dashboard
+            {t('backToDashboardBtn')}
           </Link>
         </header>
 
@@ -79,10 +80,10 @@ const Profile = () => {
             <div className="profile-badges">
               <span className="profile-role-badge">
                 <span className="profile-badge-dot"></span>
-                Verified Voter
+                {t('verifiedVoterBadge')}
               </span>
 
-              <span className="profile-active-badge">Account Active</span>
+              <span className="profile-active-badge">{t('accountActiveBadge')}</span>
             </div>
           </div>
 
@@ -92,7 +93,7 @@ const Profile = () => {
             onClick={handleEdit}
           >
             <span aria-hidden="true">✎</span>
-            Edit Profile
+            {t('editProfileBtn')}
           </button>
         </section>
 
@@ -102,35 +103,35 @@ const Profile = () => {
           <section className="profile-card">
             <div className="profile-card-header">
               <div>
-                <span className="profile-section-label">PERSONAL DETAILS</span>
-                <h2>Personal Information</h2>
+                <span className="profile-section-label">{t('personalDetailsEyebrow')}</span>
+                <h2>{t('personalInformationTitle')}</h2>
               </div>
             </div>
 
             {!isEditing ? (
               <div className="profile-details-list">
                 <div className="profile-detail-row">
-                  <span className="profile-detail-label">Full Name</span>
+                  <span className="profile-detail-label">{t('fullNameLabel')}</span>
                   <strong>{profile.fullName}</strong>
                 </div>
 
                 <div className="profile-detail-row">
-                  <span className="profile-detail-label">Email Address</span>
+                  <span className="profile-detail-label">{t('emailAddressLabel')}</span>
                   <strong>{profile.email}</strong>
                 </div>
 
                 <div className="profile-detail-row">
-                  <span className="profile-detail-label">Phone Number</span>
+                  <span className="profile-detail-label">{t('phoneNumberLabel')}</span>
                   <strong>{profile.phone}</strong>
                 </div>
 
                 <div className="profile-detail-row">
-                  <span className="profile-detail-label">Date of Birth</span>
+                  <span className="profile-detail-label">{t('dateOfBirthLabel')}</span>
                   <strong>{profile.dateOfBirth}</strong>
                 </div>
 
                 <div className="profile-detail-row">
-                  <span className="profile-detail-label">Address</span>
+                  <span className="profile-detail-label">{t('addressLabel')}</span>
                   <strong>{profile.address}</strong>
                 </div>
               </div>
@@ -138,7 +139,7 @@ const Profile = () => {
               <form className="profile-edit-form" onSubmit={handleSubmit}>
                 <div className="profile-form-grid">
                   <div className="profile-form-group">
-                    <label htmlFor="fullName">Full Name</label>
+                    <label htmlFor="fullName">{t('fullNameLabel')}</label>
                     <input
                       id="fullName"
                       name="fullName"
@@ -150,7 +151,7 @@ const Profile = () => {
                   </div>
 
                   <div className="profile-form-group">
-                    <label htmlFor="email">Email Address</label>
+                    <label htmlFor="email">{t('emailAddressLabel')}</label>
                     <input
                       id="email"
                       name="email"
@@ -162,7 +163,7 @@ const Profile = () => {
                   </div>
 
                   <div className="profile-form-group">
-                    <label htmlFor="phone">Phone Number</label>
+                    <label htmlFor="phone">{t('phoneNumberLabel')}</label>
                     <input
                       id="phone"
                       name="phone"
@@ -174,7 +175,7 @@ const Profile = () => {
                   </div>
 
                   <div className="profile-form-group">
-                    <label htmlFor="dateOfBirth">Date of Birth</label>
+                    <label htmlFor="dateOfBirth">{t('dateOfBirthLabel')}</label>
                     <input
                       id="dateOfBirth"
                       name="dateOfBirth"
@@ -186,7 +187,7 @@ const Profile = () => {
                   </div>
 
                   <div className="profile-form-group profile-form-full">
-                    <label htmlFor="address">Address</label>
+                    <label htmlFor="address">{t('addressLabel')}</label>
                     <textarea
                       id="address"
                       name="address"
@@ -204,11 +205,11 @@ const Profile = () => {
                     className="profile-cancel-button"
                     onClick={handleCancel}
                   >
-                    Cancel
+                    {t('cancelBtn')}
                   </button>
 
                   <button type="submit" className="profile-save-button">
-                    Save Changes
+                    {t('saveChangesBtn')}
                   </button>
                 </div>
               </form>
@@ -220,25 +221,25 @@ const Profile = () => {
             <div className="profile-card-header">
               <div>
                 <span className="profile-section-label">
-                  VOTER VERIFICATION
+                  {t('voterVerificationEyebrow')}
                 </span>
-                <h2>Voter Information</h2>
+                <h2>{t('voterInformationTitle')}</h2>
               </div>
             </div>
 
             <div className="profile-voter-info">
               <div className="profile-voter-id-box">
-                <span>Voter ID</span>
+                <span>{t('voterIdLabel')}</span>
                 <strong>{profile.voterId}</strong>
-                <small>Verified voter identification</small>
+                <small>{t('verifiedVoterIdDesc')}</small>
               </div>
 
               <div className="profile-verification-row">
                 <div className="profile-verification-icon">✓</div>
 
                 <div>
-                  <strong>Identity Verified</strong>
-                  <p>Your identity verification has been completed.</p>
+                  <strong>{t('identityVerifiedTitle')}</strong>
+                  <p>{t('identityVerifiedDesc')}</p>
                 </div>
               </div>
 
@@ -246,8 +247,8 @@ const Profile = () => {
                 <div className="profile-verification-icon">✓</div>
 
                 <div>
-                  <strong>Voter Registration Active</strong>
-                  <p>Your voter registration is currently active.</p>
+                  <strong>{t('voterRegistrationActiveTitle')}</strong>
+                  <p>{t('voterRegistrationActiveDesc')}</p>
                 </div>
               </div>
             </div>
@@ -261,11 +262,10 @@ const Profile = () => {
           </div>
 
           <div className="profile-security-content">
-            <span className="profile-section-label">SECURITY</span>
-            <h2>Keep your account secure</h2>
+            <span className="profile-section-label">{t('securityEyebrow')}</span>
+            <h2>{t('keepAccountSecureTitle')}</h2>
             <p>
-              Never share your password, authentication codes, or private
-              account information with anyone.
+              {t('keepAccountSecureDesc')}
             </p>
           </div>
 
@@ -273,10 +273,10 @@ const Profile = () => {
             type="button"
             className="profile-password-button"
             onClick={() =>
-              window.alert("Password change will be available with backend authentication.")
+              window.alert(t('changePasswordAlert'))
             }
           >
-            Change Password
+            {t('changePasswordBtn')}
           </button>
         </section>
 
@@ -285,10 +285,9 @@ const Profile = () => {
           <div className="profile-status-icon">✓</div>
 
           <div>
-            <h3>Account Status: Active</h3>
+            <h3>{t('accountStatusActiveTitle')}</h3>
             <p>
-              Your voter account is active and eligible to participate in
-              available elections.
+              {t('accountStatusActiveDesc')}
             </p>
           </div>
         </section>

@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./VotingMethodSelection.css";
 
 const VotingMethodSelection = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <main className="voting-method-page">
@@ -12,17 +14,16 @@ const VotingMethodSelection = () => {
         <header className="voting-method-header">
           <div className="voting-method-heading">
             <span className="voting-method-eyebrow">
-              VOTING METHOD
+              {t('votingMethodEyebrow')}
             </span>
-            <h1>How would you like to vote?</h1>
+            <h1>{t('howWouldYouLikeToVote')}</h1>
             <p>
-              Choose the voting method that works best for you. 
-              Our system is designed to provide secure and accessible voting for everyone.
+              {t('chooseVotingMethodDesc')}
             </p>
           </div>
           <Link to="/voter-dashboard" className="voting-method-back-button">
             <span aria-hidden="true">←</span>
-            Back to Dashboard
+            {t('backToDashboard')}
           </Link>
         </header>
 
@@ -34,19 +35,19 @@ const VotingMethodSelection = () => {
               📱
             </div>
             <div className="voting-method-content">
-              <h2>HOME / ONLINE VOTING</h2>
-              <p>Vote securely from your smartphone, tablet, or personal computer.</p>
+              <h2>{t('homeOnlineVoting')}</h2>
+              <p>{t('homeOnlineDesc')}</p>
               <ul className="voting-method-features">
-                <li><span aria-hidden="true">✓</span> Quick and convenient</li>
-                <li><span aria-hidden="true">✓</span> Immediate confirmation</li>
-                <li><span aria-hidden="true">✓</span> Highest privacy</li>
+                <li><span aria-hidden="true">✓</span> {t('quickConvenient')}</li>
+                <li><span aria-hidden="true">✓</span> {t('immediateConfirmation')}</li>
+                <li><span aria-hidden="true">✓</span> {t('highestPrivacy')}</li>
               </ul>
             </div>
             <button 
               className="voting-method-action-button blue-btn"
               onClick={() => navigate("/elections")}
             >
-              Vote Online
+              {t('voteOnlineBtn')}
               <span aria-hidden="true">→</span>
             </button>
           </article>
@@ -57,16 +58,16 @@ const VotingMethodSelection = () => {
               🏢
             </div>
             <div className="voting-method-content">
-              <h2>VOTING CENTER</h2>
-              <p>Get assistance at a verified center with dedicated digital kiosks.</p>
+              <h2>{t('votingCenterTitle')}</h2>
+              <p>{t('votingCenterDesc')}</p>
               <ul className="voting-method-features">
-                <li><span aria-hidden="true">✓</span> Staff assistance available</li>
-                <li><span aria-hidden="true">✓</span> Accessible devices provided</li>
-                <li><span aria-hidden="true">✓</span> Secure private booths</li>
+                <li><span aria-hidden="true">✓</span> {t('staffAssistance')}</li>
+                <li><span aria-hidden="true">✓</span> {t('accessibleDevices')}</li>
+                <li><span aria-hidden="true">✓</span> {t('securePrivateBooths')}</li>
               </ul>
             </div>
             <div className="voting-method-info-badge">
-              Log out to allow Center Operator to start a session.
+              {t('logOutToAllow')}
             </div>
           </article>
 
@@ -76,19 +77,19 @@ const VotingMethodSelection = () => {
               🏠
             </div>
             <div className="voting-method-content">
-              <h2>HOME VISIT VOTING</h2>
-              <p>Request an authorized election officer to visit your home for assisted voting.</p>
+              <h2>{t('homeVisitVotingTitle')}</h2>
+              <p>{t('homeVisitDesc')}</p>
               <ul className="voting-method-features">
-                <li><span aria-hidden="true">✓</span> For elderly & mobility-impaired</li>
-                <li><span aria-hidden="true">✓</span> Verified election officials</li>
-                <li><span aria-hidden="true">✓</span> Authorized assistance</li>
+                <li><span aria-hidden="true">✓</span> {t('elderlyMobility')}</li>
+                <li><span aria-hidden="true">✓</span> {t('verifiedOfficials')}</li>
+                <li><span aria-hidden="true">✓</span> {t('authorizedAssistance')}</li>
               </ul>
             </div>
             <button 
               className="voting-method-action-button green-btn"
               onClick={() => navigate("/home-voting-request")}
             >
-              Request Home Visit
+              {t('requestHomeVisitBtn')}
               <span aria-hidden="true">→</span>
             </button>
           </article>

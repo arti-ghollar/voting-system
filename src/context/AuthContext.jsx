@@ -5,74 +5,63 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { api } from "../services/api";
 
 const AuthContext = createContext(null);
 
-const STORAGE_KEY = "blockvote_auth_user";
-
-const getStoredUser = () => {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : null;
-  } catch {
-    return null;
-  }
-};
-
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(getStoredUser);
-  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-    } else {
-      localStorage.removeItem(STORAGE_KEY);
-    }
-  }, [user]);
+    const initAuth = async () => {
+      try {
+        const res = await api.getMe();
+        if (res.success) {
+          setUser(res.user);
+        }
+      } catch (error) {
+        console.error("Auth init error:", error);
+      }
+      setLoading(false);
+    };
+    initAuth();
+  }, []);
 
   const login = async (credentials) => {
-    setLoading(true);
-
     try {
-      let role = "voter";
-      const email = credentials.email.toLowerCase();
-      
-      if (email.includes("admin")) {
-        role = "admin";
-      } else if (email.includes("center")) {
-        role = "center_operator";
-      } else if (email.includes("officer")) {
-        role = "home_officer";
-      } else if (credentials.role) {
-        role = credentials.role;
+      const res = await api.login(credentials);
+      if (res.success) {
+        setUser(res.user);
       }
-
-      const loggedInUser = {
-        id: credentials.email || "demo-user",
-        name: credentials.name || "Demo User",
-        email: credentials.email || "demo@blockvote.local",
-        role: role,
-        voterId: `VT-${Math.floor(Math.random() * 90000) + 10000}`,
-      };
-
-      setUser(loggedInUser);
-
-      return {
-        success: true,
-        user: loggedInUser,
-      };
-    } finally {
-      setLoading(false);
+      return res;
+    } catch (error) {
+      console.error(error);
+      return { success: false, message: "Network error" };
     }
   };
 
-  const logout = () => {
-    setUser(null);
+  const logout = async () => {
+    try {
+      await api.logout();
+      setUser(null);
+    } catch (err) {
+      console.error(err);
+      setUser(null);
+    }
   };
 
   const register = async (userData) => {
-    return login(userData);
+    try {
+      const res = await api.register(userData);
+      if (res.success) {
+        setUser(res.user);
+      }
+      return res;
+    } catch (error) {
+      console.error(error);
+      return { success: false, message: "Network error" };
+    }
   };
 
   const value = useMemo(
@@ -90,7 +79,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

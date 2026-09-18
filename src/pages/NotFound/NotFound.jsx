@@ -1,22 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./NotFound.css";
 
 const NotFound = () => {
+  const { t } = useLanguage();
   return (
     <main className="not-found-page">
       <div className="not-found-card">
         <div className="not-found-code">404</div>
 
-        <h1>Page Not Found</h1>
+        <h1>{t('pageNotFoundTitle')}</h1>
 
         <p>
-          The page you are looking for does not exist or may have been
-          moved.
+          {t('pageNotFoundDesc')}
         </p>
 
         <Link to="/" className="not-found-btn">
-          Back to Home
+          {t('backToHomeBtn')}
         </Link>
       </div>
     </main>

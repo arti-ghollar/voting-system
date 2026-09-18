@@ -57,6 +57,7 @@ import { BlockchainProvider } from "./context/BlockchainContext";
 import { ElectionProvider } from "./context/ElectionContext";
 import { VotingProvider } from "./context/VotingContext";
 import { NotificationProvider } from "./context/NotificationContext";
+import { LanguageProvider } from "./context/LanguageContext";
 
 // =====================================================
 // 404 PAGE
@@ -77,6 +78,11 @@ function App() {
           Every route/page opens from the top
       ================================================= */}
       <ScrollToTop />
+
+      {/* =================================================
+          LANGUAGE PROVIDER
+      ================================================= */}
+      <LanguageProvider>
 
       {/* =================================================
           AUTH PROVIDER
@@ -421,6 +427,8 @@ function App() {
         </BlockchainProvider>
 
       </AuthProvider>
+
+      </LanguageProvider>
 
     </BrowserRouter>
   );

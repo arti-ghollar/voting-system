@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useVoting } from "../../context/VotingContext";
+import { useLanguage } from "../../context/LanguageContext";
 import "./VotingCenter.css";
 
 const VotingCenter = () => {
   const navigate = useNavigate();
   const { hasVoted } = useVoting();
+  const { t } = useLanguage();
   
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedVoter, setSearchedVoter] = useState(null);
@@ -29,12 +31,12 @@ const VotingCenter = () => {
         const voterAlreadyVoted = hasVoted("GE-2026", searchQuery);
         setSearchedVoter({
           voterId: searchQuery.toUpperCase(),
-          name: "Verified Voter",
-          status: "Eligible",
+          name: t('verifiedVoterName'),
+          status: t('eligibleStatus'),
           hasVoted: voterAlreadyVoted
         });
       } else {
-        setError("Voter not found. Please enter a valid Voter ID (e.g., VT-12345).");
+        setError(t('voterNotFound'));
       }
     }, 800);
   };
@@ -57,22 +59,21 @@ const VotingCenter = () => {
         <header className="voting-center-header">
           <div className="voting-center-welcome">
             <span className="voting-center-eyebrow">
-              CENTER OPERATOR PORTAL
+              {t('centerOperatorPortal')}
             </span>
-            <h1>Voting Center Dashboard</h1>
+            <h1>{t('votingCenterDashboardTitle')}</h1>
             <p>
-              Verify voters and conduct authorized assisted voting sessions. 
-              Candidate selections remain entirely private.
+              {t('votingCenterDashboardDesc')}
             </p>
           </div>
           <div className="voting-center-profile">
             <div className="voting-center-avatar">O</div>
             <div className="voting-center-profile-info">
-              <strong>Center Operator</strong>
-              <span>Center #42 (Central District)</span>
+              <strong>{t('centerOperatorRole')}</strong>
+              <span>{t('centerDistrict')}</span>
             </div>
             <span className="voting-center-verified">
-              <span aria-hidden="true">✓</span> Active
+              <span aria-hidden="true">✓</span> {t('activeStatus')}
             </span>
           </div>
         </header>
@@ -81,8 +82,8 @@ const VotingCenter = () => {
         <section className="voting-center-card">
           <div className="voting-center-card-header">
             <div>
-              <span className="voting-center-card-label">VOTER LOOKUP</span>
-              <h2>Verify Voter Eligibility</h2>
+              <span className="voting-center-card-label">{t('voterLookupLabel')}</span>
+              <h2>{t('verifyVoterEligibilityTitle')}</h2>
             </div>
           </div>
           
@@ -90,13 +91,13 @@ const VotingCenter = () => {
             <div className="voting-center-search-wrapper">
               <input 
                 type="text" 
-                placeholder="Enter Voter ID (e.g., VT-12345)" 
+                placeholder={t('enterVoterIdPlaceholder')} 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 required
               />
               <button type="submit" disabled={isSearching} className="voting-center-search-btn">
-                {isSearching ? "Searching..." : "Search"}
+                {isSearching ? t('searchingBtn') : t('searchBtn')}
               </button>
             </div>
             {error && <p className="voting-center-error">{error}</p>}
@@ -108,31 +109,31 @@ const VotingCenter = () => {
           <section className="voting-center-card voter-details">
             <div className="voting-center-card-header">
               <div>
-                <span className="voting-center-card-label">VERIFICATION RESULT</span>
-                <h2>Voter Information</h2>
+                <span className="voting-center-card-label">{t('verificationResultLabel')}</span>
+                <h2>{t('voterInformationTitle')}</h2>
               </div>
               <span className={`voting-center-status-badge ${searchedVoter.hasVoted ? 'status-voted' : 'status-eligible'}`}>
-                {searchedVoter.hasVoted ? "Already Voted" : "Eligible"}
+                {searchedVoter.hasVoted ? t('alreadyVotedStatus') : t('eligibleStatus')}
               </span>
             </div>
 
             <div className="voting-center-details-grid">
               <div className="voting-center-detail">
-                <span>Voter ID</span>
+                <span>{t('voterIdLabel')}</span>
                 <strong>{searchedVoter.voterId}</strong>
               </div>
               <div className="voting-center-detail">
-                <span>Name</span>
+                <span>{t('nameLabel')}</span>
                 <strong>{searchedVoter.name}</strong>
               </div>
               <div className="voting-center-detail">
-                <span>Election</span>
-                <strong>General Election 2026</strong>
+                <span>{t('electionLabel')}</span>
+                <strong>{t('ge2026Title')}</strong>
               </div>
               <div className="voting-center-detail">
-                <span>Voting Status</span>
+                <span>{t('votingStatusLabel')}</span>
                 <strong style={{ color: searchedVoter.hasVoted ? "var(--color-danger, #ef4444)" : "var(--color-success, #22c55e)" }}>
-                  {searchedVoter.hasVoted ? "Vote Cast" : "Not Voted"}
+                  {searchedVoter.hasVoted ? t('voteCastLabel') : t('notVotedLabel')}
                 </strong>
               </div>
             </div>
@@ -142,21 +143,21 @@ const VotingCenter = () => {
                 <div className="voting-center-warning-box">
                   <span className="warning-icon">⚠</span>
                   <div>
-                    <strong>Voting Blocked</strong>
-                    <p>This voter has already cast a vote in the current election. Double voting is strictly prohibited.</p>
+                    <strong>{t('votingBlockedTitle')}</strong>
+                    <p>{t('votingBlockedDesc')}</p>
                   </div>
                 </div>
               ) : (
                 <div className="voting-center-start-box">
                   <div className="voting-center-privacy-notice">
                     <span className="privacy-icon">🔐</span>
-                    <p><strong>Privacy Check:</strong> Please ensure the voter has privacy to select their candidate on the next screen. You will not be able to see their selection.</p>
+                    <p><strong>{t('privacyCheckTitle')}</strong> {t('privacyCheckDesc')}</p>
                   </div>
                   <button 
                     className="voting-center-primary-btn"
                     onClick={startAssistedVoting}
                   >
-                    Start Assisted Voting Session
+                    {t('startAssistedVotingBtn')}
                     <span>→</span>
                   </button>
                 </div>

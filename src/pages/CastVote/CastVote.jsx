@@ -1,43 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useVoting } from "../../context/VotingContext";
+import { useLanguage } from "../../context/LanguageContext";
 import "./CastVote.css";
-
-const CANDIDATES = [
-  {
-    id: "candidate-1",
-    name: "Aarav Sharma",
-    party: "Progressive Alliance",
-    symbol: "PA",
-    description: "Committed to transparent governance and digital development.",
-  },
-  {
-    id: "candidate-2",
-    name: "Priya Deshmukh",
-    party: "People's Development Party",
-    symbol: "PD",
-    description: "Focused on education, employment, and community development.",
-  },
-  {
-    id: "candidate-3",
-    name: "Rahul Patil",
-    party: "National Reform Front",
-    symbol: "NR",
-    description: "Working toward stronger infrastructure and public services.",
-  },
-  {
-    id: "candidate-4",
-    name: "Sneha Kulkarni",
-    party: "United Citizens Party",
-    symbol: "UC",
-    description: "Focused on inclusive growth, innovation, and citizen welfare.",
-  },
-];
 
 const CastVote = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { castVote, hasVoted } = useVoting();
+  const { t } = useLanguage();
+
+  const CANDIDATES = [
+    {
+      id: "candidate-1",
+      name: t('cand1Name'),
+      party: t('cand1Party'),
+      symbol: "PA",
+      description: t('cand1Desc'),
+    },
+    {
+      id: "candidate-2",
+      name: t('cand2Name'),
+      party: t('cand2Party'),
+      symbol: "PD",
+      description: t('cand2Desc'),
+    },
+    {
+      id: "candidate-3",
+      name: t('cand3Name'),
+      party: t('cand3Party'),
+      symbol: "NR",
+      description: t('cand3Desc'),
+    },
+    {
+      id: "candidate-4",
+      name: t('cand4Name'),
+      party: t('cand4Party'),
+      symbol: "UC",
+      description: t('cand4Desc'),
+    },
+  ];
 
   const votingMethod = location.state?.votingMethod || "ONLINE";
   const voterId = location.state?.voterId || "VT-2026-10482"; // Default for demo
@@ -48,10 +50,10 @@ const CastVote = () => {
   const [alreadyVoted, setAlreadyVoted] = useState(false);
 
   useEffect(() => {
-    if (hasVoted("GE-2026", voterId)) {
+    if (hasVoted("GE-2026")) {
       setAlreadyVoted(true);
     }
-  }, [hasVoted, voterId]);
+  }, [hasVoted]);
 
   const selectedCandidateData = CANDIDATES.find(
     (candidate) => candidate.id === selectedCandidate
@@ -74,47 +76,53 @@ const CastVote = () => {
     setShowConfirmation(true);
   };
 
-  const handleConfirmVote = () => {
+  const handleConfirmVote = async () => {
     if (!selectedCandidate || isSubmitting || alreadyVoted) {
       return;
     }
 
     setIsSubmitting(true);
 
-    castVote({
+    const result = await castVote({
       electionId: "GE-2026",
-      voterId: voterId,
       candidateId: selectedCandidate,
       votingMethod: votingMethod,
     });
 
-    window.setTimeout(() => {
+    if (result.success) {
+      window.setTimeout(() => {
+        setIsSubmitting(false);
+        
+        if (votingMethod === "CENTER" || votingMethod === "HOME_VISIT") {
+          // Privacy requirement: Do not reveal candidate to operator in the next screen
+          navigate("/vote-confirmation", {
+            state: {
+              isAssisted: true,
+              votingMethod,
+              election: {
+                id: "GE-2026",
+                title: t('ge2026Title'),
+              },
+              transactionId: result.transactionId
+            },
+          });
+        } else {
+          navigate("/vote-confirmation", {
+            state: {
+              candidate: selectedCandidateData,
+              election: {
+                id: "GE-2026",
+                title: t('ge2026Title'),
+              },
+              transactionId: result.transactionId
+            },
+          });
+        }
+      }, 1000);
+    } else {
       setIsSubmitting(false);
-      
-      if (votingMethod === "CENTER" || votingMethod === "HOME_VISIT") {
-        // Privacy requirement: Do not reveal candidate to operator in the next screen
-        navigate("/vote-confirmation", {
-          state: {
-            isAssisted: true,
-            votingMethod,
-            election: {
-              id: "GE-2026",
-              title: "General Election 2026",
-            },
-          },
-        });
-      } else {
-        navigate("/vote-confirmation", {
-          state: {
-            candidate: selectedCandidateData,
-            election: {
-              id: "GE-2026",
-              title: "General Election 2026",
-            },
-          },
-        });
-      }
-    }, 1000);
+      alert(result.message || t('failedToCastVote'));
+    }
   };
 
   const handleCancelConfirmation = () => {
@@ -132,13 +140,13 @@ const CastVote = () => {
           <div className="cast-vote-security-banner">
             <div className="cast-vote-security-icon" aria-hidden="true">✓</div>
             <div>
-              <h3>Already Voted</h3>
-              <p>A vote has already been cast for this election by this voter ID ({voterId}). One voter can vote only once in an election.</p>
+              <h3>{t('alreadyVotedTitle')}</h3>
+              <p>{t('alreadyVotedDesc1')}{voterId}{t('alreadyVotedDesc2')}</p>
             </div>
           </div>
           <div style={{ marginTop: "24px" }}>
             <Link to={votingMethod === "CENTER" ? "/voting-center" : (votingMethod === "HOME_VISIT" ? "/home-voting-officer" : "/voter-dashboard")} className="cast-vote-primary-button" style={{ display: "inline-flex" }}>
-              Return to Dashboard
+              {t('returnToDashboard')}
             </Link>
           </div>
         </div>
@@ -154,14 +162,13 @@ const CastVote = () => {
         <header className="cast-vote-header">
           <div className="cast-vote-heading">
             <span className="cast-vote-eyebrow">
-              VOTER PORTAL
+              {t('voterPortalEyebrow')}
             </span>
 
-            <h1>Cast Your Vote</h1>
+            <h1>{t('castVoteTitle')}</h1>
 
             <p>
-              Select one candidate for the current election. Review
-              your selection carefully before submitting your vote.
+              {t('castVoteDesc')}
             </p>
           </div>
 
@@ -170,7 +177,7 @@ const CastVote = () => {
             className="cast-vote-back-button"
           >
             <span aria-hidden="true">←</span>
-            Back to Dashboard
+            {t('backToDashboard')}
           </Link>
         </header>
 
@@ -186,28 +193,28 @@ const CastVote = () => {
 
             <div>
               <span className="cast-vote-card-label">
-                CURRENT ELECTION
+                {t('currentElectionLabel')}
               </span>
 
-              <h2>General Election 2026</h2>
+              <h2>{t('ge2026Title')}</h2>
 
               <div className="cast-vote-election-status">
                 <span
                   className="cast-vote-status-dot"
                   aria-hidden="true"
                 />
-                Voting Active
+                {t('votingActiveLabel')}
               </div>
             </div>
           </div>
 
           <div className="cast-vote-election-details">
-            <span>Election ID</span>
+            <span>{t('electionIdLabel')}</span>
             <strong>GE-2026</strong>
           </div>
 
           <div className="cast-vote-election-details">
-            <span>Voting Period</span>
+            <span>{t('votingPeriod')}</span>
             <strong>15 Aug — 31 Aug 2026</strong>
           </div>
         </section>
@@ -222,11 +229,10 @@ const CastVote = () => {
           </div>
 
           <div>
-            <h3>Before you vote</h3>
+            <h3>{t('beforeYouVoteTitle')}</h3>
 
             <p>
-              You can select only one candidate. Once your vote is
-              submitted and recorded, it cannot be changed.
+              {t('beforeYouVoteDesc')}
             </p>
           </div>
         </section>
@@ -240,18 +246,18 @@ const CastVote = () => {
             <div className="cast-vote-section-header">
               <div>
                 <span className="cast-vote-card-label">
-                  CANDIDATES
+                  {t('candidatesTitleLabel')}
                 </span>
 
-                <h2>Select a Candidate</h2>
+                <h2>{t('selectCandidateTitle')}</h2>
 
                 <p>
-                  Choose the candidate you want to vote for.
+                  {t('selectCandidateDesc')}
                 </p>
               </div>
 
               <span className="cast-vote-selection-count">
-                {selectedCandidate ? "1 selected" : "No selection"}
+                {selectedCandidate ? t('oneSelected') : t('noSelection')}
               </span>
             </div>
 
@@ -326,7 +332,7 @@ const CastVote = () => {
               </div>
 
               <div className="cast-vote-review-content">
-                <span>YOUR SELECTION</span>
+                <span>{t('yourSelectionLabel')}</span>
 
                 <strong>
                   {selectedCandidateData.name}
@@ -343,7 +349,7 @@ const CastVote = () => {
                 onClick={() => setSelectedCandidate("")}
                 disabled={isSubmitting}
               >
-                Change
+                {t('changeBtn')}
               </button>
             </section>
           )}
@@ -359,11 +365,10 @@ const CastVote = () => {
               </div>
 
               <div>
-                <h3>Ready to submit?</h3>
+                <h3>{t('readyToSubmitTitle')}</h3>
 
                 <p>
-                  Your vote will be securely submitted and recorded
-                  as a transaction.
+                  {t('readyToSubmitDesc')}
                 </p>
               </div>
             </div>
@@ -373,7 +378,7 @@ const CastVote = () => {
                 to="/elections"
                 className="cast-vote-secondary-button"
               >
-                Cancel
+                {t('cancelBtn')}
               </Link>
 
               <button
@@ -381,7 +386,7 @@ const CastVote = () => {
                 className="cast-vote-primary-button"
                 disabled={!selectedCandidate || isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : "Review Vote"}
+                {isSubmitting ? t('submittingBtn') : t('reviewVoteBtn')}
                 {!isSubmitting && (
                   <span aria-hidden="true">→</span>
                 )}
@@ -400,13 +405,10 @@ const CastVote = () => {
           </div>
 
           <div>
-            <h3>Privacy & Security</h3>
+            <h3>{t('privacySecurityTitle')}</h3>
 
             <p>
-              Your identity is not publicly associated with your
-              candidate selection. The voting system is designed to
-              preserve ballot privacy while maintaining a verifiable
-              transaction record.
+              {t('privacySecurityDesc')}
             </p>
           </div>
         </aside>
@@ -433,20 +435,19 @@ const CastVote = () => {
             </div>
 
             <span className="cast-vote-card-label">
-              FINAL REVIEW
+              {t('finalReviewLabel')}
             </span>
 
             <h2 id="cast-vote-modal-title">
-              Confirm Your Vote
+              {t('confirmYourVoteTitle')}
             </h2>
 
             <p className="cast-vote-modal-description">
-              Please verify your selection before submitting.
-              This action cannot be reversed after submission.
+              {t('confirmYourVoteDesc')}
             </p>
 
             <div className="cast-vote-confirmation-box">
-              <span>Selected Candidate</span>
+              <span>{t('selectedCandidateLabel')}</span>
 
               <strong>
                 {selectedCandidateData.name}
@@ -461,8 +462,7 @@ const CastVote = () => {
               <span aria-hidden="true">⚠</span>
 
               <p>
-                Make sure this is the candidate you want to vote
-                for before continuing.
+                {t('makeSureCandidate')}
               </p>
             </div>
 
@@ -473,7 +473,7 @@ const CastVote = () => {
                 onClick={handleCancelConfirmation}
                 disabled={isSubmitting}
               >
-                Go Back
+                {t('goBackBtn')}
               </button>
 
               <button
@@ -483,8 +483,8 @@ const CastVote = () => {
                 disabled={isSubmitting}
               >
                 {isSubmitting
-                  ? "Submitting..."
-                  : "Confirm & Submit"}
+                  ? t('submittingBtn')
+                  : t('confirmSubmitBtn')}
               </button>
             </div>
           </div>

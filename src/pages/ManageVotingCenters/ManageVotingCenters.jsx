@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 import "./ManageVotingCenters.css";
 
 const CENTERS = [
@@ -8,6 +9,7 @@ const CENTERS = [
 ];
 
 const ManageVotingCenters = () => {
+  const { t } = useLanguage();
   const [centers, setCenters] = useState(CENTERS);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -27,18 +29,18 @@ const ManageVotingCenters = () => {
       <div className="manage-centers-container">
         <header className="manage-centers-header">
           <div>
-            <span className="manage-centers-eyebrow">ADMINISTRATION PANEL</span>
-            <h1>Manage Voting Centers</h1>
-            <p>View and manage physical voting centers, capacities, and their operational status.</p>
+            <span className="manage-centers-eyebrow">{t('administrationEyebrow')}</span>
+            <h1>{t('manageCentersPageTitle')}</h1>
+            <p>{t('manageCentersPageDesc')}</p>
           </div>
-          <button className="btn btn-primary" onClick={() => alert("Add Center form would open here.")}>+ Add Center</button>
+          <button className="btn btn-primary" onClick={() => alert(t('addCenterAlert'))}>{t('addCenterBtn')}</button>
         </header>
 
         <section className="manage-centers-panel card">
           <div className="manage-centers-toolbar">
             <input 
               type="text" 
-              placeholder="Search centers by name or location..." 
+              placeholder={t('searchCentersPlaceholder')} 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="manage-centers-search"
@@ -49,12 +51,12 @@ const ManageVotingCenters = () => {
             <table className="manage-centers-table">
               <thead>
                 <tr>
-                  <th>Center ID</th>
-                  <th>Center Name</th>
-                  <th>Location</th>
-                  <th>Capacity</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>{t('centerIdTh')}</th>
+                  <th>{t('centerNameTh')}</th>
+                  <th>{t('locationTh')}</th>
+                  <th>{t('capacityTh')}</th>
+                  <th>{t('statusTh')}</th>
+                  <th>{t('actionsTh')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,7 +68,7 @@ const ManageVotingCenters = () => {
                     <td>{center.capacity}</td>
                     <td>
                       <span className={`center-status ${center.active ? 'active' : 'inactive'}`}>
-                        {center.active ? 'Operational' : 'Closed'}
+                        {center.active ? t('operationalStatus') : t('closedStatus')}
                       </span>
                     </td>
                     <td>
@@ -75,14 +77,14 @@ const ManageVotingCenters = () => {
                         onClick={() => toggleStatus(center.id)}
                         style={{ padding: '6px 12px', minHeight: '32px', fontSize: '0.8rem' }}
                       >
-                        {center.active ? 'Deactivate' : 'Activate'}
+                        {center.active ? t('deactivateBtn') : t('activateBtn')}
                       </button>
                     </td>
                   </tr>
                 ))}
                 {filteredCenters.length === 0 && (
                   <tr>
-                    <td colSpan="6" className="text-center" style={{ padding: "32px" }}>No centers found.</td>
+                    <td colSpan="6" className="text-center" style={{ padding: "32px" }}>{t('noCentersFound')}</td>
                   </tr>
                 )}
               </tbody>

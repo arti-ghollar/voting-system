@@ -1,31 +1,34 @@
 import React from "react";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Results.css";
 
-const resultData = [
-  {
-    candidate: "Aarav Sharma",
-    party: "Progressive Alliance",
-    votes: 4820,
-    percentage: 48.2,
-    position: 1,
-  },
-  {
-    candidate: "Priya Patil",
-    party: "People First",
-    votes: 3210,
-    percentage: 32.1,
-    position: 2,
-  },
-  {
-    candidate: "Rahul Deshmukh",
-    party: "National Development Party",
-    votes: 1970,
-    percentage: 19.7,
-    position: 3,
-  },
-];
-
 const Results = () => {
+  const { t } = useLanguage();
+
+  const resultData = [
+    {
+      candidate: t('cand1Name'),
+      party: t('cand1Party'),
+      votes: 4820,
+      percentage: 48.2,
+      position: 1,
+    },
+    {
+      candidate: t('cand2NameResults'),
+      party: t('cand2PartyResults'),
+      votes: 3210,
+      percentage: 32.1,
+      position: 2,
+    },
+    {
+      candidate: t('cand3NameResults'),
+      party: t('cand3PartyResults'),
+      votes: 1970,
+      percentage: 19.7,
+      position: 3,
+    },
+  ];
+
   const totalVotes = resultData.reduce(
     (total, item) => total + item.votes,
     0
@@ -35,32 +38,32 @@ const Results = () => {
     <section className="admin-results">
       <div className="ar-header">
         <div>
-          <span className="ar-eyebrow">ELECTION ANALYTICS</span>
-          <h1>Election Results</h1>
-          <p>Transparent voting results and election performance.</p>
+          <span className="ar-eyebrow">{t('electionAnalyticsLabel')}</span>
+          <h1>{t('electionResultsTitle')}</h1>
+          <p>{t('electionResultsDesc')}</p>
         </div>
 
         <button
           className="ar-export"
           onClick={() => window.print()}
         >
-          Print Results
+          {t('printResultsBtn')}
         </button>
       </div>
 
       <div className="ar-summary">
         <div>
-          <span>Total Votes</span>
+          <span>{t('totalVotesLabel')}</span>
           <strong>{totalVotes.toLocaleString()}</strong>
         </div>
 
         <div>
-          <span>Leading Candidate</span>
+          <span>{t('leadingCandidateLabel')}</span>
           <strong>{resultData[0].candidate}</strong>
         </div>
 
         <div>
-          <span>Leading Votes</span>
+          <span>{t('leadingVotesLabel')}</span>
           <strong>{resultData[0].votes.toLocaleString()}</strong>
         </div>
       </div>
@@ -68,11 +71,11 @@ const Results = () => {
       <div className="ar-panel">
         <div className="ar-panel-header">
           <div>
-            <h2>General Election 2026</h2>
-            <span>Final verified results</span>
+            <h2>{t('ge2026Title')}</h2>
+            <span>{t('finalVerifiedResults')}</span>
           </div>
 
-          <span className="ar-verified">✓ VERIFIED</span>
+          <span className="ar-verified">{t('verifiedResultsLabel')}</span>
         </div>
 
         <div className="ar-list">

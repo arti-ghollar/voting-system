@@ -1,51 +1,51 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Elections.css";
 
-const ELECTIONS = [
-  {
-    id: "GE-2026",
-    title: "General Election 2026",
-    type: "General Election",
-    status: "active",
-    startDate: "15 August 2026",
-    endDate: "31 August 2026",
-    candidates: 4,
-    description:
-      "Participate in the General Election 2026 and cast your vote securely through the voter portal.",
-  },
-  {
-    id: "LA-2026",
-    title: "Local Authority Election 2026",
-    type: "Local Election",
-    status: "upcoming",
-    startDate: "10 September 2026",
-    endDate: "20 September 2026",
-    candidates: 8,
-    description:
-      "Choose your local representatives and participate in the upcoming local authority election.",
-  },
-  {
-    id: "SE-2026",
-    title: "Student Council Election 2026",
-    type: "Council Election",
-    status: "completed",
-    startDate: "10 July 2026",
-    endDate: "20 July 2026",
-    candidates: 6,
-    description:
-      "The Student Council Election 2026 has been completed successfully.",
-  },
-];
-
-const STATUS_LABELS = {
-  all: "All Elections",
-  active: "Voting Active",
-  upcoming: "Upcoming",
-  completed: "Completed",
-};
-
 const Elections = () => {
+  const { t } = useLanguage();
+
+  const ELECTIONS = [
+    {
+      id: "GE-2026",
+      title: t('ge2026Title'),
+      type: t('ge2026Type'),
+      status: "active",
+      startDate: "15 August 2026",
+      endDate: "31 August 2026",
+      candidates: 4,
+      description: t('ge2026Desc'),
+    },
+    {
+      id: "LA-2026",
+      title: t('la2026Title'),
+      type: t('la2026Type'),
+      status: "upcoming",
+      startDate: "10 September 2026",
+      endDate: "20 September 2026",
+      candidates: 8,
+      description: t('la2026Desc'),
+    },
+    {
+      id: "SE-2026",
+      title: t('se2026Title'),
+      type: t('se2026Type'),
+      status: "completed",
+      startDate: "10 July 2026",
+      endDate: "20 July 2026",
+      candidates: 6,
+      description: t('se2026Desc'),
+    },
+  ];
+
+  const STATUS_LABELS = {
+    all: t('allElectionsTitle'),
+    active: t('votingActiveLabel'),
+    upcoming: t('upcomingLabel'),
+    completed: t('completedLabel'),
+  };
+
   const [activeFilter, setActiveFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -69,11 +69,11 @@ const Elections = () => {
   const getStatusLabel = (status) => {
     switch (status) {
       case "active":
-        return "Voting Active";
+        return t('votingActiveLabel');
       case "upcoming":
-        return "Upcoming";
+        return t('upcomingLabel');
       case "completed":
-        return "Completed";
+        return t('completedLabel');
       default:
         return "Unknown";
     }
@@ -99,13 +99,12 @@ const Elections = () => {
         {/* ================= HEADER ================= */}
         <header className="elections-header">
           <div className="elections-header-content">
-            <span className="elections-eyebrow">VOTER PORTAL</span>
+            <span className="elections-eyebrow">{t('voterPortalEyebrow')}</span>
 
-            <h1>All Elections</h1>
+            <h1>{t('allElectionsTitle')}</h1>
 
             <p>
-              Explore current, upcoming, and completed elections.
-              Select an active election to participate in secure voting.
+              {t('allElectionsDesc')}
             </p>
           </div>
 
@@ -114,7 +113,7 @@ const Elections = () => {
             className="elections-back-button"
           >
             <span aria-hidden="true">←</span>
-            Back to Dashboard
+            {t('backToDashboard')}
           </Link>
         </header>
 
@@ -126,7 +125,7 @@ const Elections = () => {
             </div>
 
             <div>
-              <span>Active Elections</span>
+              <span>{t('activeElections')}</span>
               <strong>
                 {ELECTIONS.filter(
                   (election) => election.status === "active"
@@ -141,7 +140,7 @@ const Elections = () => {
             </div>
 
             <div>
-              <span>Upcoming</span>
+              <span>{t('upcomingElections')}</span>
               <strong>
                 {ELECTIONS.filter(
                   (election) => election.status === "upcoming"
@@ -156,7 +155,7 @@ const Elections = () => {
             </div>
 
             <div>
-              <span>Completed</span>
+              <span>{t('completedElections')}</span>
               <strong>
                 {ELECTIONS.filter(
                   (election) => election.status === "completed"
@@ -171,7 +170,7 @@ const Elections = () => {
             </div>
 
             <div>
-              <span>Total Elections</span>
+              <span>{t('totalElections')}</span>
               <strong>{ELECTIONS.length}</strong>
             </div>
           </div>
@@ -208,7 +207,7 @@ const Elections = () => {
               onChange={(event) =>
                 setSearchTerm(event.target.value)
               }
-              placeholder="Search elections..."
+              placeholder={t('searchElectionsPlaceholder')}
               aria-label="Search elections"
             />
           </div>
@@ -219,12 +218,12 @@ const Elections = () => {
           <div className="elections-list-heading">
             <div>
               <span className="elections-card-label">
-                ELECTION DIRECTORY
+                {t('electionDirectoryLabel')}
               </span>
 
               <h2>
                 {activeFilter === "all"
-                  ? "Available Elections"
+                  ? t('availableElections')
                   : STATUS_LABELS[activeFilter]}
               </h2>
             </div>
@@ -281,25 +280,25 @@ const Elections = () => {
                   {/* Dates */}
                   <div className="election-card-details">
                     <div className="election-detail">
-                      <span>Voting Period</span>
+                      <span>{t('votingPeriod')}</span>
 
                       <strong>
                         {election.startDate}
                       </strong>
 
                       <small>
-                        to {election.endDate}
+                        {t('to')} {election.endDate}
                       </small>
                     </div>
 
                     <div className="election-detail">
-                      <span>Candidates</span>
+                      <span>{t('candidatesLabel')}</span>
 
                       <strong>
                         {election.candidates}
                       </strong>
 
-                      <small>Available</small>
+                      <small>{t('availableLabel')}</small>
                     </div>
                   </div>
 
@@ -310,7 +309,7 @@ const Elections = () => {
                         to="/cast-vote"
                         className="election-primary-button"
                       >
-                        Cast Your Vote
+                        {t('castYourVoteBtn')}
                         <span aria-hidden="true">→</span>
                       </Link>
                     )}
@@ -321,7 +320,7 @@ const Elections = () => {
                         className="election-disabled-button"
                         disabled
                       >
-                        Voting Not Started
+                        {t('votingNotStartedBtn')}
                       </button>
                     )}
 
@@ -330,7 +329,7 @@ const Elections = () => {
                         to="/results"
                         className="election-secondary-button"
                       >
-                        View Results
+                        {t('viewResultsBtn')}
                         <span aria-hidden="true">→</span>
                       </Link>
                     )}
@@ -347,11 +346,10 @@ const Elections = () => {
                 ⌕
               </div>
 
-              <h3>No elections found</h3>
+              <h3>{t('noElectionsFound')}</h3>
 
               <p>
-                No elections match your current search or filter.
-                Try another search term or select a different filter.
+                {t('noElectionsDesc')}
               </p>
 
               <button
@@ -362,7 +360,7 @@ const Elections = () => {
                   setActiveFilter("all");
                 }}
               >
-                Reset Filters
+                {t('resetFiltersBtn')}
               </button>
             </div>
           )}
@@ -378,12 +376,10 @@ const Elections = () => {
           </div>
 
           <div>
-            <h3>Secure & Private Voting</h3>
+            <h3>{t('securePrivateVoting')}</h3>
 
             <p>
-              Votes are designed to be securely recorded while
-              protecting voter privacy. Your candidate selection is
-              not publicly associated with your identity.
+              {t('securePrivateDesc')}
             </p>
           </div>
         </aside>

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Register.css";
 
 const Register = () => {
   const navigate = useNavigate();
+  const { register } = useAuth();
+  const { t } = useLanguage();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -18,6 +22,7 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -43,7 +48,7 @@ const Register = () => {
 
     if (password.length < 6) {
       return {
-        label: "Weak",
+        label: t('weak'),
         className: "weak",
       };
     }
@@ -59,18 +64,18 @@ const Register = () => {
       hasSpecialCharacter
     ) {
       return {
-        label: "Strong",
+        label: t('strong'),
         className: "strong",
       };
     }
 
     return {
-      label: "Medium",
+      label: t('medium'),
       className: "medium",
     };
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const fullName = formData.fullName.trim();
@@ -109,11 +114,28 @@ const Register = () => {
       return;
     }
 
-    setSuccess("Registration completed successfully.");
+    setIsSubmitting(true);
+    try {
+      const response = await register({
+        name: fullName,
+        email: email,
+        voterId: voterId,
+        password: formData.password
+      });
 
-    window.setTimeout(() => {
-      navigate("/voter-dashboard");
-    }, 700);
+      if (response.success) {
+        setSuccess("Registration completed successfully.");
+        window.setTimeout(() => {
+          navigate("/voter-dashboard");
+        }, 700);
+      } else {
+        setError(response.message || "Registration failed.");
+      }
+    } catch (err) {
+      setError(err.message || "Registration failed due to a network or server error.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const passwordStrength = getPasswordStrength();
@@ -133,17 +155,16 @@ const Register = () => {
 
           <div className="register-info-content">
             <span className="register-eyebrow">
-              SECURE DIGITAL VOTING
+              {t('secureDigitalVoting')}
             </span>
 
             <h1>
-              Create your secure
-              <span> voter account.</span>
+              {t('createSecureAccount')}
+              <span> {t('voterAccount')}</span>
             </h1>
 
             <p>
-              Register with BlockVote and participate in secure,
-              transparent and verifiable digital elections.
+              {t('registerDesc')}
             </p>
 
             <div className="register-benefits">
@@ -156,9 +177,9 @@ const Register = () => {
                 </span>
 
                 <div>
-                  <strong>Secure Identity</strong>
+                  <strong>{t('secureIdentity')}</strong>
                   <p>
-                    Your voter information is securely protected.
+                    {t('secureIdentityDesc')}
                   </p>
                 </div>
               </div>
@@ -172,9 +193,9 @@ const Register = () => {
                 </span>
 
                 <div>
-                  <strong>Blockchain Verification</strong>
+                  <strong>{t('blockchainVerification')}</strong>
                   <p>
-                    Vote records can be independently verified.
+                    {t('blockchainVerificationDesc')}
                   </p>
                 </div>
               </div>
@@ -188,9 +209,9 @@ const Register = () => {
                 </span>
 
                 <div>
-                  <strong>Privacy First</strong>
+                  <strong>{t('privacyFirst')}</strong>
                   <p>
-                    Your candidate selection remains private.
+                    {t('privacyFirstDesc')}
                   </p>
                 </div>
               </div>
@@ -207,13 +228,13 @@ const Register = () => {
         <section className="register-form-panel">
           <div className="register-form-header">
             <span className="register-mobile-eyebrow">
-              VOTER REGISTRATION
+              {t('voterRegistration')}
             </span>
 
-            <h2>Create your account</h2>
+            <h2>{t('createYourAccount')}</h2>
 
             <p>
-              Enter your details below to register as a voter.
+              {t('enterDetailsBelow')}
             </p>
           </div>
 
@@ -242,7 +263,7 @@ const Register = () => {
             {/* FULL NAME */}
             <div className="register-field">
               <label htmlFor="fullName">
-                Full Name <span>*</span>
+                {t('fullNameLabel')} <span>*</span>
               </label>
 
               <input
@@ -251,7 +272,7 @@ const Register = () => {
                 type="text"
                 value={formData.fullName}
                 onChange={handleChange}
-                placeholder="Enter your full name"
+                placeholder={t('fullNamePlaceholder')}
                 autoComplete="name"
               />
             </div>
@@ -259,7 +280,7 @@ const Register = () => {
             {/* EMAIL */}
             <div className="register-field">
               <label htmlFor="email">
-                Email Address <span>*</span>
+                {t('emailLabel')} <span>*</span>
               </label>
 
               <input
@@ -268,7 +289,7 @@ const Register = () => {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your email address"
+                placeholder={t('emailPlaceholder')}
                 autoComplete="email"
               />
             </div>
@@ -276,7 +297,7 @@ const Register = () => {
             {/* VOTER ID */}
             <div className="register-field">
               <label htmlFor="voterId">
-                Voter ID <span>*</span>
+                {t('voterIdLabel')} <span>*</span>
               </label>
 
               <input
@@ -285,19 +306,19 @@ const Register = () => {
                 type="text"
                 value={formData.voterId}
                 onChange={handleChange}
-                placeholder="Enter your voter ID"
+                placeholder={t('voterIdPlaceholder')}
                 autoComplete="off"
               />
 
               <small>
-                Enter the voter identification number issued to you.
+                {t('voterIdHint')}
               </small>
             </div>
 
             {/* PASSWORD */}
             <div className="register-field">
               <label htmlFor="password">
-                Password <span>*</span>
+                {t('passwordLabel')} <span>*</span>
               </label>
 
               <div className="register-password-wrapper">
@@ -307,7 +328,7 @@ const Register = () => {
                   type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Create a password"
+                  placeholder={t('createPassword')}
                   autoComplete="new-password"
                 />
 
@@ -323,7 +344,7 @@ const Register = () => {
                       : "Show password"
                   }
                 >
-                  {showPassword ? "Hide" : "Show"}
+                  {showPassword ? t('hide') : t('show')}
                 </button>
               </div>
 
@@ -347,7 +368,7 @@ const Register = () => {
             {/* CONFIRM PASSWORD */}
             <div className="register-field">
               <label htmlFor="confirmPassword">
-                Confirm Password <span>*</span>
+                {t('confirmPasswordLabel')} <span>*</span>
               </label>
 
               <div className="register-password-wrapper">
@@ -359,7 +380,7 @@ const Register = () => {
                   }
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  placeholder="Confirm your password"
+                  placeholder={t('confirmPasswordPlaceholder')}
                   autoComplete="new-password"
                 />
 
@@ -377,7 +398,7 @@ const Register = () => {
                       : "Show confirm password"
                   }
                 >
-                  {showConfirmPassword ? "Hide" : "Show"}
+                  {showConfirmPassword ? t('hide') : t('show')}
                 </button>
               </div>
             </div>
@@ -397,10 +418,10 @@ const Register = () => {
               />
 
               <span className="register-terms-text">
-                I agree to the{" "}
-                <Link to="/terms">Terms of Service</Link>{" "}
-                and{" "}
-                <Link to="/privacy">Privacy Policy</Link>.
+                {t('agreeTermsText1')}{" "}
+                <Link to="/terms">{t('terms')}</Link>{" "}
+                {t('agreeTermsText2')}{" "}
+                <Link to="/privacy">{t('privacy')}</Link>.
               </span>
             </label>
 
@@ -408,16 +429,17 @@ const Register = () => {
             <button
               type="submit"
               className="register-submit-button"
+              disabled={isSubmitting}
             >
-              Create Voter Account
-              <span aria-hidden="true">→</span>
+              {isSubmitting ? t('creatingAccount') : t('createVoterAccount')}
+              {!isSubmitting && <span aria-hidden="true">→</span>}
             </button>
           </form>
 
           {/* LOGIN */}
           <div className="register-login">
-            <span>Already have an account?</span>
-            <Link to="/login">Sign In</Link>
+            <span>{t('alreadyHaveAccount')}</span>
+            <Link to="/login">{t('signIn')}</Link>
           </div>
 
           {/* SECURITY */}
@@ -425,8 +447,7 @@ const Register = () => {
             <span aria-hidden="true">🔒</span>
 
             <p>
-              Your information is protected using secure
-              authentication practices.
+              {t('infoProtected')}
             </p>
           </div>
         </section>

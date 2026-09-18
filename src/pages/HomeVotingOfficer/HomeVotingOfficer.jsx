@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useVoting } from "../../context/VotingContext";
+import { useLanguage } from "../../context/LanguageContext";
 import "./HomeVotingOfficer.css";
 
 const HomeVotingOfficer = () => {
   const navigate = useNavigate();
   const { hasVoted } = useVoting();
+  const { t } = useLanguage();
   
   const [requests, setRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
@@ -67,18 +69,18 @@ const HomeVotingOfficer = () => {
         <header className="home-officer-header">
           <div className="home-officer-welcome">
             <span className="home-officer-eyebrow">
-              OFFICER PORTAL
+              {t('officerPortalEyebrow')}
             </span>
-            <h1>Home Voting Assignments</h1>
+            <h1>{t('homeVotingAssignmentsTitle')}</h1>
             <p>
-              Manage your assigned home voting requests and conduct secure, authorized assisted voting sessions.
+              {t('homeVotingAssignmentsDesc')}
             </p>
           </div>
           <div className="home-officer-profile">
             <div className="home-officer-avatar">H</div>
             <div className="home-officer-profile-info">
-              <strong>Home Voting Officer</strong>
-              <span>Central District Squad</span>
+              <strong>{t('homeVotingOfficerRole')}</strong>
+              <span>{t('centralDistrictSquad')}</span>
             </div>
           </div>
         </header>
@@ -87,11 +89,11 @@ const HomeVotingOfficer = () => {
           {/* ================= REQUEST LIST ================= */}
           <section className="home-officer-list-col">
             <div className="home-officer-card">
-              <h2 className="home-officer-section-title">Assigned Visits</h2>
+              <h2 className="home-officer-section-title">{t('assignedVisitsTitle')}</h2>
               
               <div className="home-officer-request-list">
                 {requests.length === 0 ? (
-                  <p>No assigned requests.</p>
+                  <p>{t('noAssignedRequests')}</p>
                 ) : (
                   requests.map(req => {
                     const isSelected = selectedRequest?.id === req.id;
@@ -106,7 +108,7 @@ const HomeVotingOfficer = () => {
                         <div className="home-officer-request-header">
                           <strong>{req.name}</strong>
                           <span className={`status-badge status-${req.status.toLowerCase()}`}>
-                            {voterAlreadyVoted ? "Voted" : req.status}
+                            {voterAlreadyVoted ? t('votedStatusBadge') : req.status}
                           </span>
                         </div>
                         <div className="home-officer-request-meta">
@@ -128,7 +130,7 @@ const HomeVotingOfficer = () => {
               <div className="home-officer-card">
                 <div className="home-officer-details-header">
                   <div>
-                    <span className="home-officer-card-label">REQUEST DETAILS</span>
+                    <span className="home-officer-card-label">{t('requestDetailsLabel')}</span>
                     <h2>{selectedRequest.name}</h2>
                   </div>
                   <span className="home-officer-req-id">{selectedRequest.id}</span>
@@ -136,28 +138,28 @@ const HomeVotingOfficer = () => {
 
                 <div className="home-officer-info-grid">
                   <div className="home-officer-info-item">
-                    <span>Voter ID</span>
+                    <span>{t('voterIdLabel')}</span>
                     <strong>{selectedRequest.voterId}</strong>
                   </div>
                   <div className="home-officer-info-item">
-                    <span>Contact</span>
+                    <span>{t('contactLabel')}</span>
                     <strong>{selectedRequest.contact}</strong>
                   </div>
                   <div className="home-officer-info-item">
-                    <span>Date & Time</span>
+                    <span>{t('dateTimeLabel')}</span>
                     <strong>{selectedRequest.preferredDate} ({selectedRequest.preferredTime})</strong>
                   </div>
                   <div className="home-officer-info-item">
-                    <span>Eligibility</span>
+                    <span>{t('eligibilityLabel')}</span>
                     <strong style={{ textTransform: 'capitalize' }}>{selectedRequest.reason}</strong>
                   </div>
                   <div className="home-officer-info-item full-width">
-                    <span>Address</span>
+                    <span>{t('addressLabel')}</span>
                     <strong>{selectedRequest.address}</strong>
                   </div>
                   {selectedRequest.notes && (
                     <div className="home-officer-info-item full-width">
-                      <span>Notes</span>
+                      <span>{t('notesLabel')}</span>
                       <p>{selectedRequest.notes}</p>
                     </div>
                   )}
@@ -168,21 +170,21 @@ const HomeVotingOfficer = () => {
                     <div className="home-officer-warning-box">
                       <span className="warning-icon">✓</span>
                       <div>
-                        <strong>Voting Completed</strong>
-                        <p>This voter has already successfully cast their vote.</p>
+                        <strong>{t('votingCompletedTitle')}</strong>
+                        <p>{t('votingCompletedDesc')}</p>
                       </div>
                     </div>
                   ) : (
                     <div className="home-officer-start-box">
                       <div className="home-officer-privacy-notice">
                         <span className="privacy-icon">🔐</span>
-                        <p><strong>Privacy Check:</strong> Pass the device to the voter to ensure privacy during candidate selection. You will not see their choice.</p>
+                        <p><strong>{t('privacyCheckTitle')}</strong> {t('privacyCheckDesc')}</p>
                       </div>
                       <button 
                         className="home-officer-primary-btn"
                         onClick={startAssistedVoting}
                       >
-                        Start Voting Session
+                        {t('startVotingSessionBtn')}
                         <span>→</span>
                       </button>
                     </div>
@@ -192,8 +194,8 @@ const HomeVotingOfficer = () => {
             ) : (
               <div className="home-officer-empty-state">
                 <span className="empty-icon">📝</span>
-                <h3>Select a Request</h3>
-                <p>Choose an assigned home visit from the list to view details and start a voting session.</p>
+                <h3>{t('selectRequestTitle')}</h3>
+                <p>{t('selectRequestDesc')}</p>
               </div>
             )}
           </section>

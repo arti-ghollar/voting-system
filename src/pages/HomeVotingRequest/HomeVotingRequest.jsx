@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./HomeVotingRequest.css";
 import { useAuth } from "../../context/AuthContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 const HomeVotingRequest = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: user?.name || "",
     voterId: user?.voterId || "",
@@ -56,21 +58,21 @@ const HomeVotingRequest = () => {
         <div className="home-voting-container">
           <div className="home-voting-success-card">
             <div className="home-voting-success-icon">✓</div>
-            <h2>Request Submitted Successfully</h2>
-            <p>Your request for an authorized home visit has been recorded.</p>
+            <h2>{t('requestSubmittedSuccessTitle')}</h2>
+            <p>{t('requestSubmittedSuccessDesc')}</p>
             <div className="home-voting-request-id">
-              <span>Request ID</span>
+              <span>{t('requestIdLabel')}</span>
               <strong>{requestId}</strong>
             </div>
             <p className="home-voting-success-note">
-              An election officer will review your request. You will be notified when an officer is assigned and a visit is scheduled.
+              {t('requestSuccessNote')}
             </p>
             <div className="home-voting-actions">
               <button 
                 onClick={() => navigate("/voter-dashboard")} 
                 className="home-voting-primary-btn"
               >
-                Back to Dashboard
+                {t('backToDashboard')}
               </button>
             </div>
           </div>
@@ -84,16 +86,15 @@ const HomeVotingRequest = () => {
       <div className="home-voting-container">
         <header className="home-voting-header">
           <div className="home-voting-heading">
-            <span className="home-voting-eyebrow">AUTHORIZED ASSISTANCE</span>
-            <h1>Request Home Voting</h1>
+            <span className="home-voting-eyebrow">{t('authorizedAssistanceLabel')}</span>
+            <h1>{t('requestHomeVotingTitle')}</h1>
             <p>
-              Eligible voters can request an authorized election officer to visit their home for assisted voting. 
-              Please provide the necessary details below.
+              {t('requestHomeVotingDesc')}
             </p>
           </div>
           <Link to="/voting-method" className="home-voting-back-button">
             <span aria-hidden="true">←</span>
-            Go Back
+            {t('goBackBtn2')}
           </Link>
         </header>
 
@@ -101,7 +102,7 @@ const HomeVotingRequest = () => {
           <form onSubmit={handleSubmit} className="home-voting-form">
             <div className="home-voting-form-grid">
               <div className="home-voting-field">
-                <label htmlFor="name">Full Name *</label>
+                <label htmlFor="name">{t('fullNameLabel')}</label>
                 <input 
                   type="text" 
                   id="name" 
@@ -112,7 +113,7 @@ const HomeVotingRequest = () => {
                 />
               </div>
               <div className="home-voting-field">
-                <label htmlFor="voterId">Voter ID *</label>
+                <label htmlFor="voterId">{t('voterIdLabelReq')}</label>
                 <input 
                   type="text" 
                   id="voterId" 
@@ -125,19 +126,19 @@ const HomeVotingRequest = () => {
                 />
               </div>
               <div className="home-voting-field">
-                <label htmlFor="contact">Contact Number *</label>
+                <label htmlFor="contact">{t('contactNumberLabel')}</label>
                 <input 
                   type="tel" 
                   id="contact" 
                   name="contact" 
                   value={formData.contact} 
                   onChange={handleChange} 
-                  placeholder="Enter phone number" 
+                  placeholder={t('enterPhoneNumberPlaceholder')} 
                   required 
                 />
               </div>
               <div className="home-voting-field">
-                <label htmlFor="reason">Eligibility Category *</label>
+                <label htmlFor="reason">{t('eligibilityCategoryLabel')}</label>
                 <select 
                   id="reason" 
                   name="reason" 
@@ -145,22 +146,22 @@ const HomeVotingRequest = () => {
                   onChange={handleChange} 
                   required
                 >
-                  <option value="elderly">Senior Citizen (Elderly)</option>
-                  <option value="mobility">Mobility Impaired / Disability</option>
-                  <option value="medical">Medical Condition</option>
-                  <option value="other">Other Authorized Reason</option>
+                  <option value="elderly">{t('seniorCitizenLabel')}</option>
+                  <option value="mobility">{t('mobilityImpairedLabel')}</option>
+                  <option value="medical">{t('medicalConditionLabel')}</option>
+                  <option value="other">{t('otherAuthorizedReasonLabel')}</option>
                 </select>
               </div>
             </div>
 
             <div className="home-voting-field full-width">
-              <label htmlFor="address">Complete Address *</label>
+              <label htmlFor="address">{t('completeAddressLabel')}</label>
               <textarea 
                 id="address" 
                 name="address" 
                 value={formData.address} 
                 onChange={handleChange} 
-                placeholder="Enter your full residential address"
+                placeholder={t('enterFullAddressPlaceholder')}
                 rows="3"
                 required 
               />
@@ -168,7 +169,7 @@ const HomeVotingRequest = () => {
 
             <div className="home-voting-form-grid">
               <div className="home-voting-field">
-                <label htmlFor="preferredDate">Preferred Date *</label>
+                <label htmlFor="preferredDate">{t('preferredDateLabel')}</label>
                 <input 
                   type="date" 
                   id="preferredDate" 
@@ -180,7 +181,7 @@ const HomeVotingRequest = () => {
                 />
               </div>
               <div className="home-voting-field">
-                <label htmlFor="preferredTime">Preferred Time *</label>
+                <label htmlFor="preferredTime">{t('preferredTimeLabel')}</label>
                 <select 
                   id="preferredTime" 
                   name="preferredTime" 
@@ -188,21 +189,21 @@ const HomeVotingRequest = () => {
                   onChange={handleChange} 
                   required
                 >
-                  <option value="morning">Morning (9 AM - 12 PM)</option>
-                  <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
-                  <option value="evening">Evening (4 PM - 6 PM)</option>
+                  <option value="morning">{t('morningLabel')}</option>
+                  <option value="afternoon">{t('afternoonLabel')}</option>
+                  <option value="evening">{t('eveningLabel')}</option>
                 </select>
               </div>
             </div>
 
             <div className="home-voting-field full-width">
-              <label htmlFor="notes">Additional Notes (Optional)</label>
+              <label htmlFor="notes">{t('additionalNotesLabel')}</label>
               <textarea 
                 id="notes" 
                 name="notes" 
                 value={formData.notes} 
                 onChange={handleChange} 
-                placeholder="Any special instructions for the officer to find your home or assistance required."
+                placeholder={t('additionalNotesPlaceholder')}
                 rows="2"
               />
             </div>
@@ -214,14 +215,14 @@ const HomeVotingRequest = () => {
                 onClick={() => navigate("/voting-method")}
                 disabled={isSubmitting}
               >
-                Cancel
+                {t('cancelBtn')}
               </button>
               <button 
                 type="submit" 
                 className="home-voting-submit-btn"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : "Submit Request"}
+                {isSubmitting ? t('submittingBtn') : t('submitRequestBtn')}
               </button>
             </div>
           </form>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Navbar.css";
 import logoImg from "../../assets/votebridge-logo.png";
 
@@ -10,7 +11,7 @@ const Navbar = () => {
   const [adminOpen, setAdminOpen] = useState(false);
   const [accessibilityMode, setAccessibilityMode] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [language, setLanguage] = useState("EN");
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     if (accessibilityMode) {
@@ -79,7 +80,7 @@ const Navbar = () => {
 
           <span className="navbar__brand-text">
             <span className="navbar__brand-tagline">
-              Secure • Transparent • Trusted
+              {t('tagline')}
             </span>
           </span>
         </Link>
@@ -124,7 +125,7 @@ const Navbar = () => {
             className={navLinkClass}
             onClick={closeAllMenus}
           >
-            Home
+            {t('home')}
           </NavLink>
 
           <NavLink
@@ -132,7 +133,7 @@ const Navbar = () => {
             className={navLinkClass}
             onClick={closeAllMenus}
           >
-            About
+            {t('about')}
           </NavLink>
 
           <NavLink
@@ -140,7 +141,7 @@ const Navbar = () => {
             className={navLinkClass}
             onClick={closeAllMenus}
           >
-            How It Works
+            {t('howItWorks')}
           </NavLink>
 
           <NavLink
@@ -148,7 +149,7 @@ const Navbar = () => {
             className={navLinkClass}
             onClick={closeAllMenus}
           >
-            Contact
+            {t('contact')}
           </NavLink>
 
           {/* =================================================
@@ -166,7 +167,7 @@ const Navbar = () => {
               onClick={toggleVoterMenu}
               aria-expanded={voterOpen}
             >
-              Voter Portal
+              {t('voterPortal')}
               <span className="navbar__arrow">⌄</span>
             </button>
 
@@ -179,8 +180,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">▣</span>
                 <span>
-                  <strong>Dashboard</strong>
-                  <small>Voter overview</small>
+                  <strong>{t('dashboard')}</strong>
+                  <small>{t('dashboardDescVoter')}</small>
                 </span>
               </NavLink>
 
@@ -191,8 +192,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">◈</span>
                 <span>
-                  <strong>Elections</strong>
-                  <small>View available elections</small>
+                  <strong>{t('elections')}</strong>
+                  <small>{t('electionsDescVoter')}</small>
                 </span>
               </NavLink>
 
@@ -203,8 +204,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">✓</span>
                 <span>
-                  <strong>Voting Status</strong>
-                  <small>Track your vote</small>
+                  <strong>{t('votingStatus')}</strong>
+                  <small>{t('votingStatusDesc')}</small>
                 </span>
               </NavLink>
 
@@ -215,8 +216,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">◎</span>
                 <span>
-                  <strong>Profile</strong>
-                  <small>Manage your account</small>
+                  <strong>{t('profile')}</strong>
+                  <small>{t('profileDesc')}</small>
                 </span>
               </NavLink>
 
@@ -227,7 +228,7 @@ const Navbar = () => {
                 className="navbar__dropdown-action"
                 onClick={closeAllMenus}
               >
-                View Elections →
+                {t('viewElections')}
               </Link>
 
             </div>
@@ -248,7 +249,7 @@ const Navbar = () => {
               onClick={toggleAdminMenu}
               aria-expanded={adminOpen}
             >
-              Admin
+              {t('admin')}
               <span className="navbar__arrow">⌄</span>
             </button>
 
@@ -261,8 +262,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">▣</span>
                 <span>
-                  <strong>Admin Dashboard</strong>
-                  <small>System overview</small>
+                  <strong>{t('adminDashboard')}</strong>
+                  <small>{t('dashboardDescAdmin')}</small>
                 </span>
               </NavLink>
 
@@ -273,8 +274,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">♙</span>
                 <span>
-                  <strong>Manage Voters</strong>
-                  <small>Manage registered voters</small>
+                  <strong>{t('manageVoters')}</strong>
+                  <small>{t('manageVotersDesc')}</small>
                 </span>
               </NavLink>
 
@@ -285,8 +286,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">♟</span>
                 <span>
-                  <strong>Manage Candidates</strong>
-                  <small>Candidate management</small>
+                  <strong>{t('manageCandidates')}</strong>
+                  <small>{t('manageCandidatesDesc')}</small>
                 </span>
               </NavLink>
 
@@ -297,8 +298,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">◈</span>
                 <span>
-                  <strong>Manage Elections</strong>
-                  <small>Create and manage elections</small>
+                  <strong>{t('manageElections')}</strong>
+                  <small>{t('manageElectionsDesc')}</small>
                 </span>
               </NavLink>
 
@@ -309,8 +310,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">◉</span>
                 <span>
-                  <strong>Voting Monitor</strong>
-                  <small>Monitor live voting</small>
+                  <strong>{t('votingMonitor')}</strong>
+                  <small>{t('votingMonitorDesc')}</small>
                 </span>
               </NavLink>
 
@@ -321,8 +322,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">⬡</span>
                 <span>
-                  <strong>Blockchain Records</strong>
-                  <small>Verify voting records</small>
+                  <strong>{t('blockchainRecords')}</strong>
+                  <small>{t('blockchainRecordsDesc')}</small>
                 </span>
               </NavLink>
 
@@ -333,8 +334,8 @@ const Navbar = () => {
               >
                 <span className="dropdown-icon">▥</span>
                 <span>
-                  <strong>Results</strong>
-                  <small>Election results</small>
+                  <strong>{t('results')}</strong>
+                  <small>{t('resultsDesc')}</small>
                 </span>
               </NavLink>
 
@@ -409,7 +410,7 @@ const Navbar = () => {
               className="navbar__login"
               onClick={closeAllMenus}
             >
-              Login
+              {t('login')}
             </Link>
 
             <Link
@@ -417,7 +418,7 @@ const Navbar = () => {
               className="navbar__register"
               onClick={closeAllMenus}
             >
-              Get Started
+              {t('getStarted')}
             </Link>
 
           </div>

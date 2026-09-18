@@ -4,65 +4,71 @@ import React, {
   useMemo,
   useState,
   useCallback,
+  useEffect,
 } from "react";
+import { api } from "../services/api";
+import { useAuth } from "./AuthContext";
 
 const VotingContext = createContext(null);
 
-const STORAGE_KEY = "blockvote_votes";
-
-const getInitialVotes = () => {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : [];
-  } catch {
-    return [];
-  }
-};
-
 export const VotingProvider = ({ children }) => {
-  const [votes, setVotes] = useState(getInitialVotes);
+  const { isAuthenticated } = useAuth();
+  const [votes, setVotes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const castVote = useCallback((voteData) => {
-    const vote = {
-      id: `VOTE-${Date.now()}`,
-      timestamp: new Date().toISOString(),
-      status: "Confirmed",
-      votingMethod: voteData.votingMethod || "ONLINE",
-      ...voteData,
-    };
+  const fetchVotes = useCallback(async () => {
+    if (!isAuthenticated) return;
+    setLoading(true);
+    try {
+      const res = await api.getMyVotes();
+      if (res.success) {
+        setVotes(res.votes);
+      }
+    } catch (error) {
+      console.error("Error fetching votes:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [isAuthenticated]);
 
-    setVotes((previous) => {
-      const updated = [vote, ...previous];
+  useEffect(() => {
+    fetchVotes();
+  }, [fetchVotes]);
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+  const castVote = useCallback(async (voteData) => {
+    try {
+      const res = await api.castVote(voteData);
+      if (res.success) {
+        await fetchVotes();
+        return { success: true, transactionId: res.transactionId };
+      }
+      return { success: false, message: res.message };
+    } catch (error) {
+      console.error(error);
+      return { success: false, message: "Network error" };
+    }
+  }, [fetchVotes]);
 
-      return updated;
-    });
-
-    return vote;
-  }, []);
-
-  const hasVoted = useCallback((electionId, voterId) => {
+  const hasVoted = useCallback((electionId) => {
     return votes.some(
-      (vote) =>
-        vote.electionId === electionId &&
-        vote.voterId === voterId
+      (vote) => vote.election_id === electionId
     );
   }, [votes]);
 
   const clearVotes = useCallback(() => {
     setVotes([]);
-    localStorage.removeItem(STORAGE_KEY);
   }, []);
 
   const value = useMemo(
     () => ({
       votes,
+      loading,
       castVote,
       hasVoted,
       clearVotes,
+      refreshVotes: fetchVotes
     }),
-    [votes, castVote, hasVoted, clearVotes]
+    [votes, loading, castVote, hasVoted, clearVotes, fetchVotes]
   );
 
   return (

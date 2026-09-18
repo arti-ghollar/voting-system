@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { t } = useLanguage();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -43,17 +45,22 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await login({ email: formData.email });
-      const role = response.user.role;
+      const response = await login({ email: formData.email, password: formData.password });
       
-      if (role === "admin") {
-        navigate("/admin-dashboard");
-      } else if (role === "center_operator") {
-        navigate("/voting-center");
-      } else if (role === "home_officer") {
-        navigate("/home-voting-officer");
+      if (response.success) {
+        const role = response.user.role;
+        
+        if (role === "admin") {
+          navigate("/admin-dashboard");
+        } else if (role === "center_operator") {
+          navigate("/voting-center");
+        } else if (role === "home_officer") {
+          navigate("/home-voting-officer");
+        } else {
+          navigate("/voter-dashboard");
+        }
       } else {
-        navigate("/voter-dashboard");
+        setErrorMessage(response.message || "Login failed. Please try again.");
       }
     } catch (error) {
       setErrorMessage("Login failed. Please try again.");
@@ -199,18 +206,17 @@ const Login = () => {
             <div className="login-heading">
               <div className="login-eyebrow">
                 <span></span>
-                WELCOME BACK
+                {t('welcomeBack')}
               </div>
 
               <h2>
-                Sign in to your
+                {t('loginHeading')}
                 <br />
-                <strong>voting account.</strong>
+                <strong>{t('loginHeadingStrong')}</strong>
               </h2>
 
               <p>
-                Enter your credentials to securely access your voter
-                dashboard.
+                {t('loginSubheading')}
               </p>
             </div>
 
@@ -234,7 +240,7 @@ const Login = () => {
               {/* Email */}
               <div className="login-field">
                 <label htmlFor="login-email">
-                  Email Address <span>*</span>
+                  {t('emailLabel')} <span>*</span>
                 </label>
 
                 <div className="login-input-wrapper">
@@ -246,7 +252,7 @@ const Login = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="Enter your email address"
+                    placeholder={t('emailPlaceholder')}
                     autoComplete="email"
                     required
                   />
@@ -257,11 +263,11 @@ const Login = () => {
               <div className="login-field">
                 <div className="login-label-row">
                   <label htmlFor="login-password">
-                    Password <span>*</span>
+                    {t('passwordLabel')} <span>*</span>
                   </label>
 
                   <Link to="/forgot-password" className="login-forgot-link">
-                    Forgot password?
+                    {t('forgotPassword')}
                   </Link>
                 </div>
 
@@ -274,7 +280,7 @@ const Login = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    placeholder="Enter your password"
+                    placeholder={t('passwordPlaceholder')}
                     autoComplete="current-password"
                     required
                   />
@@ -303,11 +309,11 @@ const Login = () => {
 
                   <span className="login-checkmark"></span>
 
-                  <span>Remember me</span>
+                  <span>{t('rememberMe')}</span>
                 </label>
 
                 <span className="login-session-note">
-                  Session protected
+                  {t('sessionProtected')}
                 </span>
               </div>
 
@@ -320,11 +326,11 @@ const Login = () => {
                 {isLoading ? (
                   <>
                     <span className="login-spinner"></span>
-                    Signing in...
+                    {t('signingIn')}
                   </>
                 ) : (
                   <>
-                    Sign In
+                    {t('signIn')}
                     <span>→</span>
                   </>
                 )}
@@ -338,10 +344,10 @@ const Login = () => {
 
             {/* Register */}
             <div className="login-register">
-              <p>Don't have a voting account?</p>
+              <p>{t('noAccount')}</p>
 
               <Link to="/register" className="login-register-link">
-                Create a new account
+                {t('createAccount')}
                 <span>→</span>
               </Link>
             </div>
@@ -351,15 +357,14 @@ const Login = () => {
               <span>🔒</span>
 
               <p>
-                Your credentials are protected by secure authentication
-                controls.
+                {t('secureCreds')}
               </p>
             </div>
 
             <div className="login-back-home">
               <Link to="/">
                 <span>←</span>
-                Back to Home
+                {t('backToHome')}
               </Link>
             </div>
           </div>

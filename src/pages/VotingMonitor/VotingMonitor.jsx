@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 import "./VotingMonitor.css";
 
 const initialVotes = [
@@ -32,6 +33,7 @@ const initialVotes = [
 ];
 
 const VotingMonitor = () => {
+  const { t } = useLanguage();
   const [votes] = useState(initialVotes);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("All");
@@ -64,35 +66,35 @@ const VotingMonitor = () => {
     <section className="voting-monitor">
       <div className="vm-header">
         <div>
-          <span className="vm-eyebrow">LIVE ADMIN MONITOR</span>
-          <h1>Voting Monitor</h1>
-          <p>Monitor voting activity and transaction confirmation status.</p>
+          <span className="vm-eyebrow">{t('liveAdminMonitorEyebrow')}</span>
+          <h1>{t('votingMonitorPageTitle')}</h1>
+          <p>{t('votingMonitorPageDesc')}</p>
         </div>
 
         <div className="vm-live">
           <span></span>
-          LIVE MONITORING
+          {t('liveMonitoringBadge')}
         </div>
       </div>
 
       <div className="vm-stats">
         <div className="vm-stat">
-          <span>Total Votes</span>
+          <span>{t('totalVotesLabel')}</span>
           <strong>{votes.length}</strong>
         </div>
 
         <div className="vm-stat success">
-          <span>Confirmed</span>
+          <span>{t('confirmedLabel')}</span>
           <strong>{confirmed}</strong>
         </div>
 
         <div className="vm-stat warning">
-          <span>Pending</span>
+          <span>{t('pendingLabel')}</span>
           <strong>{pending}</strong>
         </div>
 
         <div className="vm-stat">
-          <span>Confirmation Rate</span>
+          <span>{t('confirmationRateLabel')}</span>
           <strong>
             {votes.length
               ? Math.round((confirmed / votes.length) * 100)
@@ -107,7 +109,7 @@ const VotingMonitor = () => {
           <div className="vm-search">
             <span>⌕</span>
             <input
-              placeholder="Search transactions..."
+              placeholder={t('searchTransactionsPlaceholder')}
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
@@ -117,9 +119,9 @@ const VotingMonitor = () => {
             value={status}
             onChange={(event) => setStatus(event.target.value)}
           >
-            <option value="All">All Status</option>
-            <option value="Confirmed">Confirmed</option>
-            <option value="Pending">Pending</option>
+            <option value="All">{t('allStatusOption')}</option>
+            <option value="Confirmed">{t('confirmedOption')}</option>
+            <option value="Pending">{t('pendingOption')}</option>
           </select>
         </div>
 
@@ -127,13 +129,13 @@ const VotingMonitor = () => {
           <table className="vm-table">
             <thead>
               <tr>
-                <th>Transaction</th>
-                <th>Voter</th>
-                <th>Election</th>
-                <th>Candidate</th>
-                <th>Time</th>
-                <th>Blockchain Hash</th>
-                <th>Status</th>
+                <th>{t('transactionTh')}</th>
+                <th>{t('voterTh')}</th>
+                <th>{t('electionTh')}</th>
+                <th>{t('candidateTh')}</th>
+                <th>{t('timeTh')}</th>
+                <th>{t('blockchainHashTh')}</th>
+                <th>{t('statusTh')}</th>
               </tr>
             </thead>
 
@@ -166,7 +168,7 @@ const VotingMonitor = () => {
               {filteredVotes.length === 0 && (
                 <tr>
                   <td colSpan="7">
-                    <div className="vm-empty">No voting activity found.</div>
+                    <div className="vm-empty">{t('noVotingActivityFound')}</div>
                   </td>
                 </tr>
               )}

@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Home.css";
 
 const Home = () => {
+  const { t } = useLanguage();
+
   return (
     <main className="home-page">
       {/* Hero Section */}
@@ -11,20 +14,15 @@ const Home = () => {
           <div className="home-hero-content">
             <div className="home-badge">
               <span className="home-badge-dot"></span>
-              Secure • Transparent • Trusted
+              {t('tagline')}
             </div>
 
             <h1>
-              Vote with
-              <span> Trust.</span>
-              <br />
-              Powered by Blockchain.
+              {t('heroTitle')}
             </h1>
 
             <p className="home-hero-description">
-              A modern blockchain-based voting platform designed to make
-              elections secure, transparent, tamper-resistant, and accessible
-              to every eligible voter.
+              {t('heroSubtitle')}
             </p>
 
             <div className="home-hero-actions">

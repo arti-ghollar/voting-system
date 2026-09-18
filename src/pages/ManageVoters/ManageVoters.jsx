@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./ManageVoters.css";
 
 const INITIAL_VOTERS = [
@@ -66,6 +67,7 @@ const INITIAL_VOTERS = [
 ];
 
 const ManageVoters = () => {
+  const { t } = useLanguage();
   const [voters, setVoters] = useState(INITIAL_VOTERS);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -169,14 +171,13 @@ const ManageVoters = () => {
         <header className="manage-voters-header">
           <div>
             <span className="manage-voters-eyebrow">
-              ADMINISTRATION
+              {t('administrationEyebrow')}
             </span>
 
-            <h1>Manage Voters</h1>
+            <h1>{t('manageVotersPageTitle')}</h1>
 
             <p>
-              View, verify and manage registered voters from
-              the administration dashboard.
+              {t('manageVotersPageDesc')}
             </p>
           </div>
 
@@ -185,7 +186,7 @@ const ManageVoters = () => {
             className="manage-voters-back-button"
           >
             <span aria-hidden="true">←</span>
-            Back to Dashboard
+            {t('backToDashboardBtn')}
           </Link>
         </header>
 
@@ -200,9 +201,9 @@ const ManageVoters = () => {
             </div>
 
             <div>
-              <span>Total Voters</span>
+              <span>{t('totalVotersStatsLabel')}</span>
               <strong>{statistics.total}</strong>
-              <small>Registered voters</small>
+              <small>{t('registeredVotersStatsDesc')}</small>
             </div>
           </div>
 
@@ -212,9 +213,9 @@ const ManageVoters = () => {
             </div>
 
             <div>
-              <span>Active Voters</span>
+              <span>{t('activeVotersStatsLabel')}</span>
               <strong>{statistics.active}</strong>
-              <small>Currently active</small>
+              <small>{t('currentlyActiveStatsDesc')}</small>
             </div>
           </div>
 
@@ -224,9 +225,9 @@ const ManageVoters = () => {
             </div>
 
             <div>
-              <span>Verified</span>
+              <span>{t('verifiedStatsLabel')}</span>
               <strong>{statistics.verified}</strong>
-              <small>Identity verified</small>
+              <small>{t('identityVerifiedStatsDesc')}</small>
             </div>
           </div>
 
@@ -236,9 +237,9 @@ const ManageVoters = () => {
             </div>
 
             <div>
-              <span>Votes Cast</span>
+              <span>{t('votesCastStatsLabel')}</span>
               <strong>{statistics.voted}</strong>
-              <small>Participation recorded</small>
+              <small>{t('participationRecordedStatsDesc')}</small>
             </div>
           </div>
         </section>
@@ -259,14 +260,14 @@ const ManageVoters = () => {
               onChange={(event) =>
                 setSearchTerm(event.target.value)
               }
-              placeholder="Search by name, email, ID or phone..."
+              placeholder={t('searchVotersPlaceholder')}
               aria-label="Search voters"
             />
           </div>
 
           <div className="manage-voters-filters">
             <label>
-              <span>Status</span>
+              <span>{t('statusFilterLabel')}</span>
 
               <select
                 value={statusFilter}
@@ -275,14 +276,14 @@ const ManageVoters = () => {
                 }
                 aria-label="Filter by voter status"
               >
-                <option value="all">All Status</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="all">{t('allStatusOption')}</option>
+                <option value="active">{t('activeOption')}</option>
+                <option value="inactive">{t('inactiveOption')}</option>
               </select>
             </label>
 
             <label>
-              <span>Verification</span>
+              <span>{t('verificationFilterLabel')}</span>
 
               <select
                 value={verificationFilter}
@@ -291,9 +292,9 @@ const ManageVoters = () => {
                 }
                 aria-label="Filter by verification status"
               >
-                <option value="all">All Verification</option>
-                <option value="verified">Verified</option>
-                <option value="pending">Pending</option>
+                <option value="all">{t('allVerificationOption')}</option>
+                <option value="verified">{t('verifiedOption')}</option>
+                <option value="pending">{t('pendingOption')}</option>
               </select>
             </label>
 
@@ -302,7 +303,7 @@ const ManageVoters = () => {
               className="manage-voters-reset-button"
               onClick={resetFilters}
             >
-              Reset
+              {t('resetFiltersBtn')}
             </button>
           </div>
         </section>
@@ -312,14 +313,14 @@ const ManageVoters = () => {
           <div className="manage-voters-list-header">
             <div>
               <span className="manage-voters-label">
-                REGISTERED VOTERS
+                {t('registeredVotersLabel')}
               </span>
 
-              <h2>Voter Directory</h2>
+              <h2>{t('voterDirectoryTitle')}</h2>
             </div>
 
             <span className="manage-voters-count">
-              Showing {filteredVoters.length} of {voters.length}
+              {t('showingLabel')} {filteredVoters.length} {t('ofLabel')} {voters.length}
             </span>
           </div>
 
@@ -329,13 +330,13 @@ const ManageVoters = () => {
               <table className="manage-voters-table">
                 <thead>
                   <tr>
-                    <th>Voter</th>
-                    <th>Voter ID</th>
-                    <th>Registered</th>
-                    <th>Verification</th>
-                    <th>Voting Status</th>
-                    <th>Account</th>
-                    <th>Action</th>
+                    <th>{t('voterTh')}</th>
+                    <th>{t('voterIdTh')}</th>
+                    <th>{t('registeredTh')}</th>
+                    <th>{t('verificationTh')}</th>
+                    <th>{t('votingStatusTh')}</th>
+                    <th>{t('accountTh')}</th>
+                    <th>{t('actionTh')}</th>
                   </tr>
                 </thead>
 
@@ -377,7 +378,7 @@ const ManageVoters = () => {
                         {voter.verification === "verified" ? (
                           <span className="manage-voter-badge verified">
                             <span aria-hidden="true">✓</span>
-                            Verified
+                            {t('verifiedBadge')}
                           </span>
                         ) : (
                           <button
@@ -391,7 +392,7 @@ const ManageVoters = () => {
                             }
                           >
                             <span aria-hidden="true">!</span>
-                            Pending
+                            {t('pendingBadge')}
                           </button>
                         )}
                       </td>
@@ -400,11 +401,11 @@ const ManageVoters = () => {
                       <td>
                         {voter.voted ? (
                           <span className="manage-voter-badge voted">
-                            Vote Cast
+                            {t('voteCastBadge')}
                           </span>
                         ) : (
                           <span className="manage-voter-badge not-voted">
-                            Not Voted
+                            {t('notVotedBadge')}
                           </span>
                         )}
                       </td>
@@ -423,8 +424,8 @@ const ManageVoters = () => {
                             aria-hidden="true"
                           />
                           {voter.status === "active"
-                            ? "Active"
-                            : "Inactive"}
+                            ? t('activeAccountBadge')
+                            : t('inactiveAccountBadge')}
                         </span>
                       </td>
 
@@ -442,8 +443,8 @@ const ManageVoters = () => {
                           }
                         >
                           {voter.status === "active"
-                            ? "Deactivate"
-                            : "Activate"}
+                            ? t('deactivateBtn')
+                            : t('activateBtn')}
                         </button>
                       </td>
 
@@ -461,11 +462,10 @@ const ManageVoters = () => {
                 ⌕
               </div>
 
-              <h3>No voters found</h3>
+              <h3>{t('noVotersFoundTitle')}</h3>
 
               <p>
-                No registered voters match your current search
-                or filter settings.
+                {t('noVotersFoundDesc')}
               </p>
 
               <button
@@ -473,7 +473,7 @@ const ManageVoters = () => {
                 className="manage-voters-empty-button"
                 onClick={resetFilters}
               >
-                Clear Filters
+                {t('clearFiltersBtn')}
               </button>
             </div>
           )}
@@ -489,13 +489,10 @@ const ManageVoters = () => {
           </div>
 
           <div>
-            <h3>Administrator Access</h3>
+            <h3>{t('administratorAccessTitle')}</h3>
 
             <p>
-              Voter management actions should be protected by
-              role-based authorization on the backend. The
-              controls in this interface currently update the
-              local application state.
+              {t('administratorAccessDesc')}
             </p>
           </div>
         </aside>

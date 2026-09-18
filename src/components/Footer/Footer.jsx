@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Footer.css";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="footer">
@@ -17,44 +19,43 @@ const Footer = () => {
             </Link>
 
             <p className="footer__description">
-              A secure and transparent blockchain-based voting platform
-              designed for college and small-scale elections.
+              {t('footerDesc')}
             </p>
           </div>
 
           <div className="footer__column">
-            <h3>Platform</h3>
-            <Link to="/about">About</Link>
-            <Link to="/how-it-works">How It Works</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <h3>{t('platform')}</h3>
+            <Link to="/about">{t('about')}</Link>
+            <Link to="/how-it-works">{t('howItWorks')}</Link>
+            <Link to="/login">{t('login')}</Link>
+            <Link to="/register">{t('getStarted')}</Link>
           </div>
 
           <div className="footer__column">
-            <h3>Voting</h3>
-            <Link to="/elections">Elections</Link>
-            <Link to="/voting-status">Voting Status</Link>
-            <Link to="/results">Results</Link>
+            <h3>{t('voting')}</h3>
+            <Link to="/elections">{t('elections')}</Link>
+            <Link to="/voting-status">{t('votingStatus')}</Link>
+            <Link to="/results">{t('results')}</Link>
           </div>
 
           <div className="footer__column">
-            <h3>Security</h3>
-            <span>Blockchain Records</span>
-            <span>Vote Verification</span>
-            <span>Secure Authentication</span>
-            <span>Audit Trail</span>
+            <h3>{t('security')}</h3>
+            <span>{t('blockchainRecords')}</span>
+            <span>{t('voteVerification')}</span>
+            <span>{t('secureAuth')}</span>
+            <span>{t('auditTrail')}</span>
           </div>
         </div>
 
         <div className="footer__bottom">
           <div className="footer__copyright">
-            © {currentYear} VoteBridge. Built for secure college-level elections.
+            {t('copyright').replace('{year}', currentYear)}
           </div>
 
           <div className="footer__legal">
-            <span>Privacy</span>
-            <span>Security</span>
-            <span>Terms</span>
+            <span>{t('privacy')}</span>
+            <span>{t('security')}</span>
+            <span>{t('terms')}</span>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 import "./ManageElections.css";
 
 const defaultElections = [
@@ -23,6 +24,30 @@ const defaultElections = [
 ];
 
 const ManageElections = () => {
+  const { t } = useLanguage();
+
+  // Re-declare defaultElections to use translation context
+  const defaultElections = [
+    {
+      id: "ELX-001",
+      title: t('ge2026Title'),
+      type: t('generalType'),
+      startDate: "2026-09-10",
+      endDate: "2026-09-12",
+      status: "Scheduled",
+      candidates: 12,
+    },
+    {
+      id: "ELX-002",
+      title: t('municipalElectionTitle'),
+      type: t('municipalType'),
+      startDate: "2026-10-05",
+      endDate: "2026-10-06",
+      status: "Draft",
+      candidates: 8,
+    },
+  ];
+
   const [elections, setElections] = useState(defaultElections);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
@@ -91,7 +116,7 @@ const ManageElections = () => {
   };
 
   const deleteElection = (id) => {
-    if (!window.confirm("Delete this election?")) return;
+    if (!window.confirm(t('deleteElectionConfirm'))) return;
 
     setElections((previous) =>
       previous.filter((election) => election.id !== id)
@@ -102,38 +127,38 @@ const ManageElections = () => {
     <section className="manage-elections">
       <div className="me-header">
         <div>
-          <span className="me-eyebrow">ELECTION ADMINISTRATION</span>
-          <h1>Manage Elections</h1>
-          <p>Create and manage election campaigns and schedules.</p>
+          <span className="me-eyebrow">{t('electionAdminEyebrow')}</span>
+          <h1>{t('manageElectionsPageTitle')}</h1>
+          <p>{t('manageElectionsPageDesc')}</p>
         </div>
 
         <button className="me-primary-btn" onClick={() => setShowModal(true)}>
-          + Create Election
+          {t('createElectionBtn')}
         </button>
       </div>
 
       <div className="me-stats">
         <div>
-          <span>Total Elections</span>
+          <span>{t('totalElectionsLabel')}</span>
           <strong>{elections.length}</strong>
         </div>
 
         <div>
-          <span>Scheduled</span>
+          <span>{t('scheduledLabel')}</span>
           <strong>
             {elections.filter((e) => e.status === "Scheduled").length}
           </strong>
         </div>
 
         <div>
-          <span>Drafts</span>
+          <span>{t('draftsLabel')}</span>
           <strong>
             {elections.filter((e) => e.status === "Draft").length}
           </strong>
         </div>
 
         <div>
-          <span>Completed</span>
+          <span>{t('completedLabel')}</span>
           <strong>
             {elections.filter((e) => e.status === "Completed").length}
           </strong>
@@ -147,7 +172,7 @@ const ManageElections = () => {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search elections..."
+              placeholder={t('searchElectionsPlaceholder')}
             />
           </div>
 
@@ -155,11 +180,11 @@ const ManageElections = () => {
             value={filter}
             onChange={(event) => setFilter(event.target.value)}
           >
-            <option value="All">All Status</option>
-            <option value="Draft">Draft</option>
-            <option value="Scheduled">Scheduled</option>
-            <option value="Active">Active</option>
-            <option value="Completed">Completed</option>
+            <option value="All">{t('statusAll')}</option>
+            <option value="Draft">{t('statusDraft')}</option>
+            <option value="Scheduled">{t('statusScheduled')}</option>
+            <option value="Active">{t('statusActive')}</option>
+            <option value="Completed">{t('statusCompleted')}</option>
           </select>
         </div>
 
@@ -167,13 +192,13 @@ const ManageElections = () => {
           <table className="me-table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Election</th>
-                <th>Type</th>
-                <th>Schedule</th>
-                <th>Candidates</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th>{t('idTh')}</th>
+                <th>{t('electionTh')}</th>
+                <th>{t('typeTh')}</th>
+                <th>{t('scheduleTh')}</th>
+                <th>{t('candidatesTh')}</th>
+                <th>{t('statusTh')}</th>
+                <th>{t('actionsTh')}</th>
               </tr>
             </thead>
 
@@ -191,7 +216,7 @@ const ManageElections = () => {
                   <td>
                     <div className="me-date">
                       <span>{election.startDate}</span>
-                      <small>to</small>
+                      <small>{t('toLabel')}</small>
                       <span>{election.endDate}</span>
                     </div>
                   </td>
@@ -214,7 +239,7 @@ const ManageElections = () => {
                             updateStatus(election.id, "Scheduled")
                           }
                         >
-                          Schedule
+                          {t('scheduleBtn')}
                         </button>
                       )}
 
@@ -222,7 +247,7 @@ const ManageElections = () => {
                         <button
                           onClick={() => updateStatus(election.id, "Active")}
                         >
-                          Activate
+                          {t('activateBtn')}
                         </button>
                       )}
 
@@ -230,7 +255,7 @@ const ManageElections = () => {
                         className="danger"
                         onClick={() => deleteElection(election.id)}
                       >
-                        Delete
+                        {t('deleteBtn')}
                       </button>
                     </div>
                   </td>
@@ -240,7 +265,7 @@ const ManageElections = () => {
               {filtered.length === 0 && (
                 <tr>
                   <td colSpan="7">
-                    <div className="me-empty">No elections found.</div>
+                    <div className="me-empty">{t('noElectionsFound')}</div>
                   </td>
                 </tr>
               )}
@@ -254,8 +279,8 @@ const ManageElections = () => {
           <div className="me-modal">
             <div className="me-modal-header">
               <div>
-                <h2>Create Election</h2>
-                <p>Configure a new election.</p>
+                <h2>{t('createElectionModalTitle')}</h2>
+                <p>{t('createElectionModalDesc')}</p>
               </div>
 
               <button onClick={() => setShowModal(false)}>×</button>
@@ -264,33 +289,33 @@ const ManageElections = () => {
             <form onSubmit={handleSubmit}>
               <div className="me-form">
                 <label>
-                  Election Name
+                  {t('electionNameLabel')}
                   <input
                     name="title"
                     value={form.title}
                     onChange={handleChange}
-                    placeholder="Enter election name"
+                    placeholder={t('enterElectionNamePlaceholder')}
                     required
                   />
                 </label>
 
                 <label>
-                  Election Type
+                  {t('electionTypeLabel')}
                   <select
                     name="type"
                     value={form.type}
                     onChange={handleChange}
                   >
-                    <option>General</option>
-                    <option>Municipal</option>
-                    <option>State</option>
-                    <option>Student</option>
-                    <option>Organizational</option>
+                    <option value="General">{t('generalType')}</option>
+                    <option value="Municipal">{t('municipalType')}</option>
+                    <option value="State">{t('stateType')}</option>
+                    <option value="Student">{t('studentType')}</option>
+                    <option value="Organizational">{t('organizationalType')}</option>
                   </select>
                 </label>
 
                 <label>
-                  Start Date
+                  {t('startDateLabel')}
                   <input
                     type="date"
                     name="startDate"
@@ -301,7 +326,7 @@ const ManageElections = () => {
                 </label>
 
                 <label>
-                  End Date
+                  {t('endDateLabel')}
                   <input
                     type="date"
                     name="endDate"
@@ -312,14 +337,14 @@ const ManageElections = () => {
                 </label>
 
                 <label>
-                  Initial Status
+                  {t('initialStatusLabel')}
                   <select
                     name="status"
                     value={form.status}
                     onChange={handleChange}
                   >
-                    <option>Draft</option>
-                    <option>Scheduled</option>
+                    <option value="Draft">{t('statusDraft')}</option>
+                    <option value="Scheduled">{t('statusScheduled')}</option>
                   </select>
                 </label>
               </div>
@@ -330,11 +355,11 @@ const ManageElections = () => {
                   className="me-cancel"
                   onClick={() => setShowModal(false)}
                 >
-                  Cancel
+                  {t('cancelBtn')}
                 </button>
 
                 <button type="submit" className="me-primary-btn">
-                  Create Election
+                  {t('createElectionModalTitle')}
                 </button>
               </div>
             </form>

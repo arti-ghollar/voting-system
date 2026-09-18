@@ -1,3 +1,4 @@
+import { useLanguage } from "../../context/LanguageContext";
 import "./ResultChart.css";
 
 const ResultChart = ({ results = [], totalVotes }) => {
@@ -5,6 +6,7 @@ const ResultChart = ({ results = [], totalVotes }) => {
     (sum, item) => sum + Number(item.votes || 0),
     0
   );
+  const { t } = useLanguage();
 
   const finalTotal = Number(totalVotes ?? calculatedTotal);
 
@@ -12,17 +14,17 @@ const ResultChart = ({ results = [], totalVotes }) => {
     <div className="result-chart">
       <div className="result-chart__header">
         <div>
-          <span>RESULT OVERVIEW</span>
-          <h3>Election Results</h3>
+          <span>{t('resultOverviewEyebrow')}</span>
+          <h3>{t('resultChartTitle')}</h3>
         </div>
 
-        <strong>{finalTotal} Votes</strong>
+        <strong>{finalTotal} {t('resultChartVotes')}</strong>
       </div>
 
       <div className="result-chart__list">
         {results.length === 0 ? (
           <div className="result-chart__empty">
-            No result data available yet.
+            {t('resultChartEmpty')}
           </div>
         ) : (
           results.map((result, index) => {
@@ -35,7 +37,7 @@ const ResultChart = ({ results = [], totalVotes }) => {
                 <div className="result-chart__label">
                   <div>
                     <strong>{result.name}</strong>
-                    <span>{votes} votes</span>
+                    <span>{votes} {t('resultChartVotesLower')}</span>
                   </div>
 
                   <strong>{percentage}%</strong>

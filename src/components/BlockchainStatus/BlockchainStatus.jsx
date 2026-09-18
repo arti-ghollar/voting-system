@@ -1,19 +1,23 @@
+import { useLanguage } from "../../context/LanguageContext";
 import "./BlockchainStatus.css";
 
 const BlockchainStatus = ({
   connected = true,
   network = "Local Test Network",
   blockNumber = "—",
-  contractAddress = "Not connected",
+  contractAddress,
 }) => {
+  const { t } = useLanguage();
+  const displayContractAddress = contractAddress || t('bcNotConnected');
+
   return (
     <section className="blockchain-status">
       <div className="blockchain-status__header">
         <div className="blockchain-status__icon">⬡</div>
 
         <div>
-          <span>BLOCKCHAIN NETWORK</span>
-          <h3>{connected ? "Network Connected" : "Network Disconnected"}</h3>
+          <span>{t('bcStatusNetwork')}</span>
+          <h3>{connected ? t('bcStatusConnected') : t('bcStatusDisconnected')}</h3>
         </div>
 
         <span
@@ -22,27 +26,27 @@ const BlockchainStatus = ({
           }`}
         >
           <span />
-          {connected ? "Connected" : "Offline"}
+          {connected ? t('bcIndicatorConnected') : t('bcIndicatorOffline')}
         </span>
       </div>
 
       <div className="blockchain-status__details">
         <div>
-          <span>Network</span>
+          <span>{t('bcNetworkLabel')}</span>
           <strong>{network}</strong>
         </div>
 
         <div>
-          <span>Latest Block</span>
+          <span>{t('bcLatestBlockLabel')}</span>
           <strong>{blockNumber}</strong>
         </div>
 
         <div>
-          <span>Smart Contract</span>
-          <strong title={contractAddress}>
-            {contractAddress.length > 25
-              ? `${contractAddress.slice(0, 12)}...${contractAddress.slice(-8)}`
-              : contractAddress}
+          <span>{t('bcSmartContractLabel')}</span>
+          <strong title={displayContractAddress}>
+            {displayContractAddress.length > 25
+              ? `${displayContractAddress.slice(0, 12)}...${displayContractAddress.slice(-8)}`
+              : displayContractAddress}
           </strong>
         </div>
       </div>

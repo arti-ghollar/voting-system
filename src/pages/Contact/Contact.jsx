@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Contact.css";
 
 const Contact = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,21 +43,21 @@ const Contact = () => {
   const contactCards = [
     {
       icon: "✉",
-      title: "Email Support",
+      title: t('emailSupport'),
       value: "support@blockvote.com",
-      description: "For general questions and technical assistance.",
+      description: t('emailSupportDesc'),
     },
     {
       icon: "◷",
-      title: "Support Hours",
-      value: "Mon – Fri, 9:00 AM – 6:00 PM",
-      description: "Our support team is available during working hours.",
+      title: t('supportHours'),
+      value: t('supportHoursValue'),
+      description: t('supportHoursDesc'),
     },
     {
       icon: "⌖",
-      title: "Office",
-      value: "Digital Voting Center",
-      description: "Secure digital election technology and support.",
+      title: t('office'),
+      value: t('officeValue'),
+      description: t('officeDesc'),
     },
   ];
 
@@ -102,40 +104,38 @@ const Contact = () => {
           <div className="contact-hero-content">
             <div className="contact-label">
               <span></span>
-              WE ARE HERE TO HELP
+              {t('weAreHereToHelp')}
             </div>
 
             <h1>
-              Let's Start a
+              {t('startConversation')}
               <br />
-              <strong>Conversation.</strong>
+              <strong>{t('conversation')}</strong>
             </h1>
 
             <p>
-              Have a question about your account, an election, or our
-              blockchain voting platform? Send us a message and our support
-              team will help you.
+              {t('contactDesc')}
             </p>
           </div>
 
           <div className="contact-hero-stats">
             <div className="contact-stat">
               <strong>24/7</strong>
-              <span>Platform Access</span>
+              <span>{t('platformAccess')}</span>
             </div>
 
             <div className="contact-stat-divider"></div>
 
             <div className="contact-stat">
-              <strong>Secure</strong>
-              <span>Support Process</span>
+              <strong>{t('secureBadge')}</strong>
+              <span>{t('secureSupportProcess')}</span>
             </div>
 
             <div className="contact-stat-divider"></div>
 
             <div className="contact-stat">
               <strong>Trusted</strong>
-              <span>Digital Voting</span>
+              <span>{t('trustedDigitalVoting')}</span>
             </div>
           </div>
         </div>
@@ -151,18 +151,17 @@ const Contact = () => {
             <div className="contact-info">
               <div className="contact-label">
                 <span></span>
-                CONTACT INFORMATION
+                {t('contactInfoLabel')}
               </div>
 
               <h2>
-                We’re ready to
+                {t('readyToAssist')}
                 <br />
-                <strong>assist you.</strong>
+                <strong>{t('assistYou')}</strong>
               </h2>
 
               <p className="contact-info-intro">
-                Whether you need technical support or simply want to learn
-                more about the platform, our team is ready to assist.
+                {t('assistDesc')}
               </p>
 
               <div className="contact-cards">
@@ -183,10 +182,9 @@ const Contact = () => {
                 <div className="contact-security-icon">🔒</div>
 
                 <div>
-                  <strong>Your privacy matters.</strong>
+                  <strong>{t('privacyMatters')}</strong>
                   <p>
-                    Never send passwords, private keys, OTPs, or other
-                    confidential credentials through the contact form.
+                    {t('privacyMattersDesc')}
                   </p>
                 </div>
               </div>
@@ -196,18 +194,18 @@ const Contact = () => {
             <div className="contact-form-wrapper">
               <div className="contact-form-header">
                 <div>
-                  <span>MESSAGE SUPPORT</span>
-                  <h3>Send us a message</h3>
+                  <span>{t('messageSupport')}</span>
+                  <h3>{t('sendUsMessage')}</h3>
                 </div>
 
                 <div className="contact-form-status">
                   <span></span>
-                  SECURE
+                  {t('secureBadge')}
                 </div>
               </div>
 
               {submitted && (
-                <div
+                  <div
                   className="contact-success-message"
                   role="status"
                   aria-live="polite"
@@ -215,10 +213,9 @@ const Contact = () => {
                   <span>✓</span>
 
                   <div>
-                    <strong>Message submitted successfully.</strong>
+                    <strong>{t('messageSubmitted')}</strong>
                     <p>
-                      Thank you for contacting us. Our support team will review
-                      your request.
+                      {t('messageSubmittedDesc')}
                     </p>
                   </div>
                 </div>
@@ -228,7 +225,7 @@ const Contact = () => {
                 <div className="contact-form-row">
                   <div className="contact-field">
                     <label htmlFor="contact-name">
-                      Full Name <span>*</span>
+                      {t('fullNameLabel')} <span>*</span>
                     </label>
 
                     <input
@@ -237,7 +234,7 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Enter your full name"
+                      placeholder={t('fullNamePlaceholder')}
                       autoComplete="name"
                       required
                     />
@@ -245,7 +242,7 @@ const Contact = () => {
 
                   <div className="contact-field">
                     <label htmlFor="contact-email">
-                      Email Address <span>*</span>
+                      {t('emailLabel')} <span>*</span>
                     </label>
 
                     <input
@@ -254,7 +251,7 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="Enter your email"
+                      placeholder={t('emailPlaceholder')}
                       autoComplete="email"
                       required
                     />
@@ -263,7 +260,7 @@ const Contact = () => {
 
                 <div className="contact-field">
                   <label htmlFor="contact-subject">
-                    Subject <span>*</span>
+                    {t('subjectLabel')} <span>*</span>
                   </label>
 
                   <select
@@ -274,20 +271,20 @@ const Contact = () => {
                     required
                   >
                     <option value="" disabled>
-                      Select a subject
+                      {t('selectSubject')}
                     </option>
-                    <option value="account">Account & Login</option>
-                    <option value="election">Election Support</option>
-                    <option value="voting">Voting Issue</option>
-                    <option value="technical">Technical Support</option>
-                    <option value="general">General Inquiry</option>
+                    <option value="account">{t('subjAccount')}</option>
+                    <option value="election">{t('subjElection')}</option>
+                    <option value="voting">{t('subjVoting')}</option>
+                    <option value="technical">{t('subjTech')}</option>
+                    <option value="general">{t('subjGeneral')}</option>
                   </select>
                 </div>
 
                 <div className="contact-field">
                   <div className="contact-message-label">
                     <label htmlFor="contact-message">
-                      Message <span>*</span>
+                      {t('messageLabel')} <span>*</span>
                     </label>
 
                     <small>{formData.message.length}/1000</small>
@@ -298,7 +295,7 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell us how we can help..."
+                    placeholder={t('messagePlaceholder')}
                     maxLength={1000}
                     rows={7}
                     required
@@ -308,11 +305,11 @@ const Contact = () => {
                 <div className="contact-form-footer">
                   <p>
                     <span>🔒</span>
-                    Your message is handled through a secure support workflow.
+                    {t('secureWorkflow')}
                   </p>
 
                   <button type="submit" className="contact-submit-btn">
-                    Send Message
+                    {t('sendMessageBtn')}
                     <span>→</span>
                   </button>
                 </div>
@@ -330,18 +327,17 @@ const Contact = () => {
           <div className="contact-section-heading">
             <div className="contact-label">
               <span></span>
-              WHAT HAPPENS NEXT
+              {t('whatHappensNext')}
             </div>
 
             <h2>
-              Simple Support.
+              {t('simpleSupport')}
               <br />
-              <strong>Clear Communication.</strong>
+              <strong>{t('clearCommunication')}</strong>
             </h2>
 
             <p>
-              We keep the support process straightforward so you know what to
-              expect after submitting your request.
+              {t('processDesc')}
             </p>
           </div>
 
@@ -351,11 +347,10 @@ const Contact = () => {
 
               <div className="contact-process-icon">✉</div>
 
-              <h3>Send Your Request</h3>
+              <h3>{t('step1Title')}</h3>
 
               <p>
-                Complete the contact form with a clear description of your
-                question or issue.
+                {t('step1Desc')}
               </p>
             </div>
 
@@ -368,11 +363,10 @@ const Contact = () => {
 
               <div className="contact-process-icon">◉</div>
 
-              <h3>Request Reviewed</h3>
+              <h3>{t('step2Title')}</h3>
 
               <p>
-                Our support team reviews the request and identifies the best
-                way to assist.
+                {t('step2Desc')}
               </p>
             </div>
 
@@ -385,11 +379,10 @@ const Contact = () => {
 
               <div className="contact-process-icon">✓</div>
 
-              <h3>Get Assistance</h3>
+              <h3>{t('step3Title')}</h3>
 
               <p>
-                You receive guidance or additional information based on your
-                support request.
+                {t('step3Desc')}
               </p>
             </div>
           </div>
@@ -405,22 +398,21 @@ const Contact = () => {
             <div className="contact-faq-heading">
               <div className="contact-label">
                 <span></span>
-                SUPPORT FAQ
+                {t('supportFaq')}
               </div>
 
               <h2>
-                Before you
+                {t('beforeContactTitle')}
                 <br />
-                <strong>contact us.</strong>
+                <strong>{t('beforeContactStrong')}</strong>
               </h2>
 
               <p>
-                You may find the answer to your question in our frequently
-                asked questions.
+                {t('beforeContactDesc')}
               </p>
 
               <Link to="/how-it-works" className="contact-faq-link">
-                Learn how the platform works
+                {t('learnHowWorks')}
                 <span>→</span>
               </Link>
             </div>
@@ -450,28 +442,27 @@ const Contact = () => {
             <div className="contact-cta-content">
               <div className="contact-label">
                 <span></span>
-                READY TO GET STARTED?
+                {t('readyToGetStarted')}
               </div>
 
               <h2>
-                Your secure voting
+                {t('experienceStarts')}
                 <br />
-                experience <strong>starts here.</strong>
+                <strong>{t('experienceStartsStrong')}</strong>
               </h2>
 
               <p>
-                Create an account or sign in to access your digital voting
-                dashboard.
+                {t('experienceStartsDesc')}
               </p>
 
               <div className="contact-cta-actions">
                 <Link to="/register" className="contact-cta-primary">
-                  Create Account
+                  {t('createAccount')}
                   <span>→</span>
                 </Link>
 
                 <Link to="/login" className="contact-cta-secondary">
-                  Sign In
+                  {t('signIn')}
                 </Link>
               </div>
             </div>

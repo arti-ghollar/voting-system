@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 import "./ManageCandidates.css";
 
 const initialCandidates = [
@@ -29,6 +30,8 @@ const initialCandidates = [
 ];
 
 const ManageCandidates = () => {
+  const { t } = useLanguage();
+
   const [candidates, setCandidates] = useState(initialCandidates);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
@@ -124,7 +127,7 @@ const ManageCandidates = () => {
 
   const handleDelete = (id) => {
     const confirmed = window.confirm(
-      "Are you sure you want to remove this candidate?"
+      t('removeCandidateConfirm')
     );
 
     if (!confirmed) return;
@@ -138,34 +141,34 @@ const ManageCandidates = () => {
     <section className="manage-candidates">
       <div className="mc-header">
         <div>
-          <span className="mc-eyebrow">ADMINISTRATION</span>
-          <h1>Manage Candidates</h1>
+          <span className="mc-eyebrow">{t('managementLabel')}</span>
+          <h1>{t('manageCandidatesPageTitle')}</h1>
           <p>
-            Add, update and manage candidates participating in elections.
+            {t('manageCandidatesPageDesc')}
           </p>
         </div>
 
         <button className="mc-primary-btn" onClick={openAddModal}>
           <span>+</span>
-          Add Candidate
+          {t('addCandidateBtn')}
         </button>
       </div>
 
       <div className="mc-stats">
         <div className="mc-stat-card">
-          <span>Total Candidates</span>
+          <span>{t('totalCandidatesLabel')}</span>
           <strong>{candidates.length}</strong>
         </div>
 
         <div className="mc-stat-card">
-          <span>Active</span>
+          <span>{t('activeLabel')}</span>
           <strong>
             {candidates.filter((item) => item.status === "Active").length}
           </strong>
         </div>
 
         <div className="mc-stat-card">
-          <span>Inactive</span>
+          <span>{t('inactiveLabel')}</span>
           <strong>
             {candidates.filter((item) => item.status === "Inactive").length}
           </strong>
@@ -178,7 +181,7 @@ const ManageCandidates = () => {
             <span>⌕</span>
             <input
               type="text"
-              placeholder="Search candidates..."
+              placeholder={t('searchCandidatesPlaceholder')}
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
@@ -188,9 +191,9 @@ const ManageCandidates = () => {
             value={statusFilter}
             onChange={(event) => setStatusFilter(event.target.value)}
           >
-            <option value="All">All Status</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
+            <option value="All">{t('statusAll')}</option>
+            <option value="Active">{t('statusActive')}</option>
+            <option value="Inactive">{t('statusInactive')}</option>
           </select>
         </div>
 
@@ -198,13 +201,13 @@ const ManageCandidates = () => {
           <table className="mc-table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Candidate</th>
-                <th>Party</th>
-                <th>Election</th>
-                <th>Symbol</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th>{t('idTh')}</th>
+                <th>{t('candidateTh')}</th>
+                <th>{t('partyTh')}</th>
+                <th>{t('electionTh')}</th>
+                <th>{t('symbolTh')}</th>
+                <th>{t('statusTh')}</th>
+                <th>{t('actionsTh')}</th>
               </tr>
             </thead>
 
@@ -246,14 +249,14 @@ const ManageCandidates = () => {
                           className="mc-edit-btn"
                           onClick={() => openEditModal(candidate)}
                         >
-                          Edit
+                          {t('editBtn')}
                         </button>
 
                         <button
                           className="mc-delete-btn"
                           onClick={() => handleDelete(candidate.id)}
                         >
-                          Delete
+                          {t('deleteBtn')}
                         </button>
                       </div>
                     </td>
@@ -263,8 +266,8 @@ const ManageCandidates = () => {
                 <tr>
                   <td colSpan="7">
                     <div className="mc-empty">
-                      <strong>No candidates found</strong>
-                      <span>Try changing your search or filter.</span>
+                      <strong>{t('noCandidatesFoundTitle')}</strong>
+                      <span>{t('noCandidatesFoundDesc')}</span>
                     </div>
                   </td>
                 </tr>
@@ -280,12 +283,12 @@ const ManageCandidates = () => {
             <div className="mc-modal-header">
               <div>
                 <h2>
-                  {editingCandidate ? "Edit Candidate" : "Add Candidate"}
+                  {editingCandidate ? t('editCandidateTitle') : t('addCandidateTitle')}
                 </h2>
                 <p>
                   {editingCandidate
-                    ? "Update candidate information."
-                    : "Enter candidate information below."}
+                    ? t('editCandidateDesc')
+                    : t('addCandidateDesc')}
                 </p>
               </div>
 
@@ -301,58 +304,58 @@ const ManageCandidates = () => {
             <form onSubmit={handleSubmit}>
               <div className="mc-form-grid">
                 <label>
-                  Candidate Name
+                  {t('candidateNameLabel')}
                   <input
                     name="name"
                     value={form.name}
                     onChange={handleChange}
-                    placeholder="Enter candidate name"
+                    placeholder={t('enterCandidateNamePlaceholder')}
                     required
                   />
                 </label>
 
                 <label>
-                  Political Party
+                  {t('politicalPartyLabel')}
                   <input
                     name="party"
                     value={form.party}
                     onChange={handleChange}
-                    placeholder="Enter party"
+                    placeholder={t('enterPartyPlaceholder')}
                     required
                   />
                 </label>
 
                 <label>
-                  Election
+                  {t('electionLabel')}
                   <input
                     name="election"
                     value={form.election}
                     onChange={handleChange}
-                    placeholder="Enter election"
+                    placeholder={t('enterElectionPlaceholder')}
                     required
                   />
                 </label>
 
                 <label>
-                  Election Symbol
+                  {t('electionSymbolLabel')}
                   <input
                     name="symbol"
                     value={form.symbol}
                     onChange={handleChange}
-                    placeholder="e.g. ★"
+                    placeholder={t('symbolPlaceholder')}
                     maxLength="3"
                   />
                 </label>
 
                 <label>
-                  Status
+                  {t('statusLabel')}
                   <select
                     name="status"
                     value={form.status}
                     onChange={handleChange}
                   >
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
+                    <option value="Active">{t('statusActive')}</option>
+                    <option value="Inactive">{t('statusInactive')}</option>
                   </select>
                 </label>
               </div>
@@ -363,11 +366,11 @@ const ManageCandidates = () => {
                   className="mc-cancel-btn"
                   onClick={() => setShowModal(false)}
                 >
-                  Cancel
+                  {t('cancelBtn')}
                 </button>
 
                 <button type="submit" className="mc-primary-btn">
-                  {editingCandidate ? "Update Candidate" : "Add Candidate"}
+                  {editingCandidate ? t('updateCandidateBtn') : t('addCandidateBtn')}
                 </button>
               </div>
             </form>

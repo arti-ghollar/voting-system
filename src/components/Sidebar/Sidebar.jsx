@@ -1,22 +1,25 @@
 import { NavLink } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Sidebar.css";
 
 const Sidebar = ({ role = "voter", isOpen = false, onClose }) => {
+  const { t } = useLanguage();
+
   const voterLinks = [
-    { label: "Dashboard", path: "/voter-dashboard", icon: "▦" },
-    { label: "Elections", path: "/elections", icon: "◉" },
-    { label: "Voting Status", path: "/voting-status", icon: "✓" },
-    { label: "Profile", path: "/profile", icon: "○" },
+    { label: t('navDashboard'), path: "/voter-dashboard", icon: "▦" },
+    { label: t('navElections'), path: "/elections", icon: "◉" },
+    { label: t('navVotingStatus'), path: "/voting-status", icon: "✓" },
+    { label: t('navProfile'), path: "/profile", icon: "○" },
   ];
 
   const adminLinks = [
-    { label: "Dashboard", path: "/admin-dashboard", icon: "▦" },
-    { label: "Manage Voters", path: "/manage-voters", icon: "♙" },
-    { label: "Candidates", path: "/manage-candidates", icon: "♟" },
-    { label: "Elections", path: "/manage-elections", icon: "◉" },
-    { label: "Voting Monitor", path: "/voting-monitor", icon: "◌" },
-    { label: "Blockchain Records", path: "/blockchain-records", icon: "⬡" },
-    { label: "Results", path: "/results", icon: "▥" },
+    { label: t('navDashboard'), path: "/admin-dashboard", icon: "▦" },
+    { label: t('navManageVoters'), path: "/manage-voters", icon: "♙" },
+    { label: t('navCandidates'), path: "/manage-candidates", icon: "♟" },
+    { label: t('navElections'), path: "/manage-elections", icon: "◉" },
+    { label: t('navVotingMonitor'), path: "/voting-monitor", icon: "◌" },
+    { label: t('navBlockchainRecords'), path: "/blockchain-records", icon: "⬡" },
+    { label: t('navResults'), path: "/results", icon: "▥" },
   ];
 
   const links = role === "admin" ? adminLinks : voterLinks;
@@ -40,8 +43,8 @@ const Sidebar = ({ role = "voter", isOpen = false, onClose }) => {
             </div>
 
             <div>
-              <strong>{role === "admin" ? "Administrator" : "Voter"}</strong>
-              <span>{role === "admin" ? "Election Panel" : "Student Portal"}</span>
+              <strong>{role === "admin" ? t('sidebarAdminRole') : t('sidebarVoterRole')}</strong>
+              <span>{role === "admin" ? t('sidebarAdminPanel') : t('sidebarVoterPortal')}</span>
             </div>
           </div>
 
@@ -56,7 +59,7 @@ const Sidebar = ({ role = "voter", isOpen = false, onClose }) => {
         </div>
 
         <nav className="sidebar__nav" aria-label="Dashboard navigation">
-          <span className="sidebar__section-title">MAIN MENU</span>
+          <span className="sidebar__section-title">{t('sidebarMainMenu')}</span>
 
           {links.map((link) => (
             <NavLink
@@ -80,8 +83,8 @@ const Sidebar = ({ role = "voter", isOpen = false, onClose }) => {
           <div className="sidebar__security-icon">✓</div>
 
           <div>
-            <strong>Secure System</strong>
-            <span>Blockchain verified</span>
+            <strong>{t('sidebarSecureSystem')}</strong>
+            <span>{t('sidebarBlockchainVerified')}</span>
           </div>
         </div>
       </aside>

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./VotingStatus.css";
 
 const VotingStatus = () => {
   const [copied, setCopied] = useState(false);
+  const { t } = useLanguage();
 
   const election = {
-    title: "General Election 2026",
+    title: t('ge2026Title'),
     electionId: "GE-2026",
-    status: "Voting Active",
+    status: t('votingActiveLabel'),
     startDate: "15 August 2026",
     endDate: "31 August 2026",
     totalCandidates: 4,
@@ -19,30 +21,26 @@ const VotingStatus = () => {
   const votingSteps = [
     {
       id: 1,
-      title: "Registration Completed",
-      description:
-        "Your voter registration has been successfully completed.",
+      title: t('registrationCompletedTitle'),
+      description: t('registrationCompletedDesc'),
       status: "completed",
     },
     {
       id: 2,
-      title: "Identity Verified",
-      description:
-        "Your identity verification has been successfully completed.",
+      title: t('identityVerifiedTitle'),
+      description: t('identityVerifiedDesc'),
       status: "completed",
     },
     {
       id: 3,
-      title: "Vote Cast",
-      description:
-        "Your vote has been securely recorded on the blockchain.",
+      title: t('voteCastStepTitle'),
+      description: t('voteCastStepDesc'),
       status: "completed",
     },
     {
       id: 4,
-      title: "Vote Verification",
-      description:
-        "Your vote transaction record is available for verification.",
+      title: t('voteVerificationTitle'),
+      description: t('voteVerificationDesc'),
       status: "current",
     },
   ];
@@ -73,14 +71,13 @@ const VotingStatus = () => {
         <header className="voting-status-header">
           <div>
             <span className="voting-status-eyebrow">
-              VOTER PORTAL
+              {t('voterPortalEyebrow')}
             </span>
 
-            <h1>Voting Status</h1>
+            <h1>{t('votingStatusTitle')}</h1>
 
             <p>
-              Track your election participation and verify the
-              current status of your vote.
+              {t('votingStatusDesc')}
             </p>
           </div>
 
@@ -89,7 +86,7 @@ const VotingStatus = () => {
             className="voting-status-back-button"
           >
             <span aria-hidden="true">←</span>
-            Back to Dashboard
+            {t('backToDashboard')}
           </Link>
         </header>
 
@@ -105,7 +102,7 @@ const VotingStatus = () => {
 
             <div>
               <span className="voting-card-label">
-                CURRENT ELECTION
+                {t('currentElectionLabel')}
               </span>
 
               <h2>{election.title}</h2>
@@ -121,7 +118,7 @@ const VotingStatus = () => {
           </div>
 
           <div className="voting-election-date">
-            <span>Election Period</span>
+            <span>{t('electionPeriodLabel')}</span>
 
             <strong>
               {election.startDate} — {election.endDate}
@@ -141,16 +138,16 @@ const VotingStatus = () => {
             </div>
 
             <div>
-              <span>Your Status</span>
+              <span>{t('yourStatusLabel')}</span>
 
               <strong>
-                {election.hasVoted ? "Vote Cast" : "Not Voted"}
+                {election.hasVoted ? t('voteCastLabel') : t('notVotedLabel')}
               </strong>
 
               <small>
                 {election.hasVoted
-                  ? "Your vote has been recorded"
-                  : "Your vote is pending"}
+                  ? t('voteRecordedDesc')
+                  : t('votePendingDesc')}
               </small>
             </div>
           </article>
@@ -164,7 +161,7 @@ const VotingStatus = () => {
             </div>
 
             <div>
-              <span>Election ID</span>
+              <span>{t('electionIdLabel')}</span>
 
               <strong>{election.electionId}</strong>
 
@@ -181,11 +178,11 @@ const VotingStatus = () => {
             </div>
 
             <div>
-              <span>Candidates</span>
+              <span>{t('candidatesTitle')}</span>
 
               <strong>{election.totalCandidates}</strong>
 
-              <small>Available candidates</small>
+              <small>{t('availableCandidates')}</small>
             </div>
           </article>
 
@@ -196,14 +193,14 @@ const VotingStatus = () => {
           <div className="voting-section-heading">
             <div>
               <span className="voting-card-label">
-                ACTIVITY
+                {t('activityLabel')}
               </span>
 
-              <h2>Voting Progress</h2>
+              <h2>{t('votingProgressTitle')}</h2>
             </div>
 
             <span className="voting-completed-badge">
-              Completed
+              {t('completedBadge')}
             </span>
           </div>
 
@@ -226,13 +223,13 @@ const VotingStatus = () => {
 
                     {step.status === "completed" && (
                       <span className="voting-step-status">
-                        Completed
+                        {t('completedBadge')}
                       </span>
                     )}
 
                     {step.status === "current" && (
                       <span className="voting-step-status current">
-                        In Progress
+                        {t('inProgressBadge')}
                       </span>
                     )}
                   </div>
@@ -263,27 +260,24 @@ const VotingStatus = () => {
 
             <div>
               <span className="voting-card-label">
-                BLOCKCHAIN VERIFICATION
+                {t('blockchainVerificationLabel')}
               </span>
 
-              <h2>Your vote is securely recorded</h2>
+              <h2>{t('voteSecurelyRecordedTitle')}</h2>
 
               <p>
-                Your vote has been recorded as a blockchain
-                transaction. The transaction record can be used
-                to verify that your vote was included without
-                publicly revealing your selected candidate.
+                {t('voteSecurelyRecordedDesc')}
               </p>
             </div>
           </div>
 
           <div className="voting-transaction-box">
             <div className="voting-transaction-heading">
-              <span>Transaction ID</span>
+              <span>{t('transactionIdLabel')}</span>
 
               <span className="voting-verified-badge">
                 <span aria-hidden="true">✓</span>
-                Confirmed
+                {t('confirmedLabel')}
               </span>
             </div>
 
@@ -295,7 +289,7 @@ const VotingStatus = () => {
                 className="voting-copy-button"
                 onClick={handleCopyTransaction}
               >
-                {copied ? "Copied" : "Copy"}
+                {copied ? t('copiedBtn') : t('copyBtn')}
               </button>
             </div>
           </div>
@@ -305,7 +299,7 @@ const VotingStatus = () => {
               to="/vote-confirmation"
               className="voting-primary-button"
             >
-              View Vote Confirmation
+              {t('viewVoteConfirmationBtn')}
               <span aria-hidden="true">→</span>
             </Link>
 
@@ -313,7 +307,7 @@ const VotingStatus = () => {
               to="/elections"
               className="voting-secondary-button"
             >
-              View Elections
+              {t('viewElections')}
             </Link>
           </div>
         </section>
@@ -328,13 +322,10 @@ const VotingStatus = () => {
           </div>
 
           <div>
-            <h3>Privacy &amp; Security</h3>
+            <h3>{t('privacySecurityTitle')}</h3>
 
             <p>
-              Your voting status confirms that your ballot was
-              successfully submitted. The system does not
-              publicly associate your identity with your
-              candidate selection.
+              {t('privacySecurityDesc3')}
             </p>
           </div>
         </section>

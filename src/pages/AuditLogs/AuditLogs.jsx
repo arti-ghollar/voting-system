@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 import "./AuditLogs.css";
 
 const AUDIT_LOGS = [
@@ -12,6 +13,7 @@ const AUDIT_LOGS = [
 ];
 
 const AuditLogs = () => {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredLogs = AUDIT_LOGS.filter(log => 
@@ -25,9 +27,9 @@ const AuditLogs = () => {
       <div className="audit-logs-container">
         <header className="audit-logs-header">
           <div>
-            <span className="audit-logs-eyebrow">ADMINISTRATION PANEL</span>
-            <h1>Audit Logs</h1>
-            <p>Monitor system events, user activity, and security logs. Note: Ballot secrecy is preserved; candidate selections are never logged here.</p>
+            <span className="audit-logs-eyebrow">{t('administrationEyebrow')}</span>
+            <h1>{t('auditLogsPageTitle')}</h1>
+            <p>{t('auditLogsPageDesc')}</p>
           </div>
         </header>
 
@@ -35,7 +37,7 @@ const AuditLogs = () => {
           <div className="audit-logs-toolbar">
             <input 
               type="text" 
-              placeholder="Search logs by event, role, or status..." 
+              placeholder={t('searchLogsPlaceholder')} 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="audit-logs-search"
@@ -46,12 +48,12 @@ const AuditLogs = () => {
             <table className="audit-logs-table">
               <thead>
                 <tr>
-                  <th>Log ID</th>
-                  <th>Date & Time</th>
-                  <th>Event Description</th>
-                  <th>Role</th>
-                  <th>Details</th>
-                  <th>Status</th>
+                  <th>{t('logIdTh')}</th>
+                  <th>{t('dateTimeTh')}</th>
+                  <th>{t('eventDescriptionTh')}</th>
+                  <th>{t('roleTh')}</th>
+                  <th>{t('detailsTh')}</th>
+                  <th>{t('statusTh')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -71,7 +73,7 @@ const AuditLogs = () => {
                 ))}
                 {filteredLogs.length === 0 && (
                   <tr>
-                    <td colSpan="6" className="text-center" style={{ padding: "32px" }}>No logs found.</td>
+                    <td colSpan="6" className="text-center" style={{ padding: "32px" }}>{t('noLogsFound')}</td>
                   </tr>
                 )}
               </tbody>

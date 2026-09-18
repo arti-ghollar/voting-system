@@ -1,19 +1,21 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./VoteConfirmation.css";
 
 const VoteConfirmation = () => {
   const location = useLocation();
+  const { t } = useLanguage();
   const isAssisted = location.state?.isAssisted || false;
   const votingMethod = location.state?.votingMethod || "ONLINE";
 
   const voteDetails = {
     electionId: location.state?.election?.id || "GE-2026",
-    electionName: location.state?.election?.title || "General Election 2026",
-    voteStatus: "Successfully Recorded",
+    electionName: location.state?.election?.title || t('ge2026Title'),
+    voteStatus: t('successfullyRecorded'),
     transactionId: "0x7a9f8b31e4c29a7d5f10b6c84c82d91e",
     blockNumber: "18,429,731",
-    network: "Blockchain Network",
+    network: t('blockchainNetwork'),
     date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
     time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
   };
@@ -45,14 +47,13 @@ const VoteConfirmation = () => {
         <header className="vote-confirmation-header">
           <div>
             <span className="vote-confirmation-eyebrow">
-              {isAssisted ? "AUTHORIZED ASSISTANCE" : "VOTER PORTAL"}
+              {isAssisted ? t('authorizedAssistanceLabel') : t('voterPortalLabel')}
             </span>
 
-            <h1>Vote Confirmation</h1>
+            <h1>{t('voteConfirmationTitle')}</h1>
 
             <p>
-              Your vote has been successfully submitted and
-              recorded.
+              {t('voteConfirmationDesc')}
             </p>
           </div>
 
@@ -61,7 +62,7 @@ const VoteConfirmation = () => {
             className="vote-confirmation-back-button"
           >
             <span aria-hidden="true">←</span>
-            Back to Dashboard
+            {t('backToDashboard')}
           </Link>
         </header>
 
@@ -72,15 +73,13 @@ const VoteConfirmation = () => {
           </div>
 
           <span className="vote-confirmation-success-label">
-            VOTE SUCCESSFULLY RECORDED
+            {t('voteSuccessfullyRecorded')}
           </span>
 
-          <h2>Your vote has been confirmed</h2>
+          <h2>{t('voteConfirmedTitle')}</h2>
 
           <p>
-            Your ballot was successfully submitted for the
-            selected election. A blockchain transaction record
-            has been generated for verification.
+            {t('voteConfirmedDesc')}
           </p>
 
           <div className="vote-confirmation-status">
@@ -97,7 +96,7 @@ const VoteConfirmation = () => {
           <div className="vote-confirmation-card-header">
             <div>
               <span className="vote-confirmation-card-label">
-                ELECTION DETAILS
+                {t('electionDetailsLabel')}
               </span>
 
               <h2>{voteDetails.electionName}</h2>
@@ -110,22 +109,22 @@ const VoteConfirmation = () => {
 
           <div className="vote-confirmation-details-grid">
             <div className="vote-confirmation-detail">
-              <span>Election</span>
+              <span>{t('electionLabel')}</span>
               <strong>{voteDetails.electionName}</strong>
             </div>
 
             <div className="vote-confirmation-detail">
-              <span>Election ID</span>
+              <span>{t('electionIdLabel')}</span>
               <strong>{voteDetails.electionId}</strong>
             </div>
 
             <div className="vote-confirmation-detail">
-              <span>Date</span>
+              <span>{t('dateLabel')}</span>
               <strong>{voteDetails.date}</strong>
             </div>
 
             <div className="vote-confirmation-detail">
-              <span>Time</span>
+              <span>{t('timeLabel')}</span>
               <strong>{voteDetails.time}</strong>
             </div>
           </div>
@@ -140,14 +139,13 @@ const VoteConfirmation = () => {
 
             <div>
               <span className="vote-confirmation-card-label">
-                BLOCKCHAIN RECORD
+                {t('blockchainRecordLabel')}
               </span>
 
-              <h2>Transaction Verification</h2>
+              <h2>{t('transactionVerificationTitle')}</h2>
 
               <p>
-                The following transaction information can be
-                used to verify that your vote was recorded.
+                {t('transactionVerificationDesc')}
               </p>
             </div>
           </div>
@@ -155,11 +153,11 @@ const VoteConfirmation = () => {
           {/* Transaction ID */}
           <div className="vote-confirmation-transaction">
             <div className="vote-confirmation-transaction-heading">
-              <span>Transaction ID</span>
+              <span>{t('transactionIdLabel')}</span>
 
               <span className="vote-confirmation-verified-badge">
                 <span aria-hidden="true">✓</span>
-                Verified
+                {t('verifiedLabel')}
               </span>
             </div>
 
@@ -172,7 +170,7 @@ const VoteConfirmation = () => {
                 onClick={handleCopyTransaction}
                 aria-label="Copy transaction ID"
               >
-                Copy
+                {t('copyBtn')}
               </button>
             </div>
           </div>
@@ -180,19 +178,19 @@ const VoteConfirmation = () => {
           {/* Blockchain Information */}
           <div className="vote-confirmation-chain-grid">
             <div>
-              <span>Block Number</span>
+              <span>{t('blockNumberLabel')}</span>
               <strong>{voteDetails.blockNumber}</strong>
             </div>
 
             <div>
-              <span>Network</span>
+              <span>{t('networkLabel')}</span>
               <strong>{voteDetails.network}</strong>
             </div>
 
             <div>
-              <span>Status</span>
+              <span>{t('statusLabel')}</span>
               <strong className="vote-confirmation-chain-status">
-                Confirmed
+                {t('confirmedLabel')}
               </strong>
             </div>
           </div>
@@ -208,13 +206,10 @@ const VoteConfirmation = () => {
           </div>
 
           <div>
-            <h3>Privacy &amp; Security</h3>
+            <h3>{t('privacySecurityTitle')}</h3>
 
             <p>
-              This confirmation proves that a vote was recorded
-              for the election. It does not publicly reveal your
-              candidate selection or associate your identity with
-              your ballot choice.
+              {t('privacySecurityDesc2')}
             </p>
           </div>
         </section>
@@ -227,14 +222,14 @@ const VoteConfirmation = () => {
                 to="/voting-status"
                 className="vote-confirmation-primary-button"
               >
-                View Voting Status
+                {t('viewVotingStatusBtn')}
                 <span aria-hidden="true">→</span>
               </Link>
               <Link
                 to="/elections"
                 className="vote-confirmation-secondary-button"
               >
-                View Elections
+                {t('viewElections')}
               </Link>
             </>
           )}
@@ -244,7 +239,7 @@ const VoteConfirmation = () => {
               to={getDashboardLink()}
               className="vote-confirmation-primary-button"
             >
-              Finish Assisted Session
+              {t('finishAssistedSessionBtn')}
               <span aria-hidden="true">→</span>
             </Link>
           )}
@@ -253,7 +248,7 @@ const VoteConfirmation = () => {
             to={getDashboardLink()}
             className="vote-confirmation-secondary-button"
           >
-            Dashboard
+            {t('dashboardBtn')}
           </Link>
         </section>
 
@@ -267,13 +262,10 @@ const VoteConfirmation = () => {
           </div>
 
           <div>
-            <h3>Keep Your Transaction ID Safe</h3>
+            <h3>{t('keepTransactionSafeTitle')}</h3>
 
             <p>
-              Your transaction ID can be used as a reference for
-              checking the blockchain record of your submitted
-              vote. Never share private keys, passwords or
-              authentication credentials.
+              {t('keepTransactionSafeDesc')}
             </p>
           </div>
         </aside>

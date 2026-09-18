@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 import "./ElectionCard.css";
 
 const ElectionCard = ({ election }) => {
+  const { t } = useLanguage();
   const {
     id,
     title = "Student Council Election",
@@ -16,10 +18,10 @@ const ElectionCard = ({ election }) => {
   const normalizedStatus = String(status).toLowerCase();
 
   const statusLabel = {
-    active: "Active",
-    upcoming: "Upcoming",
-    completed: "Completed",
-    draft: "Draft",
+    active: t('statusActive'),
+    upcoming: t('statusUpcoming'),
+    completed: t('statusCompleted'),
+    draft: t('statusDraft'),
   };
 
   return (
@@ -42,23 +44,23 @@ const ElectionCard = ({ election }) => {
 
         <div className="election-card__dates">
           <div>
-            <span>STARTS</span>
+            <span>{t('startsLabel')}</span>
             <strong>{startDate}</strong>
           </div>
 
           <div>
-            <span>ENDS</span>
+            <span>{t('endsLabel')}</span>
             <strong>{endDate}</strong>
           </div>
         </div>
 
         <div className="election-card__stats">
           <span>
-            <strong>{candidatesCount}</strong> Candidates
+            <strong>{candidatesCount}</strong> {t('candidatesCountLabel')}
           </span>
 
           <span>
-            <strong>{totalVoters}</strong> Eligible Voters
+            <strong>{totalVoters}</strong> {t('eligibleVotersLabel')}
           </span>
         </div>
       </div>
@@ -72,10 +74,10 @@ const ElectionCard = ({ election }) => {
         }`}
       >
         {normalizedStatus === "active"
-          ? "Vote Now"
+          ? t('btnVoteNow')
           : normalizedStatus === "completed"
-            ? "View Results"
-            : "View Details"}
+            ? t('btnViewResults')
+            : t('btnViewDetails')}
         <span aria-hidden="true">→</span>
       </Link>
     </article>

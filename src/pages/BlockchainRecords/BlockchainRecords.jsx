@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 import "./BlockchainRecords.css";
 
 const records = [
@@ -32,6 +33,7 @@ const records = [
 ];
 
 const BlockchainRecords = () => {
+  const { t } = useLanguage();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [isVerifying, setIsVerifying] = useState(false);
@@ -57,15 +59,15 @@ const BlockchainRecords = () => {
     <section className="blockchain-records">
       <div className="br-header">
         <div>
-          <span className="br-eyebrow">BLOCKCHAIN LEDGER</span>
-          <h1>Blockchain Records</h1>
-          <p>Review immutable voting transactions recorded on-chain.</p>
+          <span className="br-eyebrow">{t('blockchainLedgerEyebrow')}</span>
+          <h1>{t('blockchainRecordsPageTitle')}</h1>
+          <p>{t('blockchainRecordsPageDesc')}</p>
         </div>
 
         <div className="br-actions-right">
           <div className="br-network" style={{ marginBottom: "12px", justifyContent: "flex-end" }}>
             <span></span>
-            Ethereum Network
+            {t('ethereumNetworkLabel')}
           </div>
           <button
             className="br-verify-btn"
@@ -91,11 +93,11 @@ const BlockchainRecords = () => {
               transition: "all 0.2s"
             }}
           >
-            {isVerifying ? "Verifying..." : "Verify Blockchain Integrity"}
+            {isVerifying ? t('verifyingBtnText') : t('verifyBlockchainIntegrityBtn')}
           </button>
           {verifySuccess && (
             <div style={{ color: "var(--color-success)", fontSize: "0.85rem", marginTop: "8px", fontWeight: "600", display: "flex", alignItems: "center", gap: "4px", justifyContent: "flex-end" }}>
-              ✓ Blockchain integrity verified
+              {t('blockchainIntegrityVerified')}
             </div>
           )}
         </div>
@@ -103,18 +105,18 @@ const BlockchainRecords = () => {
 
       <div className="br-info-grid">
         <div>
-          <span>Latest Block</span>
+          <span>{t('latestBlockLabel')}</span>
           <strong>#184521</strong>
         </div>
 
         <div>
-          <span>Total Transactions</span>
+          <span>{t('totalTransactionsLabel')}</span>
           <strong>18,452</strong>
         </div>
 
         <div>
-          <span>Network Status</span>
-          <strong className="online">Online</strong>
+          <span>{t('networkStatusLabel')}</span>
+          <strong className="online">{t('onlineStatus')}</strong>
         </div>
       </div>
 
@@ -123,7 +125,7 @@ const BlockchainRecords = () => {
           <div className="br-search">
             <span>⌕</span>
             <input
-              placeholder="Search block or transaction..."
+              placeholder={t('searchBlockTransactionPlaceholder')}
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
@@ -133,9 +135,9 @@ const BlockchainRecords = () => {
             value={filter}
             onChange={(event) => setFilter(event.target.value)}
           >
-            <option value="All">All Records</option>
-            <option value="Confirmed">Confirmed</option>
-            <option value="Pending">Pending</option>
+            <option value="All">{t('allRecordsOption')}</option>
+            <option value="Confirmed">{t('confirmedOption')}</option>
+            <option value="Pending">{t('pendingOption')}</option>
           </select>
         </div>
 
@@ -143,12 +145,12 @@ const BlockchainRecords = () => {
           <table className="br-table">
             <thead>
               <tr>
-                <th>Block</th>
-                <th>Transaction Hash</th>
-                <th>Type</th>
-                <th>Network</th>
-                <th>Timestamp</th>
-                <th>Status</th>
+                <th>{t('blockTh')}</th>
+                <th>{t('transactionHashTh')}</th>
+                <th>{t('typeTh')}</th>
+                <th>{t('networkTh')}</th>
+                <th>{t('timestampTh')}</th>
+                <th>{t('statusTh')}</th>
               </tr>
             </thead>
 
@@ -180,7 +182,7 @@ const BlockchainRecords = () => {
               {filteredRecords.length === 0 && (
                 <tr>
                   <td colSpan="6">
-                    <div className="br-empty">No records found.</div>
+                    <div className="br-empty">{t('noRecordsFound')}</div>
                   </td>
                 </tr>
               )}
