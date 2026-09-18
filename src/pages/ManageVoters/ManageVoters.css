@@ -46,7 +46,7 @@
 
 .manage-voters-header h1 {
   margin: 0;
-  color: #111827;
+  color: var(--color-text);
   font-size: clamp(30px, 4vw, 42px);
   font-weight: 800;
   line-height: 1.15;
@@ -55,7 +55,7 @@
 
 .manage-voters-header p {
   margin: 10px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 13px;
   line-height: 1.7;
 }
@@ -69,7 +69,7 @@
   padding: 0 16px;
   border: 1px solid #dce4ee;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--color-surface);
   color: #334155;
   font-size: 11px;
   font-weight: 800;
@@ -84,7 +84,7 @@
 
 .manage-voters-back-button:hover {
   border-color: #cbd5e1;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
   color: #1e293b;
   transform: translateY(-1px);
 }
@@ -111,9 +111,9 @@
   gap: 12px;
   min-width: 0;
   padding: 17px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 5px 18px rgba(15, 23, 42, 0.035);
 }
 
@@ -186,9 +186,9 @@
   gap: 16px;
   margin-bottom: 21px;
   padding: 13px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: #ffffff;
+  background: var(--color-surface);
 }
 
 .manage-voters-search {
@@ -212,10 +212,10 @@
   width: 100%;
   height: 38px;
   padding: 0 12px 0 34px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   outline: none;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
   color: #334155;
   font-family: inherit;
   font-size: 10px;
@@ -231,7 +231,7 @@
 
 .manage-voters-search input:focus {
   border-color: #93c5fd;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
 }
 
@@ -257,11 +257,11 @@
   min-width: 130px;
   height: 36px;
   padding: 0 28px 0 10px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   outline: none;
-  background: #f8fafc;
-  color: #475569;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-secondary);
   font-family: inherit;
   font-size: 9px;
   font-weight: 700;
@@ -276,10 +276,10 @@
 .manage-voters-reset-button {
   height: 36px;
   padding: 0 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  background: #ffffff;
-  color: #64748b;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
   font-family: inherit;
   font-size: 9px;
   font-weight: 800;
@@ -287,7 +287,7 @@
 }
 
 .manage-voters-reset-button:hover {
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
   color: #334155;
 }
 
@@ -297,9 +297,9 @@
 
 .manage-voters-list {
   width: 100%;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 16px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 5px 18px rgba(15, 23, 42, 0.035);
   overflow: hidden;
 }
@@ -329,7 +329,7 @@
 }
 
 .manage-voters-count {
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 9px;
   font-weight: 800;
 }
@@ -351,7 +351,7 @@
 }
 
 .manage-voters-table thead {
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
 }
 
 .manage-voters-table th {
@@ -369,7 +369,7 @@
 .manage-voters-table td {
   padding: 14px 16px;
   border-bottom: 1px solid #eef2f7;
-  color: #475569;
+  color: var(--color-text-secondary);
   font-size: 9px;
   vertical-align: middle;
 }
@@ -446,17 +446,17 @@
 
 .manage-voter-id {
   padding: 5px 7px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
-  background: #f8fafc;
-  color: #64748b;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-muted);
   font-family: monospace;
   font-size: 8px;
   font-weight: 700;
 }
 
 .manage-voter-date {
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 9px;
   font-weight: 700;
   white-space: nowrap;
@@ -498,14 +498,14 @@
 }
 
 .manage-voter-badge.voted {
-  border: 1px solid #ddd6fe;
+  border: 1px solid var(--color-border);
   background: #f5f3ff;
   color: #7c3aed;
 }
 
 .manage-voter-badge.not-voted {
-  border: 1px solid #e2e8f0;
-  background: #f8fafc;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-secondary);
   color: #94a3b8;
 }
 
@@ -614,8 +614,8 @@
   height: 52px;
   margin-bottom: 14px;
   border-radius: 14px;
-  background: #f1f5f9;
-  color: #64748b;
+  background: var(--color-surface-secondary);
+  color: var(--color-text-muted);
   font-size: 20px;
 }
 
@@ -659,9 +659,9 @@
   gap: 12px;
   margin-top: 18px;
   padding: 17px 19px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
 }
 
 .manage-voters-notice-icon {
@@ -673,14 +673,14 @@
   flex: 0 0 34px;
   border-radius: 9px;
   background: #e2e8f0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 12px;
   font-weight: 800;
 }
 
 .manage-voters-notice h3 {
   margin: 0;
-  color: #475569;
+  color: var(--color-text-secondary);
   font-size: 11px;
   font-weight: 800;
 }

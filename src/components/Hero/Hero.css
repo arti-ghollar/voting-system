@@ -109,7 +109,7 @@
 
 .hero__secondary-btn {
   color: #344054;
-  background: #ffffff;
+  background: var(--color-surface);
   border: 1px solid #d0d5dd;
 }
 
@@ -292,7 +292,7 @@
   gap: 9px;
   border: 1px solid #eaecf0;
   border-radius: 11px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 15px 35px rgba(16, 24, 40, 0.1);
 }
 

@@ -13,15 +13,6 @@ const STATS = [
     className: "blue",
   },
   {
-    id: "candidates",
-    title: "Candidates",
-    value: "48",
-    change: "+12",
-    description: "Registered candidates",
-    icon: "C",
-    className: "purple",
-  },
-  {
     id: "elections",
     title: "Active Elections",
     value: "3",
@@ -32,11 +23,20 @@ const STATS = [
   },
   {
     id: "votes",
-    title: "Votes Cast",
+    title: "Total Votes Cast",
     value: "8,942",
     change: "71.1%",
     description: "Voter participation",
     icon: "✓",
+    className: "purple",
+  },
+  {
+    id: "home-requests",
+    title: "Pending Home Visits",
+    value: "14",
+    change: "+3 Today",
+    description: "Require officer assignment",
+    icon: "🏠",
     className: "orange",
   },
 ];
@@ -252,6 +252,73 @@ const AdminDashboard = () => {
               </div>
             </article>
           ))}
+        </section>
+
+        {/* ================= VOTING METHOD CHARTS ================= */}
+        <section className="admin-section admin-charts-section" style={{ marginTop: "32px", background: "var(--color-surface)", padding: "32px", borderRadius: "24px", border: "1px solid var(--color-border)" }}>
+          <div className="admin-section-header">
+            <div>
+              <span className="admin-section-label">ANALYTICS</span>
+              <h2>Voting Methods Breakdown</h2>
+            </div>
+          </div>
+          
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px" }}>
+            <div>
+              <h3 style={{ fontSize: "1.125rem", marginBottom: "16px", color: "var(--color-text-primary)" }}>By Voting Platform</h3>
+              
+              <div style={{ marginBottom: "16px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+                  <span style={{ color: "var(--color-text-secondary)", fontSize: "0.95rem" }}>📱 Online / Home</span>
+                  <strong style={{ color: "var(--color-text-primary)" }}>7,214 (80.6%)</strong>
+                </div>
+                <div style={{ width: "100%", height: "8px", background: "rgba(59, 130, 246, 0.2)", borderRadius: "4px" }}>
+                  <div style={{ width: "80.6%", height: "100%", background: "#3b82f6", borderRadius: "4px" }}></div>
+                </div>
+              </div>
+              
+              <div style={{ marginBottom: "16px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+                  <span style={{ color: "var(--color-text-secondary)", fontSize: "0.95rem" }}>🏢 Voting Center</span>
+                  <strong style={{ color: "var(--color-text-primary)" }}>1,540 (17.2%)</strong>
+                </div>
+                <div style={{ width: "100%", height: "8px", background: "rgba(168, 85, 247, 0.2)", borderRadius: "4px" }}>
+                  <div style={{ width: "17.2%", height: "100%", background: "#a855f7", borderRadius: "4px" }}></div>
+                </div>
+              </div>
+              
+              <div style={{ marginBottom: "16px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+                  <span style={{ color: "var(--color-text-secondary)", fontSize: "0.95rem" }}>🏠 Home Visit (Assisted)</span>
+                  <strong style={{ color: "var(--color-text-primary)" }}>188 (2.2%)</strong>
+                </div>
+                <div style={{ width: "100%", height: "8px", background: "rgba(34, 197, 94, 0.2)", borderRadius: "4px" }}>
+                  <div style={{ width: "2.2%", height: "100%", background: "#22c55e", borderRadius: "4px" }}></div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 style={{ fontSize: "1.125rem", marginBottom: "16px", color: "var(--color-text-primary)" }}>Home Voting Requests</h3>
+              
+              <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+                <div style={{ flex: 1, minWidth: "120px", padding: "16px", background: "rgba(234, 179, 8, 0.1)", borderRadius: "12px", border: "1px solid rgba(234, 179, 8, 0.2)" }}>
+                  <strong style={{ display: "block", fontSize: "1.5rem", color: "#eab308", marginBottom: "4px" }}>14</strong>
+                  <span style={{ fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>Pending</span>
+                </div>
+                
+                <div style={{ flex: 1, minWidth: "120px", padding: "16px", background: "rgba(59, 130, 246, 0.1)", borderRadius: "12px", border: "1px solid rgba(59, 130, 246, 0.2)" }}>
+                  <strong style={{ display: "block", fontSize: "1.5rem", color: "#3b82f6", marginBottom: "4px" }}>82</strong>
+                  <span style={{ fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>Approved / Scheduled</span>
+                </div>
+                
+                <div style={{ flex: 1, minWidth: "120px", padding: "16px", background: "rgba(34, 197, 94, 0.1)", borderRadius: "12px", border: "1px solid rgba(34, 197, 94, 0.2)" }}>
+                  <strong style={{ display: "block", fontSize: "1.5rem", color: "#22c55e", marginBottom: "4px" }}>188</strong>
+                  <span style={{ fontSize: "0.875rem", color: "var(--color-text-secondary)" }}>Completed</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ================= QUICK ACTIONS ================= */}

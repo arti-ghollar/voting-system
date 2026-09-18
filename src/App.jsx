@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // =====================================================
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 // =====================================================
 // COMMON COMPONENTS
@@ -30,6 +31,10 @@ import CastVote from "./pages/CastVote/CastVote";
 import VoteConfirmation from "./pages/VoteConfirmation/VoteConfirmation";
 import VotingStatus from "./pages/VotingStatus/VotingStatus";
 import Profile from "./pages/Profile/Profile";
+import VotingMethodSelection from "./pages/VotingMethodSelection/VotingMethodSelection";
+import HomeVotingRequest from "./pages/HomeVotingRequest/HomeVotingRequest";
+import VotingCenter from "./pages/VotingCenter/VotingCenter";
+import HomeVotingOfficer from "./pages/HomeVotingOfficer/HomeVotingOfficer";
 
 // =====================================================
 // ADMIN PAGES
@@ -41,6 +46,8 @@ import ManageElections from "./pages/ManageElections/ManageElections";
 import VotingMonitor from "./pages/VotingMonitor/VotingMonitor";
 import BlockchainRecords from "./pages/BlockchainRecords/BlockchainRecords";
 import Results from "./pages/Results/Results";
+import AuditLogs from "./pages/AuditLogs/AuditLogs";
+import ManageVotingCenters from "./pages/ManageVotingCenters/ManageVotingCenters";
 
 // =====================================================
 // CONTEXT PROVIDERS
@@ -64,11 +71,38 @@ import "./App.css";
 function App() {
   return (
     <BrowserRouter>
+
+      {/* =================================================
+          SCROLL TO TOP
+          Every route/page opens from the top
+      ================================================= */}
+      <ScrollToTop />
+
+      {/* =================================================
+          AUTH PROVIDER
+      ================================================= */}
       <AuthProvider>
+
+        {/* =================================================
+            BLOCKCHAIN PROVIDER
+        ================================================= */}
         <BlockchainProvider>
+
+          {/* =================================================
+              ELECTION PROVIDER
+          ================================================= */}
           <ElectionProvider>
+
+            {/* =================================================
+                VOTING PROVIDER
+            ================================================= */}
             <VotingProvider>
+
+              {/* =================================================
+                  NOTIFICATION PROVIDER
+              ================================================= */}
               <NotificationProvider>
+
                 <div className="app">
 
                   {/* =================================================
@@ -80,6 +114,7 @@ function App() {
                       MAIN CONTENT
                   ================================================= */}
                   <main className="app-main">
+
                     <Routes>
 
                       {/* =================================================
@@ -134,6 +169,54 @@ function App() {
                             allowedRoles={["voter", "admin"]}
                           >
                             <VoterDashboard />
+                          </ProtectedRoute>
+                        }
+                      />
+
+                      {/* Voting Method Selection */}
+                      <Route
+                        path="/voting-method"
+                        element={
+                          <ProtectedRoute
+                            allowedRoles={["voter", "admin"]}
+                          >
+                            <VotingMethodSelection />
+                          </ProtectedRoute>
+                        }
+                      />
+
+                      {/* Home Voting Request */}
+                      <Route
+                        path="/home-voting-request"
+                        element={
+                          <ProtectedRoute
+                            allowedRoles={["voter", "admin"]}
+                          >
+                            <HomeVotingRequest />
+                          </ProtectedRoute>
+                        }
+                      />
+
+                      {/* Voting Center Operator */}
+                      <Route
+                        path="/voting-center"
+                        element={
+                          <ProtectedRoute
+                            allowedRoles={["center_operator", "admin"]}
+                          >
+                            <VotingCenter />
+                          </ProtectedRoute>
+                        }
+                      />
+
+                      {/* Home Voting Officer */}
+                      <Route
+                        path="/home-voting-officer"
+                        element={
+                          <ProtectedRoute
+                            allowedRoles={["home_officer", "admin"]}
+                          >
+                            <HomeVotingOfficer />
                           </ProtectedRoute>
                         }
                       />
@@ -286,6 +369,30 @@ function App() {
                         }
                       />
 
+                      {/* Audit Logs */}
+                      <Route
+                        path="/admin/audit-logs"
+                        element={
+                          <ProtectedRoute
+                            allowedRoles={["admin"]}
+                          >
+                            <AuditLogs />
+                          </ProtectedRoute>
+                        }
+                      />
+
+                      {/* Manage Voting Centers */}
+                      <Route
+                        path="/admin/voting-centers"
+                        element={
+                          <ProtectedRoute
+                            allowedRoles={["admin"]}
+                          >
+                            <ManageVotingCenters />
+                          </ProtectedRoute>
+                        }
+                      />
+
                       {/* =================================================
                           404 - PAGE NOT FOUND
                       ================================================= */}
@@ -295,6 +402,7 @@ function App() {
                       />
 
                     </Routes>
+
                   </main>
 
                   {/* =================================================
@@ -303,11 +411,17 @@ function App() {
                   <Footer />
 
                 </div>
+
               </NotificationProvider>
+
             </VotingProvider>
+
           </ElectionProvider>
+
         </BlockchainProvider>
+
       </AuthProvider>
+
     </BrowserRouter>
   );
 }

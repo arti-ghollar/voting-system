@@ -1,0 +1,271 @@
+.home-voting-page {
+  padding: 120px 5% 80px;
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.home-voting-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.home-voting-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
+  gap: 24px;
+}
+
+.home-voting-heading h1 {
+  font-size: 2.5rem;
+  color: var(--color-text-primary);
+  margin: 8px 0 16px;
+  font-weight: 700;
+}
+
+.home-voting-heading p {
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.home-voting-eyebrow {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #22c55e;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.home-voting-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.home-voting-back-button:hover {
+  border-color: var(--color-text-primary);
+  transform: translateY(-2px);
+}
+
+.home-voting-form-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.home-voting-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.home-voting-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.home-voting-field.full-width {
+  margin-bottom: 24px;
+}
+
+.home-voting-field label {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+}
+
+.home-voting-field input,
+.home-voting-field select,
+.home-voting-field textarea {
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+
+.home-voting-field input:focus,
+.home-voting-field select:focus,
+.home-voting-field textarea:focus {
+  outline: none;
+  border-color: #22c55e;
+}
+
+.read-only-input {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed;
+}
+
+.home-voting-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border);
+}
+
+.home-voting-cancel-btn {
+  padding: 14px 24px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.home-voting-cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.home-voting-submit-btn {
+  padding: 14px 32px;
+  border-radius: 8px;
+  border: none;
+  background: #22c55e;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.home-voting-submit-btn:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+}
+
+.home-voting-submit-btn:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success View */
+.home-voting-success-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 64px 40px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.home-voting-success-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin: 0 auto 32px;
+}
+
+.home-voting-success-card h2 {
+  font-size: 2rem;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+}
+
+.home-voting-success-card p {
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  margin-bottom: 32px;
+}
+
+.home-voting-request-id {
+  display: inline-flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 16px 32px;
+  border-radius: 12px;
+  border: 1px dashed var(--color-border);
+  margin-bottom: 32px;
+}
+
+.home-voting-request-id span {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.home-voting-request-id strong {
+  font-size: 1.5rem;
+  color: #22c55e;
+  letter-spacing: 0.05em;
+}
+
+.home-voting-success-note {
+  font-size: 0.95rem !important;
+  max-width: 500px;
+  margin: 0 auto 40px !important;
+}
+
+.home-voting-primary-btn {
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: none;
+  background: #3b82f6;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.home-voting-primary-btn:hover {
+  background: #2563eb;
+}
+
+@media (max-width: 768px) {
+  .home-voting-header {
+    flex-direction: column;
+  }
+  
+  .home-voting-form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .home-voting-form-card,
+  .home-voting-success-card {
+    padding: 32px 24px;
+  }
+  
+  .home-voting-form-actions {
+    flex-direction: column;
+  }
+  
+  .home-voting-cancel-btn,
+  .home-voting-submit-btn {
+    width: 100%;
+  }
+}

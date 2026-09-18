@@ -5,7 +5,7 @@
   justify-content: center;
   padding: 25px;
   box-sizing: border-box;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
 }
 
 .not-found-card {
@@ -13,7 +13,7 @@
   padding: 45px 30px;
   border: 1px solid #e5e7eb;
   border-radius: 20px;
-  background: white;
+  background: var(--color-surface);
   text-align: center;
   box-shadow: 0 15px 50px rgba(15, 23, 42, 0.07);
 }
@@ -27,14 +27,14 @@
 
 .not-found-card h1 {
   margin: 20px 0 8px;
-  color: #111827;
+  color: var(--color-text);
   font-size: 28px;
 }
 
 .not-found-card p {
   margin: 0 auto 25px;
   max-width: 390px;
-  color: #64748b;
+  color: var(--color-text-muted);
   line-height: 1.7;
   font-size: 14px;
 }

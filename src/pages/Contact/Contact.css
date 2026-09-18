@@ -8,8 +8,8 @@ css
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  background: #ffffff;
-  color: #0f172a;
+  background: var(--color-surface);
+  color: var(--color-text);
   font-family:
     Inter,
     ui-sans-serif,
@@ -113,7 +113,7 @@ css
 }
 
 .contact-breadcrumb a {
-  color: #64748b;
+  color: var(--color-text-muted);
   transition: color 0.2s ease;
 }
 
@@ -147,7 +147,7 @@ css
 
 .contact-hero-content h1 {
   margin: 0;
-  color: #0f172a;
+  color: var(--color-text);
   font-size: clamp(46px, 6vw, 68px);
   font-weight: 800;
   line-height: 1.03;
@@ -161,7 +161,7 @@ css
 .contact-hero-content > p {
   max-width: 650px;
   margin: 22px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 15px;
   line-height: 1.8;
 }
@@ -186,7 +186,7 @@ css
 }
 
 .contact-stat strong {
-  color: #0f172a;
+  color: var(--color-text);
   font-size: 15px;
   font-weight: 800;
 }
@@ -209,7 +209,7 @@ css
 
 .contact-main {
   padding: 105px 0;
-  background: #ffffff;
+  background: var(--color-surface);
 }
 
 .contact-main-grid {
@@ -225,7 +225,7 @@ css
 
 .contact-info h2 {
   margin: 0;
-  color: #0f172a;
+  color: var(--color-text);
   font-size: clamp(32px, 4vw, 45px);
   font-weight: 800;
   line-height: 1.1;
@@ -239,7 +239,7 @@ css
 .contact-info-intro {
   max-width: 430px;
   margin: 18px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 13px;
   line-height: 1.8;
 }
@@ -256,9 +256,9 @@ css
   align-items: flex-start;
   gap: 14px;
   padding: 17px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: #ffffff;
+  background: var(--color-surface);
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
@@ -309,7 +309,7 @@ css
 
 .contact-info-card-content p {
   margin: 5px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 9px;
   line-height: 1.6;
 }
@@ -350,7 +350,7 @@ css
 
 .contact-security-note p {
   margin: 5px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 9px;
   line-height: 1.6;
 }
@@ -361,9 +361,9 @@ css
 
 .contact-form-wrapper {
   padding: 29px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 21px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow:
     0 22px 55px rgba(15, 23, 42, 0.07),
     0 4px 15px rgba(15, 23, 42, 0.025);
@@ -388,7 +388,7 @@ css
 
 .contact-form-header h3 {
   margin: 5px 0 0;
-  color: #0f172a;
+  color: var(--color-text);
   font-size: 19px;
   font-weight: 800;
 }
@@ -494,7 +494,7 @@ css
   border: 1px solid #cbd5e1;
   border-radius: 10px;
   outline: none;
-  background: #ffffff;
+  background: var(--color-surface);
   color: #334155;
   font-size: 11px;
   transition:
@@ -615,7 +615,7 @@ css
 
 .contact-process {
   padding: 105px 0;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
 }
 
 .contact-section-heading {
@@ -630,7 +630,7 @@ css
 
 .contact-section-heading h2 {
   margin: 0;
-  color: #0f172a;
+  color: var(--color-text);
   font-size: clamp(32px, 4.2vw, 45px);
   font-weight: 800;
   line-height: 1.12;
@@ -644,7 +644,7 @@ css
 .contact-section-heading > p {
   max-width: 580px;
   margin: 17px auto 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 13px;
   line-height: 1.75;
 }
@@ -660,9 +660,9 @@ css
   position: relative;
   min-height: 220px;
   padding: 26px 23px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 17px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
 }
 
@@ -691,14 +691,14 @@ css
 
 .contact-process-card h3 {
   margin: 0;
-  color: #0f172a;
+  color: var(--color-text);
   font-size: 15px;
   font-weight: 800;
 }
 
 .contact-process-card p {
   margin: 10px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 10px;
   line-height: 1.75;
 }
@@ -718,7 +718,7 @@ css
 
 .contact-faq {
   padding: 105px 0;
-  background: #ffffff;
+  background: var(--color-surface);
 }
 
 .contact-faq-grid {
@@ -730,7 +730,7 @@ css
 
 .contact-faq-heading h2 {
   margin: 0;
-  color: #0f172a;
+  color: var(--color-text);
   font-size: clamp(32px, 4vw, 44px);
   font-weight: 800;
   line-height: 1.1;
@@ -744,7 +744,7 @@ css
 .contact-faq-heading > p {
   max-width: 400px;
   margin: 17px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 13px;
   line-height: 1.75;
 }
@@ -771,9 +771,9 @@ css
 
 .contact-faq-item {
   overflow: hidden;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 13px;
-  background: #ffffff;
+  background: var(--color-surface);
 }
 
 .contact-faq-item summary {
@@ -807,7 +807,7 @@ css
 .contact-faq-item p {
   margin: 0;
   padding: 0 21px 20px;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 10px;
   line-height: 1.75;
 }
@@ -818,7 +818,7 @@ css
 
 .contact-cta {
   padding: 15px 0 105px;
-  background: #ffffff;
+  background: var(--color-surface);
 }
 
 .contact-cta-card {

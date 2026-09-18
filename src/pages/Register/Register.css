@@ -25,9 +25,9 @@
   min-height: 700px;
   margin: 0 auto;
   overflow: hidden;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 20px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 20px 55px rgba(15, 23, 42, 0.08);
 }
 
@@ -159,7 +159,7 @@
   gap: 15px;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 7px;
   font-weight: 700;
 }
@@ -173,7 +173,7 @@
   flex-direction: column;
   justify-content: center;
   padding: 45px 48px;
-  background: #ffffff;
+  background: var(--color-surface);
 }
 
 .register-form-header {
@@ -187,7 +187,7 @@
 
 .register-form-header h2 {
   margin: 0;
-  color: #111827;
+  color: var(--color-text);
   font-size: 27px;
   font-weight: 800;
   letter-spacing: -0.6px;
@@ -269,7 +269,7 @@
 
 .register-field label {
   margin-bottom: 6px;
-  color: #475569;
+  color: var(--color-text-secondary);
   font-size: 9px;
   font-weight: 800;
 }
@@ -286,7 +286,7 @@
   border: 1px solid #dbe2ea;
   border-radius: 8px;
   outline: none;
-  background: #ffffff;
+  background: var(--color-surface);
   color: #334155;
   font-family: inherit;
   font-size: 10px;
@@ -435,7 +435,7 @@
   margin-top: 1px;
   border: 1px solid #cbd5e1;
   border-radius: 4px;
-  background: #ffffff;
+  background: var(--color-surface);
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
@@ -464,7 +464,7 @@
 }
 
 .register-terms-text {
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 8px;
   line-height: 1.6;
 }
@@ -618,7 +618,7 @@
 @media (max-width: 600px) {
   .register-page {
     padding: 0;
-    background: #ffffff;
+    background: var(--color-surface);
   }
 
   .register-container {

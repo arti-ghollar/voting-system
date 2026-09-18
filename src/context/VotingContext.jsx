@@ -27,6 +27,7 @@ export const VotingProvider = ({ children }) => {
       id: `VOTE-${Date.now()}`,
       timestamp: new Date().toISOString(),
       status: "Confirmed",
+      votingMethod: voteData.votingMethod || "ONLINE",
       ...voteData,
     };
 

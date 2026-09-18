@@ -16,9 +16,9 @@ const Hero = () => {
             <span> smarter campus.</span>
           </h1>
 
-          <p className="hero__description">
-            EduVote provides a secure, transparent and verifiable digital
-            voting experience for college elections and small organizations.
+          <p className="hero__subtitle">
+            VoteBridge provides a secure, transparent and verifiable digital
+            voting platform designed for modern student elections.
           </p>
 
           <div className="hero__actions">

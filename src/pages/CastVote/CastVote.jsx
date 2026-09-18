@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useVoting } from "../../context/VotingContext";
 import "./CastVote.css";
 
 const CANDIDATES = [
@@ -35,27 +36,38 @@ const CANDIDATES = [
 
 const CastVote = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { castVote, hasVoted } = useVoting();
+
+  const votingMethod = location.state?.votingMethod || "ONLINE";
+  const voterId = location.state?.voterId || "VT-2026-10482"; // Default for demo
 
   const [selectedCandidate, setSelectedCandidate] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [alreadyVoted, setAlreadyVoted] = useState(false);
+
+  useEffect(() => {
+    if (hasVoted("GE-2026", voterId)) {
+      setAlreadyVoted(true);
+    }
+  }, [hasVoted, voterId]);
 
   const selectedCandidateData = CANDIDATES.find(
     (candidate) => candidate.id === selectedCandidate
   );
 
   const handleCandidateChange = (candidateId) => {
-    if (isSubmitting) {
+    if (isSubmitting || alreadyVoted) {
       return;
     }
-
     setSelectedCandidate(candidateId);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!selectedCandidate) {
+    if (!selectedCandidate || alreadyVoted) {
       return;
     }
 
@@ -63,28 +75,45 @@ const CastVote = () => {
   };
 
   const handleConfirmVote = () => {
-    if (!selectedCandidate || isSubmitting) {
+    if (!selectedCandidate || isSubmitting || alreadyVoted) {
       return;
     }
 
     setIsSubmitting(true);
 
-    /*
-     * Demo submission.
-     * Replace this section with your votingService API/blockchain
-     * transaction when backend and smart contract are connected.
-     */
+    castVote({
+      electionId: "GE-2026",
+      voterId: voterId,
+      candidateId: selectedCandidate,
+      votingMethod: votingMethod,
+    });
+
     window.setTimeout(() => {
       setIsSubmitting(false);
-      navigate("/vote-confirmation", {
-        state: {
-          candidate: selectedCandidateData,
-          election: {
-            id: "GE-2026",
-            title: "General Election 2026",
+      
+      if (votingMethod === "CENTER" || votingMethod === "HOME_VISIT") {
+        // Privacy requirement: Do not reveal candidate to operator in the next screen
+        navigate("/vote-confirmation", {
+          state: {
+            isAssisted: true,
+            votingMethod,
+            election: {
+              id: "GE-2026",
+              title: "General Election 2026",
+            },
           },
-        },
-      });
+        });
+      } else {
+        navigate("/vote-confirmation", {
+          state: {
+            candidate: selectedCandidateData,
+            election: {
+              id: "GE-2026",
+              title: "General Election 2026",
+            },
+          },
+        });
+      }
     }, 1000);
   };
 
@@ -95,6 +124,27 @@ const CastVote = () => {
 
     setShowConfirmation(false);
   };
+
+  if (alreadyVoted) {
+    return (
+      <main className="cast-vote-page">
+        <div className="cast-vote-container">
+          <div className="cast-vote-security-banner">
+            <div className="cast-vote-security-icon" aria-hidden="true">✓</div>
+            <div>
+              <h3>Already Voted</h3>
+              <p>A vote has already been cast for this election by this voter ID ({voterId}). One voter can vote only once in an election.</p>
+            </div>
+          </div>
+          <div style={{ marginTop: "24px" }}>
+            <Link to={votingMethod === "CENTER" ? "/voting-center" : (votingMethod === "HOME_VISIT" ? "/home-voting-officer" : "/voter-dashboard")} className="cast-vote-primary-button" style={{ display: "inline-flex" }}>
+              Return to Dashboard
+            </Link>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="cast-vote-page">

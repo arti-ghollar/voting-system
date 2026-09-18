@@ -1,5 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./About.css";
+
+// Images for Three Ways to Vote
+import onlineVotingImg from "../../assets/online_voting_home_1789640269295.jpg";
+import centerVotingImg from "../../assets/voting_center_assistance_1789640280892.jpg";
+import homeVisitImg from "../../assets/home_visit_voting_1789640353460.jpg";
 
 const About = () => {
   return (
@@ -104,6 +110,99 @@ const About = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Three Ways to Vote */}
+      <section className="about-voting-ways">
+        <div className="about-container">
+          <div className="voting-ways-header">
+            <span className="section-label">HOW IT WORKS</span>
+            <h2>
+              Three Ways to
+              <span> Vote</span>
+            </h2>
+            <p>
+              Making voting more accessible, convenient, and inclusive for everyone. Choose the voting method that best suits your situation.
+            </p>
+          </div>
+
+          <div className="voting-ways-cards">
+            {/* Card 1: Online Voting */}
+            <article className="voting-way-card">
+              <div className="way-card-image">
+                <img src={onlineVotingImg} alt="Person securely voting from home on a smartphone" />
+                <div className="way-icon">📱</div>
+              </div>
+              <div className="way-card-content">
+                <h3>Online / Home Voting</h3>
+                <p>
+                  Voters who have a smartphone and are comfortable using digital technology can cast their vote securely from home using the online voting system.
+                </p>
+                <ul className="way-features">
+                  <li>Vote from your smartphone</li>
+                  <li>Easy and convenient process</li>
+                  <li>Secure voter verification</li>
+                  <li>Candidate information before voting</li>
+                  <li>Vote confirmation after submission</li>
+                  <li>Designed for users who are comfortable with digital technology</li>
+                </ul>
+                <Link to="/voting-method" className="way-action-btn">
+                  Vote Online
+                </Link>
+              </div>
+            </article>
+
+            {/* Card 2: Voting Center */}
+            <article className="voting-way-card">
+              <div className="way-card-image">
+                <img src={centerVotingImg} alt="Voter receiving assistance at an accessible voting center" />
+                <div className="way-icon">🏢</div>
+              </div>
+              <div className="way-card-content">
+                <h3>Assisted Voting Center</h3>
+                <p>
+                  Voters who are not comfortable using smartphones or online technology can visit an authorized voting center and receive assistance through a simple and accessible voting process.
+                </p>
+                <ul className="way-features">
+                  <li>Visit an authorized voting center</li>
+                  <li>Voter identity verification</li>
+                  <li>Assistance from an authorized operator</li>
+                  <li>Simple and accessible interface</li>
+                  <li>Candidate choice remains private</li>
+                  <li>Vote is recorded only after voter confirmation</li>
+                </ul>
+                <Link to="/voting-method" className="way-action-btn">
+                  Find Voting Center
+                </Link>
+              </div>
+            </article>
+
+            {/* Card 3: Home Visit */}
+            <article className="voting-way-card">
+              <div className="way-card-image">
+                <img src={homeVisitImg} alt="Authorized officer assisting an elderly voter at home" />
+                <div className="way-icon">🏠</div>
+              </div>
+              <div className="way-card-content">
+                <h3>Authorized Home Visit Voting</h3>
+                <p>
+                  Voters who are unable to travel to a voting center, such as eligible elderly or mobility-limited voters, may request an authorized home voting visit, subject to applicable election rules and approval.
+                </p>
+                <ul className="way-features">
+                  <li>Request home voting assistance</li>
+                  <li>Request verification and approval</li>
+                  <li>Authorized officer assigned</li>
+                  <li>Voting appointment scheduled</li>
+                  <li>Private assisted voting process</li>
+                  <li>Vote completion confirmation</li>
+                </ul>
+                <Link to="/home-voting-request" className="way-action-btn">
+                  Request Home Visit
+                </Link>
+              </div>
+            </article>
           </div>
         </div>
       </section>

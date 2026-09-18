@@ -35,11 +35,25 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
 
     try {
+      let role = "voter";
+      const email = credentials.email.toLowerCase();
+      
+      if (email.includes("admin")) {
+        role = "admin";
+      } else if (email.includes("center")) {
+        role = "center_operator";
+      } else if (email.includes("officer")) {
+        role = "home_officer";
+      } else if (credentials.role) {
+        role = credentials.role;
+      }
+
       const loggedInUser = {
         id: credentials.email || "demo-user",
         name: credentials.name || "Demo User",
         email: credentials.email || "demo@blockvote.local",
-        role: credentials.role || "voter",
+        role: role,
+        voterId: `VT-${Math.floor(Math.random() * 90000) + 10000}`,
       };
 
       setUser(loggedInUser);

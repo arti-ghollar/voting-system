@@ -7,7 +7,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: var(--color-surface);
   border-right: 1px solid #eaecf0;
   box-shadow: 8px 0 24px rgba(16, 24, 40, 0.04);
 }

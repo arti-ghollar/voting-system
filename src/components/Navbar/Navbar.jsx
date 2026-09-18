@@ -1,11 +1,40 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "./Navbar.css";
+import logoImg from "../../assets/votebridge-logo.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [voterOpen, setVoterOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
+  const [accessibilityMode, setAccessibilityMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [language, setLanguage] = useState("EN");
+
+  useEffect(() => {
+    if (accessibilityMode) {
+      document.body.classList.add("accessibility-mode");
+    } else {
+      document.body.classList.remove("accessibility-mode");
+    }
+  }, [accessibilityMode]);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark-theme");
+    } else {
+      document.body.classList.remove("dark-theme");
+    }
+  }, [darkMode]);
+
+  const toggleAccessibility = () => {
+    setAccessibilityMode((prev) => !prev);
+  };
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
 
   const closeAllMenus = () => {
     setMenuOpen(false);
@@ -41,15 +70,14 @@ const Navbar = () => {
           className="navbar__brand"
           onClick={closeAllMenus}
         >
-          <span className="navbar__logo" aria-hidden="true">
-            <span className="navbar__logo-check">✓</span>
-          </span>
+          <img
+            src={logoImg}
+            alt="VoteBridge Logo"
+            className="navbar__brand-logo"
+            style={{ height: "95px", objectFit: "contain" }}
+          />
 
           <span className="navbar__brand-text">
-            <span className="navbar__brand-name">
-              EduVote
-            </span>
-
             <span className="navbar__brand-tagline">
               Secure • Transparent • Trusted
             </span>
@@ -311,6 +339,63 @@ const Navbar = () => {
               </NavLink>
 
             </div>
+          </div>
+
+          {/* =================================================
+              SETTINGS (LANG/ACCESSIBILITY/THEME)
+          ================================================== */}
+          <div className="navbar__settings" style={{ display: 'flex', alignItems: 'center', gap: '15px', padding: '0 15px' }}>
+            <button
+              type="button"
+              className={`navbar__theme-toggle ${darkMode ? 'active' : ''}`}
+              onClick={toggleDarkMode}
+              aria-pressed={darkMode}
+              title="Toggle Dark Mode"
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '20px',
+                cursor: 'pointer',
+                color: darkMode ? '#eab308' : '#64748b'
+              }}
+            >
+              {darkMode ? '☀️' : '🌙'}
+            </button>
+            <button
+              type="button"
+              className={`navbar__accessibility-toggle ${accessibilityMode ? 'active' : ''}`}
+              onClick={toggleAccessibility}
+              aria-pressed={accessibilityMode}
+              title="Toggle Accessibility Mode"
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '20px',
+                cursor: 'pointer',
+                color: accessibilityMode ? '#2563eb' : '#64748b'
+              }}
+            >
+              ♿
+            </button>
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="navbar__language-select"
+              aria-label="Select Language"
+              style={{
+                border: '1px solid #e2e8f0',
+                borderRadius: '8px',
+                padding: '4px 8px',
+                fontSize: '14px',
+                color: '#475569',
+                background: '#f8fafc',
+                cursor: 'pointer'
+              }}
+            >
+              <option value="EN">English</option>
+              <option value="HI">हिंदी</option>
+              <option value="MR">मराठी</option>
+            </select>
           </div>
 
           {/* =================================================

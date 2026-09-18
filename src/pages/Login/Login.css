@@ -12,8 +12,8 @@ css
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: #f8fafc;
-  color: #0f172a;
+  background: var(--color-surface-secondary);
+  color: var(--color-text);
   font-family:
     Inter,
     ui-sans-serif,
@@ -101,7 +101,7 @@ css
   height: 7px;
   border: 2px solid #93c5fd;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.035);
 }
 
@@ -222,7 +222,7 @@ css
     10% 57%,
     10% 15%
   );
-  background: #ffffff;
+  background: var(--color-surface);
   color: #2563eb;
   font-size: 11px;
   font-weight: 900;
@@ -235,7 +235,7 @@ css
 }
 
 .login-brand-text strong {
-  color: #0f172a;
+  color: var(--color-text);
   font-size: 15px;
   font-weight: 900;
   letter-spacing: 0.03em;
@@ -285,7 +285,7 @@ css
 
 .login-brand-content h1 {
   margin: 0;
-  color: #0f172a;
+  color: var(--color-text);
   font-size: clamp(48px, 5.7vw, 69px);
   font-weight: 850;
   line-height: 1.01;
@@ -299,7 +299,7 @@ css
 .login-brand-content > p {
   max-width: 530px;
   margin: 23px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 13px;
   line-height: 1.8;
 }
@@ -401,7 +401,7 @@ css
   justify-content: center;
   border: 1px solid #dbeafe;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
 }
 
@@ -492,7 +492,7 @@ css
 .login-form-card {
   width: min(100%, 465px);
   padding: 37px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 23px;
   background: rgba(255, 255, 255, 0.97);
   box-shadow:
@@ -518,7 +518,7 @@ css
 
 .login-heading h2 {
   margin: 0;
-  color: #0f172a;
+  color: var(--color-text);
   font-size: clamp(30px, 4vw, 38px);
   font-weight: 850;
   line-height: 1.08;
@@ -531,7 +531,7 @@ css
 
 .login-heading > p {
   margin: 14px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 11px;
   line-height: 1.7;
 }
@@ -648,7 +648,7 @@ css
   border: 1px solid #cbd5e1;
   border-radius: 10px;
   outline: none;
-  background: #ffffff;
+  background: var(--color-surface);
   color: #334155;
   font-size: 10px;
   transition:
@@ -729,7 +729,7 @@ css
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 8px;
   font-weight: 600;
 }
@@ -750,7 +750,7 @@ css
   justify-content: center;
   border: 1px solid #cbd5e1;
   border-radius: 4px;
-  background: #ffffff;
+  background: var(--color-surface);
   transition:
     border-color 0.2s ease,
     background 0.2s ease;
@@ -865,7 +865,7 @@ css
   position: relative;
   z-index: 1;
   padding: 0 12px;
-  background: #ffffff;
+  background: var(--color-surface);
   color: #94a3b8;
   font-size: 7px;
   font-weight: 800;
@@ -915,9 +915,9 @@ css
   gap: 7px;
   margin-top: 27px;
   padding: 10px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
 }
 
 .login-form-security span {
@@ -946,7 +946,7 @@ css
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 8px;
   font-weight: 700;
   transition: color 0.2s ease;

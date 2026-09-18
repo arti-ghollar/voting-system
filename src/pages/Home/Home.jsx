@@ -11,7 +11,7 @@ const Home = () => {
           <div className="home-hero-content">
             <div className="home-badge">
               <span className="home-badge-dot"></span>
-              Secure • Transparent • Decentralized
+              Secure • Transparent • Trusted
             </div>
 
             <h1>
@@ -34,7 +34,7 @@ const Home = () => {
               </Link>
 
               <Link to="/how-it-works" className="home-btn home-btn-secondary">
-                How It Works
+                Learn More
               </Link>
             </div>
 

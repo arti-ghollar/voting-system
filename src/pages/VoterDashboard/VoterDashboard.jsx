@@ -50,11 +50,11 @@ const VoterDashboard = () => {
 
   const quickActions = [
     {
-      id: "elections",
-      title: "View Elections",
-      description: "Explore available elections and candidates.",
-      icon: "▣",
-      link: "/elections",
+      id: "vote-method",
+      title: "Choose Voting Method",
+      description: "Select how you would like to cast your vote.",
+      icon: "🗳️",
+      link: "/voting-method",
       className: "blue",
     },
     {
@@ -149,10 +149,10 @@ const VoterDashboard = () => {
             </div>
 
             <Link
-              to="/elections"
+              to="/voting-method"
               className="voter-dashboard-election-button"
             >
-              View Election
+              Vote Now
               <span aria-hidden="true">→</span>
             </Link>
           </div>

@@ -42,11 +42,19 @@ const Login = () => {
 
     setIsLoading(true);
 
-    const role = formData.email.includes("admin") ? "admin" : "voter";
-
     try {
-      await login({ email: formData.email, role });
-      navigate(role === "admin" ? "/admin-dashboard" : "/voter-dashboard");
+      const response = await login({ email: formData.email });
+      const role = response.user.role;
+      
+      if (role === "admin") {
+        navigate("/admin-dashboard");
+      } else if (role === "center_operator") {
+        navigate("/voting-center");
+      } else if (role === "home_officer") {
+        navigate("/home-voting-officer");
+      } else {
+        navigate("/voter-dashboard");
+      }
     } catch (error) {
       setErrorMessage("Login failed. Please try again.");
     } finally {

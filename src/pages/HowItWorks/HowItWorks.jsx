@@ -206,6 +206,84 @@ const HowItWorks = () => {
           </div>
         </section>
 
+        {/* ================= ELECTION INFO CENTER ================= */}
+        <section className="how-it-works-info-section" style={{ padding: '80px 0', borderTop: '1px solid var(--color-border)' }}>
+          <div className="how-it-works-section-heading">
+            <div>
+              <span className="how-it-works-card-label">ELECTION INFORMATION CENTER</span>
+              <h2>Important Updates & Schedules</h2>
+            </div>
+          </div>
+          
+          <div className="how-it-works-info-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}>
+            <div className="card" style={{ padding: '24px' }}>
+              <h3 style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>📅 Election Schedule</h3>
+              <ul style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px' }}>
+                  <span>Voter Registration Deadline</span>
+                  <strong>10 Aug 2026</strong>
+                </li>
+                <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px' }}>
+                  <span>General Election Starts</span>
+                  <strong>15 Aug 2026</strong>
+                </li>
+                <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px' }}>
+                  <span>Voting Period Ends</span>
+                  <strong>31 Aug 2026</strong>
+                </li>
+                <li style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Results Declaration</span>
+                  <strong>02 Sep 2026</strong>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="card" style={{ padding: '24px' }}>
+              <h3 style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>🏢 Voting Centers</h3>
+              <p style={{ marginBottom: '12px' }}>For voters who prefer in-person voting, verified centers are open from 8:00 AM to 6:00 PM during the election period.</p>
+              <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingLeft: '20px', listStyleType: 'disc' }}>
+                <li>Central District Hall (Downtown)</li>
+                <li>Northside Community Center</li>
+                <li>West End Library</li>
+              </ul>
+            </div>
+            
+            <div className="card" style={{ padding: '24px' }}>
+              <h3 style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>♿ Accessibility Services</h3>
+              <p style={{ marginBottom: '12px' }}>We are committed to accessible elections:</p>
+              <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingLeft: '20px', listStyleType: 'disc' }}>
+                <li>Screen-reader friendly platform</li>
+                <li>High-contrast & large text options available via the NavBar</li>
+                <li>Authorized Home Visits for eligible elderly and disabled citizens</li>
+                <li>Wheelchair accessible physical voting centers</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ================= FAQ ================= */}
+        <section className="how-it-works-faq-section" style={{ padding: '80px 0', borderTop: '1px solid var(--color-border)' }}>
+          <div className="how-it-works-section-heading text-center" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <span className="how-it-works-card-label">SUPPORT</span>
+            <h2>Frequently Asked Questions</h2>
+          </div>
+          
+          <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className="card" style={{ padding: '24px' }}>
+              <h4 style={{ marginBottom: '8px' }}>Can I vote from my mobile phone?</h4>
+              <p>Yes. If you have a verified account and are comfortable using digital technology, you can securely cast your vote from any smartphone or computer.</p>
+            </div>
+            <div className="card" style={{ padding: '24px' }}>
+              <h4 style={{ marginBottom: '8px' }}>Who is eligible for an Authorized Home Visit?</h4>
+              <p>Home visit voting is strictly subject to applicable rules and verification. It is generally available for senior citizens, individuals with mobility impairments, or those with severe medical conditions. You must submit a request which will be reviewed for approval.</p>
+            </div>
+            <div className="card" style={{ padding: '24px' }}>
+              <h4 style={{ marginBottom: '8px' }}>How is my vote kept private?</h4>
+              <p>Your identity is verified separately from your vote. The system encrypts your candidate selection and it is never publicly associated with your personal identity in the blockchain ledger or administrative audit logs.</p>
+            </div>
+          </div>
+        </section>
+
         {/* ================= CTA ================= */}
         <section className="how-it-works-cta">
           <div className="how-it-works-cta-content">

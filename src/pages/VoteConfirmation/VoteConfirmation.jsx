@@ -1,17 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./VoteConfirmation.css";
 
 const VoteConfirmation = () => {
+  const location = useLocation();
+  const isAssisted = location.state?.isAssisted || false;
+  const votingMethod = location.state?.votingMethod || "ONLINE";
+
   const voteDetails = {
-    electionId: "GE-2026",
-    electionName: "General Election 2026",
+    electionId: location.state?.election?.id || "GE-2026",
+    electionName: location.state?.election?.title || "General Election 2026",
     voteStatus: "Successfully Recorded",
     transactionId: "0x7a9f8b31e4c29a7d5f10b6c84c82d91e",
     blockNumber: "18,429,731",
     network: "Blockchain Network",
-    date: "31 August 2026",
-    time: "10:42 AM",
+    date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+    time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
   };
 
   const handleCopyTransaction = async () => {
@@ -27,6 +31,12 @@ const VoteConfirmation = () => {
     }
   };
 
+  const getDashboardLink = () => {
+    if (votingMethod === "CENTER") return "/voting-center";
+    if (votingMethod === "HOME_VISIT") return "/home-voting-officer";
+    return "/voter-dashboard";
+  };
+
   return (
     <main className="vote-confirmation-page">
       <div className="vote-confirmation-container">
@@ -35,7 +45,7 @@ const VoteConfirmation = () => {
         <header className="vote-confirmation-header">
           <div>
             <span className="vote-confirmation-eyebrow">
-              VOTER PORTAL
+              {isAssisted ? "AUTHORIZED ASSISTANCE" : "VOTER PORTAL"}
             </span>
 
             <h1>Vote Confirmation</h1>
@@ -47,7 +57,7 @@ const VoteConfirmation = () => {
           </div>
 
           <Link
-            to="/voter-dashboard"
+            to={getDashboardLink()}
             className="vote-confirmation-back-button"
           >
             <span aria-hidden="true">←</span>
@@ -211,23 +221,36 @@ const VoteConfirmation = () => {
 
         {/* ================= ACTIONS ================= */}
         <section className="vote-confirmation-actions">
-          <Link
-            to="/voting-status"
-            className="vote-confirmation-primary-button"
-          >
-            View Voting Status
-            <span aria-hidden="true">→</span>
-          </Link>
+          {!isAssisted && (
+            <>
+              <Link
+                to="/voting-status"
+                className="vote-confirmation-primary-button"
+              >
+                View Voting Status
+                <span aria-hidden="true">→</span>
+              </Link>
+              <Link
+                to="/elections"
+                className="vote-confirmation-secondary-button"
+              >
+                View Elections
+              </Link>
+            </>
+          )}
+
+          {isAssisted && (
+            <Link
+              to={getDashboardLink()}
+              className="vote-confirmation-primary-button"
+            >
+              Finish Assisted Session
+              <span aria-hidden="true">→</span>
+            </Link>
+          )}
 
           <Link
-            to="/elections"
-            className="vote-confirmation-secondary-button"
-          >
-            View Elections
-          </Link>
-
-          <Link
-            to="/voter-dashboard"
+            to={getDashboardLink()}
             className="vote-confirmation-secondary-button"
           >
             Dashboard

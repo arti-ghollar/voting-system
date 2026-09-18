@@ -21,7 +21,7 @@
 
 .ar-header h1 {
   margin: 7px 0;
-  color: #111827;
+  color: var(--color-text);
   font-size: 30px;
 }
 
@@ -34,7 +34,7 @@
 .ar-export {
   border: 1px solid #d1d5db;
   border-radius: 9px;
-  background: white;
+  background: var(--color-surface);
   color: #374151;
   padding: 10px 14px;
   font-weight: 700;
@@ -52,18 +52,18 @@
   padding: 20px;
   border: 1px solid #e5e7eb;
   border-radius: 14px;
-  background: white;
+  background: var(--color-surface);
 }
 
 .ar-summary span {
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 13px;
 }
 
 .ar-summary strong {
   display: block;
   margin-top: 8px;
-  color: #111827;
+  color: var(--color-text);
   font-size: 24px;
 }
 
@@ -71,7 +71,7 @@
   overflow: hidden;
   border: 1px solid #e5e7eb;
   border-radius: 16px;
-  background: white;
+  background: var(--color-surface);
 }
 
 .ar-panel-header {
@@ -84,14 +84,14 @@
 
 .ar-panel-header h2 {
   margin: 0;
-  color: #111827;
+  color: var(--color-text);
   font-size: 18px;
 }
 
 .ar-panel-header span {
   display: block;
   margin-top: 4px;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 12px;
 }
 
@@ -145,13 +145,13 @@
 }
 
 .ar-candidate strong {
-  color: #111827;
+  color: var(--color-text);
   font-size: 14px;
 }
 
 .ar-candidate span {
   margin-top: 3px;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 12px;
 }
 
@@ -159,7 +159,7 @@
   overflow: hidden;
   height: 9px;
   border-radius: 20px;
-  background: #e5e7eb;
+  background: var(--color-surface-secondary);
 }
 
 .ar-bar-fill {
@@ -178,12 +178,12 @@
 }
 
 .ar-votes strong {
-  color: #111827;
+  color: var(--color-text);
 }
 
 .ar-votes span {
   margin-top: 3px;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 12px;
 }
 

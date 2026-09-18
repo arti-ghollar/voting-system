@@ -34,6 +34,8 @@ const records = [
 const BlockchainRecords = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [verifySuccess, setVerifySuccess] = useState(false);
 
   const filteredRecords = useMemo(() => {
     return records.filter((record) => {
@@ -60,9 +62,42 @@ const BlockchainRecords = () => {
           <p>Review immutable voting transactions recorded on-chain.</p>
         </div>
 
-        <div className="br-network">
-          <span></span>
-          Ethereum Network
+        <div className="br-actions-right">
+          <div className="br-network" style={{ marginBottom: "12px", justifyContent: "flex-end" }}>
+            <span></span>
+            Ethereum Network
+          </div>
+          <button
+            className="br-verify-btn"
+            onClick={() => {
+              setIsVerifying(true);
+              setVerifySuccess(false);
+              setTimeout(() => {
+                setIsVerifying(false);
+                setVerifySuccess(true);
+              }, 1500);
+            }}
+            disabled={isVerifying}
+            style={{
+              padding: "8px 16px",
+              background: "var(--color-surface)",
+              border: "1px solid var(--color-border)",
+              borderRadius: "8px",
+              cursor: isVerifying ? "not-allowed" : "pointer",
+              fontWeight: 600,
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              transition: "all 0.2s"
+            }}
+          >
+            {isVerifying ? "Verifying..." : "Verify Blockchain Integrity"}
+          </button>
+          {verifySuccess && (
+            <div style={{ color: "var(--color-success)", fontSize: "0.85rem", marginTop: "8px", fontWeight: "600", display: "flex", alignItems: "center", gap: "4px", justifyContent: "flex-end" }}>
+              ✓ Blockchain integrity verified
+            </div>
+          )}
         </div>
       </div>
 

@@ -46,7 +46,7 @@
 
 .vote-confirmation-header h1 {
   margin: 0;
-  color: #111827;
+  color: var(--color-text);
   font-size: clamp(30px, 4vw, 42px);
   font-weight: 800;
   line-height: 1.15;
@@ -55,7 +55,7 @@
 
 .vote-confirmation-header p {
   margin: 9px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 13px;
   line-height: 1.6;
 }
@@ -69,7 +69,7 @@
   padding: 0 16px;
   border: 1px solid #dce4ee;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--color-surface);
   color: #334155;
   font-size: 11px;
   font-weight: 800;
@@ -83,7 +83,7 @@
 
 .vote-confirmation-back-button:hover {
   border-color: #cbd5e1;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
   transform: translateY(-1px);
 }
 
@@ -148,7 +148,7 @@
 .vote-confirmation-success-card p {
   max-width: 620px;
   margin: 9px auto 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 11px;
   line-height: 1.7;
 }
@@ -161,7 +161,7 @@
   padding: 7px 11px;
   border: 1px solid #bbf7d0;
   border-radius: 999px;
-  background: #ffffff;
+  background: var(--color-surface);
   color: #15803d;
   font-size: 9px;
   font-weight: 800;
@@ -181,9 +181,9 @@
 .vote-confirmation-card,
 .vote-confirmation-blockchain-card {
   margin-bottom: 18px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 16px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 5px 20px rgba(15, 23, 42, 0.035);
 }
 
@@ -253,7 +253,7 @@
 .vote-confirmation-detail strong {
   display: block;
   overflow: hidden;
-  color: #475569;
+  color: var(--color-text-secondary);
   font-size: 10px;
   font-weight: 800;
   text-overflow: ellipsis;
@@ -308,9 +308,9 @@
 
 .vote-confirmation-transaction {
   padding: 15px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 11px;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
 }
 
 .vote-confirmation-transaction-heading {
@@ -322,7 +322,7 @@
 }
 
 .vote-confirmation-transaction-heading > span:first-child {
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 9px;
   font-weight: 800;
 }
@@ -362,7 +362,7 @@
   padding: 0 10px;
   border: 1px solid #dbeafe;
   border-radius: 7px;
-  background: #ffffff;
+  background: var(--color-surface);
   color: #2563eb;
   font-family: inherit;
   font-size: 8px;
@@ -393,11 +393,11 @@
   padding: 13px;
   border: 1px solid #eef2f7;
   border-radius: 9px;
-  background: #ffffff;
+  background: var(--color-surface);
 }
 
 .vote-confirmation-chain-grid strong {
-  color: #475569;
+  color: var(--color-text-secondary);
   font-size: 10px;
   font-weight: 800;
 }
@@ -429,7 +429,7 @@
   height: 36px;
   flex: 0 0 36px;
   border-radius: 9px;
-  background: #ffffff;
+  background: var(--color-surface);
   font-size: 15px;
 }
 
@@ -442,7 +442,7 @@
 
 .vote-confirmation-privacy p {
   margin: 4px 0 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 9px;
   line-height: 1.65;
 }
@@ -493,13 +493,13 @@
 
 .vote-confirmation-secondary-button {
   border: 1px solid #dbe2ea;
-  background: #ffffff;
-  color: #475569;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
 }
 
 .vote-confirmation-secondary-button:hover {
   border-color: #cbd5e1;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
   transform: translateY(-1px);
 }
 
@@ -512,9 +512,9 @@
   align-items: flex-start;
   gap: 12px;
   padding: 16px 18px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: #f8fafc;
+  background: var(--color-surface-secondary);
 }
 
 .vote-confirmation-notice-icon {
@@ -526,14 +526,14 @@
   flex: 0 0 34px;
   border-radius: 9px;
   background: #e2e8f0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 12px;
   font-weight: 900;
 }
 
 .vote-confirmation-notice h3 {
   margin: 0;
-  color: #475569;
+  color: var(--color-text-secondary);
   font-size: 10px;
   font-weight: 800;
 }
@@ -608,9 +608,9 @@
   .vote-confirmation-transaction-value code {
     width: 100%;
     padding: 8px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--color-border);
     border-radius: 6px;
-    background: #ffffff;
+    background: var(--color-surface);
   }
 
   .vote-confirmation-copy-button {

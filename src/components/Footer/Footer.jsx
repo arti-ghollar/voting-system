@@ -11,10 +11,9 @@ const Footer = () => {
           <div className="footer__brand">
             <Link to="/" className="footer__brand-link">
               <span className="footer__logo" aria-hidden="true">
-                ✓
+                <span className="footer__logo-check">✓</span>
               </span>
-
-              <span className="footer__brand-name">EduVote</span>
+              <span className="footer__brand-name">VoteBridge</span>
             </Link>
 
             <p className="footer__description">
@@ -48,9 +47,9 @@ const Footer = () => {
         </div>
 
         <div className="footer__bottom">
-          <p>
-            © {currentYear} EduVote. Built for secure college-level elections.
-          </p>
+          <div className="footer__copyright">
+            © {currentYear} VoteBridge. Built for secure college-level elections.
+          </div>
 
           <div className="footer__legal">
             <span>Privacy</span>
