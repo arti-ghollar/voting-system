@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useVoting } from "../../context/VotingContext";
 import { useLanguage } from "../../context/LanguageContext";
+import { verifyFingerprint, getBiometricStatus } from "../../services/biometricService";
+import FingerprintIcon from "../../components/FingerprintAuth/FingerprintIcon";
 import "./CastVote.css";
 
 const CastVote = () => {
@@ -49,11 +51,32 @@ const CastVote = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [alreadyVoted, setAlreadyVoted] = useState(false);
 
+  // Biometric authentication state
+  const [hasBiometric, setHasBiometric] = useState(false);
+  const [biometricLoading, setBiometricLoading] = useState(false);
+  const [biometricError, setBiometricError] = useState("");
+  const [biometricVerified, setBiometricVerified] = useState(false);
+  const [proofToken, setProofToken] = useState(null);
+
   useEffect(() => {
-    if (hasVoted("GE-2026")) {
+    if (hasVoted("GE-2026") || hasVoted(1)) {
       setAlreadyVoted(true);
     }
   }, [hasVoted]);
+
+  useEffect(() => {
+    const checkBio = async () => {
+      try {
+        const st = await getBiometricStatus();
+        if (st.success && st.hasBiometric) {
+          setHasBiometric(true);
+        }
+      } catch (err) {
+        console.warn("Could not check biometric status:", err);
+      }
+    };
+    checkBio();
+  }, []);
 
   const selectedCandidateData = CANDIDATES.find(
     (candidate) => candidate.id === selectedCandidate
@@ -73,20 +96,23 @@ const CastVote = () => {
       return;
     }
 
+    setBiometricError("");
     setShowConfirmation(true);
   };
 
-  const handleConfirmVote = async () => {
+  const handleConfirmVote = async (overrideProofToken = null) => {
     if (!selectedCandidate || isSubmitting || alreadyVoted) {
       return;
     }
 
     setIsSubmitting(true);
+    const tokenToSend = overrideProofToken || proofToken;
 
     const result = await castVote({
       electionId: "GE-2026",
       candidateId: selectedCandidate,
       votingMethod: votingMethod,
+      biometricVerificationProofToken: tokenToSend || null,
     });
 
     if (result.success) {
@@ -103,7 +129,8 @@ const CastVote = () => {
                 id: "GE-2026",
                 title: t('ge2026Title'),
               },
-              transactionId: result.transactionId
+              transactionId: result.transactionId,
+              biometricVerified: Boolean(tokenToSend || result.biometricVerified),
             },
           });
         } else {
@@ -114,7 +141,8 @@ const CastVote = () => {
                 id: "GE-2026",
                 title: t('ge2026Title'),
               },
-              transactionId: result.transactionId
+              transactionId: result.transactionId,
+              biometricVerified: Boolean(tokenToSend || result.biometricVerified),
             },
           });
         }
@@ -125,11 +153,30 @@ const CastVote = () => {
     }
   };
 
+  const handleConfirmWithBiometrics = async () => {
+    if (isSubmitting || biometricLoading) return;
+    setBiometricLoading(true);
+    setBiometricError("");
+
+    try {
+      const bioRes = await verifyFingerprint();
+      setBiometricVerified(true);
+      setProofToken(bioRes.verificationProofToken);
+      // Immediately submit with verified proof token
+      await handleConfirmVote(bioRes.verificationProofToken);
+    } catch (err) {
+      setBiometricError(err.message || "Fingerprint verification cancelled or failed. You can retry or confirm with standard authentication.");
+    } finally {
+      setBiometricLoading(false);
+    }
+  };
+
   const handleCancelConfirmation = () => {
-    if (isSubmitting) {
+    if (isSubmitting || biometricLoading) {
       return;
     }
 
+    setBiometricError("");
     setShowConfirmation(false);
   };
 
@@ -458,34 +505,83 @@ const CastVote = () => {
               </small>
             </div>
 
+            {biometricVerified && (
+              <div className="cast-vote-modal-warning" style={{ background: '#ecfdf5', borderColor: '#a7f3d0', color: '#065f46' }}>
+                <span aria-hidden="true">✓</span>
+                <p>Biometric Verified: Identity authenticated via fingerprint sensor</p>
+              </div>
+            )}
+
+            {biometricError && (
+              <div className="cast-vote-modal-warning" style={{ background: '#fef2f2', borderColor: '#fca5a5', color: '#991b1b' }}>
+                <span aria-hidden="true">⚠️</span>
+                <p>{biometricError}</p>
+              </div>
+            )}
+
             <div className="cast-vote-modal-warning">
               <span aria-hidden="true">⚠</span>
-
-              <p>
-                {t('makeSureCandidate')}
-              </p>
+              <p>{t('makeSureCandidate')}</p>
             </div>
 
-            <div className="cast-vote-modal-actions">
-              <button
-                type="button"
-                className="cast-vote-modal-cancel"
-                onClick={handleCancelConfirmation}
-                disabled={isSubmitting}
-              >
-                {t('goBackBtn')}
-              </button>
+            <div className="cast-vote-modal-actions" style={{ flexDirection: 'column', gap: '10px' }}>
+              {hasBiometric && (
+                <button
+                  type="button"
+                  id="btn-confirm-vote-fingerprint"
+                  className="cast-vote-modal-confirm"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '10px',
+                    background: '#10b981',
+                    color: '#ffffff',
+                    width: '100%',
+                    padding: '13px 18px',
+                    fontWeight: 700,
+                  }}
+                  onClick={handleConfirmWithBiometrics}
+                  disabled={isSubmitting || biometricLoading}
+                >
+                  <FingerprintIcon size={20} color="#ffffff" />
+                  <span>
+                    {biometricLoading
+                      ? 'Touch fingerprint sensor now...'
+                      : 'Verify Fingerprint & Submit Ballot'}
+                  </span>
+                </button>
+              )}
 
-              <button
-                type="button"
-                className="cast-vote-modal-confirm"
-                onClick={handleConfirmVote}
-                disabled={isSubmitting}
-              >
-                {isSubmitting
-                  ? t('submittingBtn')
-                  : t('confirmSubmitBtn')}
-              </button>
+              <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
+                <button
+                  type="button"
+                  className="cast-vote-modal-cancel"
+                  style={{ flex: 1 }}
+                  onClick={handleCancelConfirmation}
+                  disabled={isSubmitting || biometricLoading}
+                >
+                  {t('goBackBtn')}
+                </button>
+
+                <button
+                  type="button"
+                  className="cast-vote-modal-confirm"
+                  style={{
+                    flex: 1,
+                    background: hasBiometric ? '#475569' : '#2563eb',
+                    color: '#ffffff',
+                  }}
+                  onClick={() => handleConfirmVote()}
+                  disabled={isSubmitting || biometricLoading}
+                >
+                  {isSubmitting
+                    ? t('submittingBtn')
+                    : hasBiometric
+                    ? 'Submit Standard Ballot'
+                    : t('confirmSubmitBtn')}
+                </button>
+              </div>
             </div>
           </div>
         </div>

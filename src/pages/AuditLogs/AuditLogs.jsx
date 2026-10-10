@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLanguage } from "../../context/LanguageContext";
+import { api } from "../../services/api";
 import "./AuditLogs.css";
 
 const AUDIT_LOGS = [
@@ -15,8 +16,31 @@ const AUDIT_LOGS = [
 const AuditLogs = () => {
   const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
+  const [logs, setLogs] = useState(AUDIT_LOGS);
 
-  const filteredLogs = AUDIT_LOGS.filter(log => 
+  useEffect(() => {
+    const fetchRealLogs = async () => {
+      try {
+        const res = await api.admin.getBiometricLogs();
+        if (res.success && res.logs && res.logs.length > 0) {
+          const mappedBioLogs = res.logs.map(l => ({
+            id: `BIO-${l.id}`,
+            event: l.action === 'REGISTRATION' ? 'Fingerprint Registered' : (l.action === 'VOTE_VERIFICATION' ? 'Ballot Biometric Verification' : 'Fingerprint Authenticated'),
+            date: new Date(l.created_at).toLocaleString(),
+            role: 'Voter',
+            status: l.status === 'SUCCESS' ? 'Success' : 'Failed',
+            details: `Voter: ${l.fullName || l.email || 'Voter'} ${l.failure_reason ? `(${l.failure_reason})` : ''}`,
+          }));
+          setLogs([...mappedBioLogs, ...AUDIT_LOGS]);
+        }
+      } catch (e) {
+        // Fall back to default logs
+      }
+    };
+    fetchRealLogs();
+  }, []);
+
+  const filteredLogs = logs.filter(log => 
     log.event.toLowerCase().includes(searchTerm.toLowerCase()) || 
     log.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
     log.status.toLowerCase().includes(searchTerm.toLowerCase())

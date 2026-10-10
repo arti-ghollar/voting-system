@@ -1,8 +1,32 @@
-export const verifySession = (req, res, next) => {
-  if (req.session && req.session.userId) {
-    req.user = { id: req.session.userId, role: req.session.role };
+import jwt from 'jsonwebtoken';
+
+export const authMiddleware = (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ success: false, message: 'Authentication required' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    req.user = decoded; // Contains id, email, role, etc.
     next();
-  } else {
-    res.status(401).json({ success: false, message: 'Access denied. Please login.' });
+  } catch (error) {
+    return res.status(401).json({ success: false, message: 'Invalid or expired token' });
   }
+};
+
+export const optionalAuthMiddleware = (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = decoded;
+    }
+  } catch (error) {
+    // Ignore invalid token in optional auth
+  }
+  next();
 };

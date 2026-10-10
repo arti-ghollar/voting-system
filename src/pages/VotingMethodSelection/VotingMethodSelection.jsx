@@ -40,6 +40,7 @@ const VotingMethodSelection = () => {
               <ul className="voting-method-features">
                 <li><span aria-hidden="true">✓</span> {t('quickConvenient')}</li>
                 <li><span aria-hidden="true">✓</span> {t('immediateConfirmation')}</li>
+                <li><span aria-hidden="true">🛡️</span> Fingerprint Biometric Verified</li>
                 <li><span aria-hidden="true">✓</span> {t('highestPrivacy')}</li>
               </ul>
             </div>

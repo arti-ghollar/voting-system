@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useLanguage } from "../../context/LanguageContext";
+import FingerprintIcon from "../../components/FingerprintAuth/FingerprintIcon";
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loginWithBiometrics } = useAuth();
   const { t } = useLanguage();
 
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isBiometricLoading, setIsBiometricLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event) => {
@@ -66,6 +68,36 @@ const Login = () => {
       setErrorMessage("Login failed. Please try again.");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleBiometricLogin = async () => {
+    setErrorMessage("");
+    setIsBiometricLoading(true);
+
+    try {
+      const response = await loginWithBiometrics(formData.email.trim() || null);
+      if (response.success) {
+        const role = response.user.role;
+        if (role === "admin") {
+          navigate("/admin-dashboard");
+        } else if (role === "center_operator") {
+          navigate("/voting-center");
+        } else if (role === "home_officer") {
+          navigate("/home-voting-officer");
+        } else {
+          navigate("/voter-dashboard");
+        }
+      } else {
+        setErrorMessage(
+          response.message ||
+            "Fingerprint verification cancelled or failed. You can sign in using password below."
+        );
+      }
+    } catch (error) {
+      setErrorMessage("Biometric authentication failed. Please sign in with password.");
+    } finally {
+      setIsBiometricLoading(false);
     }
   };
 
@@ -332,6 +364,36 @@ const Login = () => {
                   <>
                     {t('signIn')}
                     <span>→</span>
+                  </>
+                )}
+              </button>
+
+              {/* Biometric Fingerprint Login Button */}
+              <button
+                type="button"
+                id="btn-login-fingerprint"
+                className="login-submit-btn"
+                style={{
+                  marginTop: "12px",
+                  background: "#0f172a",
+                  borderColor: "#334155",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                }}
+                onClick={handleBiometricLogin}
+                disabled={isLoading || isBiometricLoading}
+              >
+                {isBiometricLoading ? (
+                  <>
+                    <span className="login-spinner"></span>
+                    <span>Touch sensor to verify...</span>
+                  </>
+                ) : (
+                  <>
+                    <FingerprintIcon size={20} color="#38bdf8" />
+                    <span>Sign In with Fingerprint</span>
                   </>
                 )}
               </button>

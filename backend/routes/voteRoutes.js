@@ -1,10 +1,11 @@
 import express from 'express';
-import { castVote, getMyVotes } from '../controllers/voteController.js';
-import { verifySession } from '../middleware/authMiddleware.js';
+import { castVote, getMyVotes, checkVote } from '../controllers/voteController.js';
+import { authMiddleware } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', verifySession, castVote);
-router.get('/my-votes', verifySession, getMyVotes);
+router.post('/', authMiddleware, castVote);
+router.get('/my-votes', authMiddleware, getMyVotes);
+router.get('/check/:electionId', authMiddleware, checkVote);
 
 export default router;

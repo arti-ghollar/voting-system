@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import { api } from "../services/api";
+import { verifyFingerprint } from "../services/biometricService";
 
 const AuthContext = createContext(null);
 
@@ -64,6 +65,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const loginWithBiometrics = async (emailOrVoterId = null) => {
+    try {
+      const res = await verifyFingerprint(emailOrVoterId);
+      if (res.success && res.user) {
+        setUser(res.user);
+      }
+      return res;
+    } catch (error) {
+      console.error("Biometric login error:", error);
+      return { success: false, message: error.message || "Fingerprint verification failed." };
+    }
+  };
+
   const value = useMemo(
     () => ({
       user,
@@ -71,6 +85,7 @@ export const AuthProvider = ({ children }) => {
       isAuthenticated: Boolean(user),
       isAdmin: user?.role === "admin",
       login,
+      loginWithBiometrics,
       logout,
       register,
     }),

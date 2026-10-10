@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useElection } from "../../context/ElectionContext";
 import { useLanguage } from "../../context/LanguageContext";
 import { api } from "../../services/api";
+import FingerprintAuth from "../../components/FingerprintAuth/FingerprintAuth";
 import "./VoterDashboard.css";
 
 const VoterDashboard = () => {
@@ -18,7 +19,7 @@ const VoterDashboard = () => {
       try {
         const res = await api.getMyVotes();
         if (res.success && res.votes && selectedElection) {
-          const voted = res.votes.some(v => v.election_id === selectedElection.id);
+          const voted = res.votes.some(v => v.election_id === selectedElection.id || v.electionId === selectedElection.id);
           setHasVoted(voted);
         }
       } catch (err) {
@@ -133,6 +134,9 @@ const VoterDashboard = () => {
             </span>
           </div>
         </header>
+
+        {/* ================= FINGERPRINT BIOMETRIC AUTHENTICATION ================= */}
+        <FingerprintAuth mode="dashboard" />
 
         {/* ================= ACTIVE ELECTION ================= */}
         {selectedElection ? (

@@ -1,0 +1,513 @@
+/* ====================================================================
+   FINGERPRINT AUTHENTICATION COMPONENT STYLES
+   Professional, responsive WebAuthn biometric UI
+   ==================================================================== */
+
+.fingerprint-auth-card {
+  position: relative;
+  width: 100%;
+  margin-bottom: 28px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(226, 232, 240, 0.6);
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.fingerprint-auth-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #3b82f6, #06b6d4, #10b981);
+}
+
+/* ================= HEADER ================= */
+.fingerprint-auth-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.fingerprint-auth-icon-wrap {
+  flex-shrink: 0;
+}
+
+.fingerprint-icon-aura {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.fingerprint-icon-aura.active {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.15);
+}
+
+.fingerprint-icon-aura.scanning {
+  background: #eff6ff;
+  border-color: #2563eb;
+  color: #2563eb;
+  animation: fpPulse 1.6s infinite ease-in-out;
+}
+
+@keyframes fpPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(37, 99, 235, 0);
+    transform: scale(1.04);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    transform: scale(1);
+  }
+}
+
+.fingerprint-auth-title-area {
+  flex: 1;
+  min-width: 260px;
+}
+
+.fingerprint-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #2563eb;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.fingerprint-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2563eb;
+}
+
+.fingerprint-auth-title-area h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.4px;
+}
+
+.fingerprint-auth-subtitle {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #64748b;
+  max-width: 680px;
+}
+
+.fingerprint-header-status-badge {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* ================= BADGES ================= */
+.fp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.fp-badge-active {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.fp-badge-unregistered {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.fp-badge-locked {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.fp-badge-neutral {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.fp-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.fp-dot.green {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.fp-dot.amber {
+  background: #f59e0b;
+}
+
+.fp-dot.red {
+  background: #ef4444;
+}
+
+/* ================= ALERTS ================= */
+.fp-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  animation: fadeInAlert 0.25s ease-out;
+}
+
+@keyframes fadeInAlert {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fp-alert-icon {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.fp-alert strong {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.fp-alert p {
+  margin: 0;
+}
+
+.fp-alert-success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.fp-alert-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.fp-alert-warning {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+
+.fp-alert-info {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.fp-alert-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.6;
+  padding: 0 4px;
+}
+
+.fp-alert-close:hover {
+  opacity: 1;
+}
+
+/* ================= STATUS GRID ================= */
+.fingerprint-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.fingerprint-status-item {
+  padding: 16px 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.fp-status-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.fp-status-value-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.fp-status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.fp-status-indicator.enrolled {
+  background: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.fp-status-indicator.not-enrolled {
+  background: #f59e0b;
+}
+
+.fp-status-indicator.failed {
+  background: #ef4444;
+}
+
+.fp-status-indicator.neutral {
+  background: #94a3b8;
+}
+
+.fp-status-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.fp-status-desc {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* ================= CREDENTIALS LIST ================= */
+.fingerprint-credentials-list {
+  margin-bottom: 22px;
+  padding: 16px;
+  background: #fafaf9;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+}
+
+.fp-credentials-title {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #475569;
+  margin-bottom: 10px;
+}
+
+.fp-cred-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fp-cred-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.fp-cred-chip-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fp-cred-type {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.fp-cred-id,
+.fp-cred-date {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.fp-cred-remove-btn {
+  padding: 4px 10px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fp-cred-remove-btn:hover {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ================= BUTTONS & CONTROLS ================= */
+.fingerprint-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.fp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.fp-btn-register {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+}
+
+.fp-btn-register:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+
+.fp-btn-verify {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+}
+
+.fp-btn-verify:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+}
+
+.fp-btn-disabled-hint {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.fp-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.fp-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: fpSpin 0.7s infinite linear;
+}
+
+@keyframes fpSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fp-check-icon {
+  font-weight: 800;
+}
+
+/* ================= SECURITY FOOTNOTE ================= */
+.fingerprint-security-footnote {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.fp-lock-icon {
+  font-size: 14px;
+  color: #2563eb;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .fingerprint-auth-card {
+    padding: 20px 16px;
+  }
+  .fingerprint-actions-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .fp-button {
+    width: 100%;
+  }
+}

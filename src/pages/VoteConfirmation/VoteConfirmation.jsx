@@ -8,12 +8,13 @@ const VoteConfirmation = () => {
   const { t } = useLanguage();
   const isAssisted = location.state?.isAssisted || false;
   const votingMethod = location.state?.votingMethod || "ONLINE";
+  const biometricVerified = location.state?.biometricVerified || false;
 
   const voteDetails = {
     electionId: location.state?.election?.id || "GE-2026",
     electionName: location.state?.election?.title || t('ge2026Title'),
     voteStatus: t('successfullyRecorded'),
-    transactionId: "0x7a9f8b31e4c29a7d5f10b6c84c82d91e",
+    transactionId: location.state?.transactionId || "0x7a9f8b31e4c29a7d5f10b6c84c82d91e",
     blockNumber: "18,429,731",
     network: t('blockchainNetwork'),
     date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
@@ -126,6 +127,13 @@ const VoteConfirmation = () => {
             <div className="vote-confirmation-detail">
               <span>{t('timeLabel')}</span>
               <strong>{voteDetails.time}</strong>
+            </div>
+
+            <div className="vote-confirmation-detail">
+              <span>Authentication Method</span>
+              <strong style={{ color: biometricVerified ? '#10b981' : '#2563eb', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                {biometricVerified ? '✓ WebAuthn Fingerprint Verified' : 'Standard Secure Authentication'}
+              </strong>
             </div>
           </div>
         </section>

@@ -1,27 +1,29 @@
 import express from 'express';
 import { 
-  getAllUsers, 
-  createElection, updateElection, deleteElection,
-  addCandidate, updateCandidate, deleteCandidate,
-  getStatistics 
+  getDashboardStats, 
+  getUsers, 
+  getVoters, 
+  getElections, 
+  getCandidates, 
+  getVotes, 
+  getResults,
+  getBiometricLogs
 } from '../controllers/adminController.js';
-import { verifySession } from '../middleware/authMiddleware.js';
-import { verifyAdmin } from '../middleware/adminMiddleware.js';
+import { authMiddleware } from '../middleware/authMiddleware.js';
+import { adminMiddleware } from '../middleware/adminMiddleware.js';
 
 const router = express.Router();
 
-router.use(verifySession, verifyAdmin);
+// All admin routes are protected by both auth and admin middlewares
+router.use(authMiddleware, adminMiddleware);
 
-router.get('/users', getAllUsers);
-
-router.post('/elections', createElection);
-router.put('/elections/:id', updateElection);
-router.delete('/elections/:id', deleteElection);
-
-router.post('/candidates', addCandidate);
-router.put('/candidates/:id', updateCandidate);
-router.delete('/candidates/:id', deleteCandidate);
-
-router.get('/statistics', getStatistics);
+router.get('/dashboard', getDashboardStats);
+router.get('/users', getUsers);
+router.get('/voters', getVoters);
+router.get('/elections', getElections);
+router.get('/candidates', getCandidates);
+router.get('/votes', getVotes);
+router.get('/results', getResults);
+router.get('/biometric-logs', getBiometricLogs);
 
 export default router;

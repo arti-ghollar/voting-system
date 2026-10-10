@@ -1,9 +1,9 @@
 import express from 'express';
-import { getElectionResults } from '../controllers/resultController.js';
-import { verifySession } from '../middleware/authMiddleware.js';
+import { getResultsByElection, getCandidateResults } from '../controllers/resultController.js';
 
 const router = express.Router();
 
-router.get('/:electionId', verifySession, getElectionResults);
+router.get('/:electionId', getResultsByElection);
+router.get('/:electionId/candidates', getCandidateResults);
 
 export default router;
